@@ -1,0 +1,44 @@
+.layout {
+  height: calc(100vh - var(--ant-layout-header-height));
+  margin: calc(32px * -1);
+  overflow: hidden;
+
+  @h: 60px;
+  @l: 360px;
+  @r: 400px;
+
+  &-header {
+    position: relative;
+    height: @h;
+    z-index: 2;
+  }
+
+  &-content {
+    height: calc(100% - @h);
+    display: flex;
+
+    &-left {
+      width: @l;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+
+    &-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 655px;
+      overflow: overlay;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &-right {
+      width: @r;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+  }
+}

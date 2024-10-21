@@ -1,0 +1,31 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px;
+
+  .item {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+    margin: 5px;
+    background: #f7f7f7;
+
+    &-active {
+      border-color: var(--ant-color-primary);
+    }
+  }
+}
+
+.list.list-disabled {
+  .item,
+  .item-active {
+    cursor: not-allowed;
+    opacity: var(--ant-opacity-loading);
+  }
+}

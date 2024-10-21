@@ -1,0 +1,31 @@
+.item {
+  padding: 12px;
+  border-radius: var(--ant-border-radius);
+  background-color: var(--ant-color-bg-layout);
+  margin-bottom: var(--ant-padding);
+  display: flex;
+  flex-direction: column;
+
+  &-remove,
+  &-move {
+    padding: 2px 4px;
+  }
+
+  &-move {
+    cursor: move;
+  }
+
+  &-remove {
+    cursor: pointer;
+  }
+
+  &-action {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    flex-direction: row;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--ant-color-border);
+  }
+}

@@ -6,6 +6,7 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
+
   layout: {
     title: '@umijs/max',
   },
@@ -25,9 +26,14 @@ export default defineConfig({
       component: './Access',
     },
     {
-      name: ' CRUD 示例',
+      name: 'CRUD 示例',
       path: '/table',
       component: './Table',
+    },
+    {
+      name: '页面设计器',
+      path: '/design',
+      component: './Design',
     },
   ],
   npmClient: 'pnpm',
