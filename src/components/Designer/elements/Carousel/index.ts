@@ -1,7 +1,10 @@
 import { DefaultTemplateFullStyle } from '../../constants';
 import { CarouselElementType } from '../../interface';
 
-export const DefaultCarouselConfig: Partial<CarouselElementType> = {
+export const CarouselConfig: CarouselElementType = {
+  id: '',
+  title: '轮播图',
+  component: 'carousel',
   'component-props': {
     height: '180px',
     images: [

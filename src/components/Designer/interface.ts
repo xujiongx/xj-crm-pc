@@ -10,6 +10,7 @@ export const enum ElementTypes {
   // TEXT_APPLY = 'text_apply',
   // VIDEO_APPLY = 'video_apply',
   TITLE = 'title',
+  DEMO = 'demo',
 }
 
 export interface TitleConfig {
@@ -30,6 +31,8 @@ export interface TitleConfig {
 
 export interface BaseElementType {
   id: string;
+  title: string;
+  icon?: string | React.ReactNode;
   'decorator-props'?: {
     template: 'full' | 'card';
     style?: React.CSSProperties;
@@ -59,6 +62,12 @@ export interface CarouselElementType extends BaseElementType {
       link?: string;
       imgUrl?: string;
     }>;
+  };
+}
+export interface DemoElementType extends BaseElementType {
+  component: string;
+  'component-props'?: {
+    title?: string;
   };
 }
 

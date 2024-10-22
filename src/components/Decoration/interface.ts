@@ -103,3 +103,11 @@ export interface TitleElementType extends BaseElementType {
   component: 'title';
   'component-props'?: TitleConfig;
 }
+
+export interface CustomerConfig {
+  materials: any;
+  elementsMap: any;
+  configsMap: any;
+  uploadConfig: any;
+  hidePageStyle?: boolean;
+}

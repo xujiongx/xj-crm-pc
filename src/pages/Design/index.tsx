@@ -1,9 +1,19 @@
 import Designer from '@/components/Designer';
-// import { useModel } from '@umijs/max';
 
 const DesignPage: React.FC = () => {
-  // const { name } = useModel('global');
-  return <Designer />;
+  const data = JSON.parse(localStorage.getItem('data') || '{}');
+
+  return (
+    <Designer
+      viewConfig={data?.viewConfig}
+      elements={data?.elements || []}
+      // preview={true}
+      handleSave={(data) => {
+        console.log('😣', data);
+        localStorage.setItem('data', JSON.stringify(data));
+      }}
+    />
+  );
 };
 
 export default DesignPage;

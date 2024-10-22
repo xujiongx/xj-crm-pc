@@ -6,18 +6,22 @@ import clsx from 'clsx';
 // import DesignerMoblieModal from '../../../List/components/Modal';
 // import { apiStatus } from '../../../List/services';
 // import useMainStore from '../../store';
+import { ViewConfig } from '../../interface';
+import useMainStore from '../../store';
 import styles from './index.less';
 
 interface HeaderProps {
   className: string;
-  onSuccess?: () => void;
+  handleSave?: (data: { elements: any[]; viewConfig: ViewConfig }) => void;
 }
 
 const Header = ({
   className,
+  handleSave,
 }: // onSuccess
 HeaderProps) => {
-  // const preview = useMainStore((store) => store.preview);
+  const elements = useMainStore((store) => store.elements);
+  const viewConfig = useMainStore((store) => store.viewConfig);
   // const item = useMainStore((store) => store.viewConfig.pageConfig);
 
   // const statusConfirm = (id: string, status: 1 | 0, msg: string) => {
@@ -60,7 +64,16 @@ HeaderProps) => {
       </Space>
 
       <Space size={10}>
-        <Button>保存</Button>
+        <Button
+          onClick={() =>
+            handleSave?.({
+              elements,
+              viewConfig,
+            })
+          }
+        >
+          保存
+        </Button>
         <Button type="primary">发布</Button>
       </Space>
     </div>

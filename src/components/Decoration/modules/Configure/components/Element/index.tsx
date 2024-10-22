@@ -31,7 +31,7 @@ const ElementConfigure = () => {
     useMainStore.getState().onUpdateElement(form.getFieldsValue());
   };
 
-  console.log(888, form.getFieldsValue());
+  console.log(888, selectedElement, form.getFieldsValue());
 
   return (
     <Form
@@ -87,6 +87,7 @@ const ElementConfigure = () => {
             key: 'style',
             label: '样式设置',
             children: <ElementStyleConfiure onValuesChange={onValuesChange} />,
+            hidden: ComponentConfig.config?.hideStyle,
           },
         ].filter((item) => !item.hidden)}
       />

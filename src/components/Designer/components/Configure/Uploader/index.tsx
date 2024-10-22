@@ -5,6 +5,7 @@ import DisabledContext from 'antd/es/config-provider/DisabledContext';
 import { RcFile } from 'antd/es/upload';
 import React from 'react';
 
+import useMainStore from '@/components/Decoration/store';
 import DIcon from '../../Element/DIcon';
 import styles from './index.less';
 
@@ -58,18 +59,16 @@ const Uploader = ({
 }: UploaderProps) => {
   const disabled = React.useContext(DisabledContext);
   const mergedDisabled = (customDisabled ?? disabled) || maxCount <= number;
+  const uploadConfig = useMainStore((store) => store.config.uploadConfig);
 
   return (
     <Upload.Dragger
       showUploadList={false}
-      // headers={{ 'X-Access-Token': getToken()! }}
+      headers={uploadConfig.headers}
       className={styles.card}
       disabled={mergedDisabled}
       accept={AcceptType[type].map((accept) => `.${accept}`).join(',')}
-      // action={`${config?.crmPrefix}/scp/exam/file/common/upload?${stringifySignature(
-      //   {},
-      //   getToken()!,
-      // )}`}
+      action={uploadConfig.action}
       beforeUpload={(file) => beforUpload(file, type)}
       onChange={({ file }) => {
         if (file.status === 'done') {

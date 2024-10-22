@@ -3,12 +3,7 @@ import Color from '../Color';
 import ColumnSelect from '../Column';
 import IconRadio from '../IconRadio';
 
-const TitleConfiure = ({}: // onValuesChange,
-{
-  onValuesChange?: (values: any) => void;
-}) => {
-  // const form = Form.useFormInstance();
-
+const TitleConfiure = () => {
   return (
     <Form.Item
       noStyle

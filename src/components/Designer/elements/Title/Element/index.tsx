@@ -1,8 +1,8 @@
-import { TitleElementType } from '@/pages/Setting/Designer/Mobile/QNDesignCore/interface';
+import { TitleElementType } from '@/components/Designer/interface';
 import { RightOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
 import DIcon from '../../../components/Element/DIcon';
-import { DefaultTitleConfig } from './constants';
+import { TitleConfig } from '../index';
 import './index.less';
 
 interface TitleElementProps {
@@ -12,7 +12,7 @@ interface TitleElementProps {
 
 const TitleElement = ({
   style,
-  config = DefaultTitleConfig['component-props'],
+  config = TitleConfig['component-props'],
 }: TitleElementProps) => {
   const prefixCls = 'desinger-title';
 

@@ -1,4 +1,5 @@
 import { defineConfig } from '@umijs/max';
+import proxyConfig from './config/proxy.config';
 
 export default defineConfig({
   antd: {},
@@ -6,7 +7,7 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
-
+  proxy: proxyConfig,
   layout: {
     title: '@umijs/max',
   },

@@ -1,4 +1,5 @@
 import CarouselConfigure from '../elements/Carousel/Configure';
+import DemoConfig from '../elements/Demo/Configure';
 import ImageConfigure from '../elements/Image/Configure';
 import NavigationConfigure from '../elements/Navigation/Configure';
 import TitleConfigure from '../elements/Title/Configure';
@@ -8,11 +9,14 @@ export const ConfigTypeMap: Record<
   ElementTypes,
   {
     component: () => React.ReactNode;
-    config?: { hideTitle?: boolean };
+    config?: { hideTitle?: boolean; hideStyle?: boolean };
   }
 > = {
   [ElementTypes.IMAGE]: {
     component: ImageConfigure,
+    config: {
+      // hideStyle: true,
+    },
   },
   [ElementTypes.CAROUSEL]: {
     component: CarouselConfigure,
@@ -25,5 +29,8 @@ export const ConfigTypeMap: Record<
   },
   [ElementTypes.TITLE]: {
     component: TitleConfigure,
+  },
+  [ElementTypes.DEMO]: {
+    component: DemoConfig,
   },
 };

@@ -1,7 +1,10 @@
 import { DefaultTemplateFullStyle, DefaultTitleConfig } from '../../constants';
 import { ImageElementType } from '../../interface';
 
-export const DefaultImageConfig: Partial<ImageElementType> = {
+export const ImageConfig: ImageElementType = {
+  id: '',
+  title: '图片',
+  component: 'image',
   'component-props': {
     images: [
       {

@@ -5,7 +5,7 @@ import Sorter from '../../../components/Configure/Sorter';
 import SorterItem from '../../../components/Configure/Sorter/item';
 import Uploader from '../../../components/Configure/Uploader';
 import ImageUploader from '../../../components/Configure/Uploader/image';
-import { DefaultCarouselConfig } from '../default';
+import { CarouselConfig } from '../index';
 import styles from './index.less';
 
 const CarouselConfigure = () => {
@@ -118,7 +118,7 @@ const CarouselConfigure = () => {
                 maxCount={5}
                 onUpload={(imgUrl) => {
                   add({
-                    ...DefaultCarouselConfig['component-props']?.images?.[0],
+                    ...CarouselConfig['component-props']?.images?.[0],
                     imgUrl,
                   });
                 }}

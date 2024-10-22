@@ -10,11 +10,10 @@ import { useEffect, useRef, useState } from 'react';
 import EditableElement from './EditableElement';
 
 import DIcon from '../../../components/Element/DIcon';
-import { ElementType } from '../../../interface';
 import useMainStore from '../../../store';
 import styles from './index.less';
 
-const Viewport = () => {
+const Viewport = <T,>() => {
   const listRef = useRef<HTMLDivElement>(null);
 
   const preview = useMainStore((store) => store.preview);
@@ -31,8 +30,8 @@ const Viewport = () => {
     height: 0,
   });
 
-  const onSelect = (elmemt: ElementType) => {
-    useMainStore.getState().setSelectedElement(elmemt);
+  const onSelect = (element: T) => {
+    useMainStore.getState().setSelectedElement<T>(element);
   };
 
   useEffect(() => {

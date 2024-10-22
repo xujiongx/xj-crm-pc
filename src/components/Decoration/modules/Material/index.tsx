@@ -15,17 +15,6 @@ interface MaterialProps {
 const Material = (props: MaterialProps) => {
   const { className, configMaterial, preview = false, add } = props;
 
-  // const preview = useMainStore((store) => store.preview);
-
-  // const configMaterial = useMainStore((store) => store.config.materials);
-
-  // const add = (item: any) => {
-  //   useMainStore.getState().onAddElement({
-  //     ...item,
-  //     id: uid(),
-  //   });
-  // };
-
   return (
     <div className={clsx(className, styles.material)}>
       {configMaterial?.map((material) => (

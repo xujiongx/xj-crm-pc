@@ -1,20 +1,18 @@
 import Decoration from '../Decoration';
+import { DesignerConfig } from './config/index';
 import { ElementType, ViewConfig } from './interface';
-import DesignConfig from './utils/index';
 
 interface Props<T> {
   preview?: boolean;
   system?: boolean;
   loading?: boolean;
-  elements?: Array<T>;
+  elements?: T[];
   viewConfig?: ViewConfig;
-  onBack?: () => void;
-  onUpdate?: (elements: Array<T>) => Promise<any> | undefined;
-  onPublish?: () => Promise<any>;
+  handleSave?: (data: { elements: T[]; viewConfig: ViewConfig }) => void;
 }
 
 const Designer = (props: Props<ElementType>) => {
-  return <Decoration {...props} config={DesignConfig} />;
+  return <Decoration<ElementType> {...props} config={DesignerConfig} />;
 };
 
 export default Designer;

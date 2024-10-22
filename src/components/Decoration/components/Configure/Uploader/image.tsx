@@ -1,5 +1,6 @@
 // import config from '@aicc/config';
 // import { getToken, stringifySignature } from '@aicc/shared';
+import useMainStore from '@/components/Decoration/store';
 import { CloseOutlined } from '@ant-design/icons';
 import { useControllableValue } from 'ahooks';
 import { Upload, message } from 'antd';
@@ -22,18 +23,16 @@ const ImageUploader = ({
   const [value, setValue] = useControllableValue(rest);
   const disabled = React.useContext(DisabledContext);
   const mergedDisabled = customDisabled ?? disabled;
+  const uploadConfig = useMainStore((store) => store.config.uploadConfig);
 
   return (
     <Upload
       showUploadList={false}
-      // headers={{ 'X-Access-Token': getToken()! }}
+      headers={uploadConfig.headers}
       className={styles.card}
       maxCount={1}
       accept={ImageAcceptType.map((accept) => `.${accept}`).join(',')}
-      // action={`${config?.crmPrefix}/scp/exam/file/common/upload?${stringifySignature(
-      //   {},
-      //   getToken()!,
-      // )}`}
+      action={uploadConfig.action}
       disabled={mergedDisabled}
       beforeUpload={(file) => beforUpload(file, 'image')}
       onChange={({ file }) => {

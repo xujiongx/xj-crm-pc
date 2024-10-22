@@ -10,6 +10,7 @@ const Configure = ({ className }: { className: string }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
   const [tabActive, setTabActive] = useState('view');
   const selectedElement = useMainStore((store) => store.selectedElement);
+  const hidePageStyle = useMainStore((store) => store.config.hidePageStyle);
 
   useEffect(() => {
     nodeRef.current?.scrollTo({ top: 0 });
@@ -28,7 +29,12 @@ const Configure = ({ className }: { className: string }) => {
             children: <ElementConfigure />,
             hidden: !selectedElement,
           },
-          { key: 'view', label: '页面配置', children: <ViewConfigure /> },
+          {
+            key: 'view',
+            label: '页面配置',
+            children: <ViewConfigure />,
+            hidden: hidePageStyle,
+          },
         ].filter((item) => !item.hidden)}
       />
     </div>

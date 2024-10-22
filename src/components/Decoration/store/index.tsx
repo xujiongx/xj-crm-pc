@@ -1,9 +1,8 @@
 import { create } from 'zustand';
-// import { ElementType } from '../interface';
 import { uid } from '../utils';
 import { Actions, State } from './interface';
 
-const initialState: State = {
+const initialState: State<any> = {
   preview: false,
   viewConfig: {
     style: {
@@ -20,10 +19,11 @@ const initialState: State = {
     materials: [],
     elementsMap: [],
     configuresMap: [],
+    uploadConfig: {},
   },
 };
 
-const useMainStore = create<State & Actions>((set, get) => ({
+const useMainStore = create<State<any> & Actions>((set, get) => ({
   ...initialState,
 
   reset() {
@@ -99,19 +99,19 @@ const useMainStore = create<State & Actions>((set, get) => ({
 
   onUpdateElement(data: any) {
     const elements = get().elements;
-    const elememt = get().selectedElement;
-    const index = elements.findIndex((element) => element.id === elememt?.id);
+    const element = get().selectedElement;
+    const index = elements.findIndex((e) => e.id === element?.id);
     elements[index] = {
       ...elements[index],
       'component-props': {
-        ...elememt?.['component-props'],
+        ...element?.['component-props'],
         ...data['component-props'],
       },
       'decorator-props': {
-        ...elememt?.['decorator-props'],
+        ...element?.['decorator-props'],
         ...data['decorator-props'],
         style: {
-          ...elememt?.['decorator-props']?.style,
+          ...element?.['decorator-props']?.style,
           ...data['decorator-props'].style,
         },
       },

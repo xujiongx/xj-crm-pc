@@ -1,12 +1,12 @@
 import Viewport from './Viewport';
 import styles from './index.less';
 
-const Canvas = () => {
+const Canvas = <T,>() => {
   return (
     <div className={styles.canvas}>
       <div className={styles['canvas-header']}></div>
       <div className={styles['canvas-body']}>
-        <Viewport />
+        <Viewport<T> />
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
-import { TitleElementType } from '@/pages/Setting/Designer/Mobile/QNDesignCore/interface';
+import { TitleElementType } from '../../interface';
 
-export const DefaultTitleConfig: Partial<TitleElementType> = {
+export const TitleConfig: TitleElementType = {
+  id: '',
+  title: '图片',
+  component: 'title',
   'component-props': {
     title: '标题',
     fontSize: '16px',

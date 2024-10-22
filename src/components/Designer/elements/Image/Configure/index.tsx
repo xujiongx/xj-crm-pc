@@ -5,7 +5,7 @@ import Sorter from '../../../components/Configure/Sorter';
 import SorterItem from '../../../components/Configure/Sorter/item';
 import Uploader from '../../../components/Configure/Uploader';
 import ImageUploader from '../../../components/Configure/Uploader/image';
-import { DefaultImageConfig } from '../default';
+import { ImageConfig } from '../index';
 import styles from './index.less';
 
 const ImageConfigure = () => {
@@ -111,7 +111,7 @@ const ImageConfigure = () => {
                 maxCount={10}
                 onUpload={(imgUrl) => {
                   add({
-                    ...DefaultImageConfig['component-props']?.images?.[0],
+                    ...ImageConfig['component-props']?.images?.[0],
                     imgUrl,
                   });
                 }}

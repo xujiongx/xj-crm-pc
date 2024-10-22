@@ -1,7 +1,7 @@
 import { Carousel } from 'antd';
 import DefaultImage from '../../../components/Element/DefaultImage';
 import { CarouselElementType } from '../../../interface';
-import { DefaultCarouselConfig } from '../default';
+import { CarouselConfig } from '../index';
 import './index.less';
 
 interface CarouselElementProps {
@@ -13,7 +13,7 @@ interface CarouselElementProps {
 
 const CarouselElement = ({
   style,
-  config = DefaultCarouselConfig['component-props'],
+  config = CarouselConfig['component-props'],
 }: CarouselElementProps) => {
   const prefixCls = 'desinger-carousel';
 
