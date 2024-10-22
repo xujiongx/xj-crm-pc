@@ -1,11 +1,6 @@
 import { EditOutlined, LeftOutlined } from '@ant-design/icons';
 import { Button, Space } from 'antd';
 import clsx from 'clsx';
-// import { ProSwitch } from 'qnzs-ui';
-// import { history } from 'umi';
-// import DesignerMoblieModal from '../../../List/components/Modal';
-// import { apiStatus } from '../../../List/services';
-// import useMainStore from '../../store';
 import { ViewConfig } from '../../interface';
 import useMainStore from '../../store';
 import styles from './index.less';
@@ -15,33 +10,10 @@ interface HeaderProps {
   handleSave?: (data: { elements: any[]; viewConfig: ViewConfig }) => void;
 }
 
-const Header = ({
-  className,
-  handleSave,
-}: // onSuccess
-HeaderProps) => {
+const Header = ({ className, handleSave }: HeaderProps) => {
   const elements = useMainStore((store) => store.elements);
   const viewConfig = useMainStore((store) => store.viewConfig);
-  // const item = useMainStore((store) => store.viewConfig.pageConfig);
-
-  // const statusConfirm = (id: string, status: 1 | 0, msg: string) => {
-  //   Modal.confirm({
-  //     title: '启用确认',
-  //     content: msg,
-  //     cancelText: '保留当前首页',
-  //     okText: '启用新首页',
-  //     onOk: async () => {
-  //       // const res = await apiStatus({ id, status, force: 1 });
-  //       // if (res?.code === 0) {
-  //       //   message.success(res.msg);
-  //       //   // status &&
-  //       //   //   history.replace(`/setting/designer/mobile/viewer/${item?.id}`);
-  //       // } else {
-  //       //   message.error(res?.msg);
-  //       // }
-  //     },
-  //   });
-  // };
+  const item = useMainStore((store) => store.viewConfig.pageConfig);
 
   return (
     <div className={clsx(className, styles.header)}>
@@ -51,14 +23,8 @@ HeaderProps) => {
       </Space>
 
       <Space>
-        {/* {item?.title}
-        {!preview && (
-          <DesignerMoblieModal item={item} onSuccess={onSuccess}>
-            <Button type="text" icon={<EditOutlined />} />
-          </DesignerMoblieModal>
-        )} */}
         <div>
-          标题
+          {item?.title}
           <Button type="text" icon={<EditOutlined />} />
         </div>
       </Space>
@@ -74,7 +40,17 @@ HeaderProps) => {
         >
           保存
         </Button>
-        <Button type="primary">发布</Button>
+        <Button
+          type="primary"
+          onClick={() =>
+            handleSave?.({
+              elements,
+              viewConfig,
+            })
+          }
+        >
+          发布
+        </Button>
       </Space>
     </div>
   );

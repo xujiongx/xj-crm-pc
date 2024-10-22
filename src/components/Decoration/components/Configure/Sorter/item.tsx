@@ -4,7 +4,7 @@ import DisabledContext from 'antd/es/config-provider/DisabledContext';
 import clsx from 'clsx';
 import React from 'react';
 
-import DIcon from '../../../../components/Element/DIcon';
+import DIcon from '../../Element/DIcon';
 import styles from './index.less';
 
 interface SorterItemProps {

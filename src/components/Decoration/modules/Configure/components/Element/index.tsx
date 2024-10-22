@@ -1,8 +1,8 @@
+import { TitleMaterial } from '@/components/Decoration/elements/Title';
 import { Collapse, Form, Space, Switch } from 'antd';
 import { useEffect } from 'react';
 import ElementStyleConfiure from '../../../../components/Configure/Style';
 import TitleConfiure from '../../../../components/Configure/Title';
-import { DefaultTitleConfig } from '../../../../components/Element/Title/constants';
 import useMainStore from '../../../../store';
 import styles from './index.less';
 
@@ -69,7 +69,7 @@ const ElementConfigure = () => {
                       if (checked) {
                         form.setFieldValue(['decorator-props', 'title'], {
                           visible: true,
-                          ...DefaultTitleConfig['component-props'],
+                          ...TitleMaterial['component-props'],
                           ...form.getFieldValue(['decorator-props', 'title']),
                         });
                         onValuesChange();

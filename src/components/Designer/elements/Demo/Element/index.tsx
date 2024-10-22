@@ -1,5 +1,5 @@
 import { DemoElementType } from '../../../interface';
-import { DemoConfig } from '../index';
+import { DemoMaterial } from '../index';
 import './index.less';
 
 interface CarouselElementProps {
@@ -9,9 +9,9 @@ interface CarouselElementProps {
   showTitle?: boolean;
 }
 
-const CarouselElement = ({
+const DemoElement = ({
   style,
-  config = DemoConfig['component-props'],
+  config = DemoMaterial['component-props'],
 }: CarouselElementProps) => {
   const prefixCls = 'desinger-carousel';
 
@@ -22,4 +22,4 @@ const CarouselElement = ({
   );
 };
 
-export default CarouselElement;
+export default DemoElement;

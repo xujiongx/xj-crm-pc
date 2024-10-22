@@ -17,12 +17,3 @@ export const useMaterialOperate = <T>() => {
     add,
   };
 };
-
-// export const useHeaderOperate = () => {
-//   const elements = useMainStore((store) => store.elements);
-
-//   const handleSave = () => {
-
-//   }
-
-// }

@@ -1,6 +1,8 @@
-import { DefaultTemplateFullStyle } from '../../constants';
+import { DefaultTemplateFullStyle } from '@/components/Decoration/constants';
+import DemoConfigRender from './Configure';
+import DemoElementRender from './Element';
 
-export const DemoConfig = {
+const DemoMaterial = {
   id: '',
   title: 'Demo',
   icon: <div>D</div>,
@@ -16,3 +18,5 @@ export const DemoConfig = {
     },
   },
 };
+
+export { DemoConfigRender, DemoElementRender, DemoMaterial };

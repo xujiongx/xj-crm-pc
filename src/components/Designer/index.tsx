@@ -1,6 +1,7 @@
 import Decoration from '../Decoration';
+import { ElementType } from '../Decoration/interface';
 import { DesignerConfig } from './config/index';
-import { ElementType, ViewConfig } from './interface';
+import { CustomerElementType, ViewConfig } from './interface';
 
 interface Props<T> {
   preview?: boolean;
@@ -11,8 +12,13 @@ interface Props<T> {
   handleSave?: (data: { elements: T[]; viewConfig: ViewConfig }) => void;
 }
 
-const Designer = (props: Props<ElementType>) => {
-  return <Decoration<ElementType> {...props} config={DesignerConfig} />;
+const Designer = (props: Props<ElementType & CustomerElementType>) => {
+  return (
+    <Decoration<ElementType & CustomerElementType>
+      {...props}
+      config={DesignerConfig}
+    />
+  );
 };
 
 export default Designer;

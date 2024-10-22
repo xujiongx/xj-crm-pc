@@ -1,4 +1,4 @@
-import TitleElement from '../../../../../components/Element/Title';
+import TitleElement from '@/components/Decoration/elements/Title/Element';
 import { ElementType } from '../../../../../interface';
 import useMainStore from '../../../../../store';
 

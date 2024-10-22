@@ -1,14 +1,12 @@
-import { CarouselConfig } from '../elements/Carousel/index';
-import { DemoConfig } from '../elements/Demo';
-import { ImageConfig } from '../elements/Image/index';
-import { NavigationConfig } from '../elements/Navigation/index';
+import { CarouselMaterial } from '@/components/Decoration/elements/Carousel';
+import { ImageMaterial } from '@/components/Decoration/elements/Image';
+import { NavigationMaterial } from '@/components/Decoration/elements/Navigation';
+import { CourseMaterial } from '../elements/Course';
+import { DemoMaterial } from '../elements/Demo';
 
-const MaterialBase = [
-  CarouselConfig,
-  NavigationConfig,
-  ImageConfig,
-  DemoConfig,
-];
+const MaterialBase = [CarouselMaterial, NavigationMaterial, ImageMaterial];
+
+const CustomerComponents = [DemoMaterial, CourseMaterial];
 
 export const Materials = [
   {
@@ -17,6 +15,6 @@ export const Materials = [
   },
   {
     title: '应用组件',
-    items: [],
+    items: CustomerComponents,
   },
 ];

@@ -1,5 +1,6 @@
 import { Spin } from 'antd';
 import { useEffect } from 'react';
+import { DesignerConfig } from './config';
 import { useMaterialOperate } from './hooks';
 import styles from './index.less';
 import { CustomerConfig, ViewConfig } from './interface';
@@ -10,7 +11,7 @@ import Material from './modules/Material';
 import useMainStore from './store';
 
 interface Props<T> {
-  config: CustomerConfig;
+  config?: CustomerConfig;
   preview?: boolean;
   loading?: boolean;
   elements?: T[];
@@ -41,7 +42,11 @@ const Decorate = <T,>(props: Props<T>) => {
   }, [viewConfig]);
 
   useEffect(() => {
-    if (!config) return;
+    // 外部没有传入配置，就使用默认配置
+    if (!config) {
+      useMainStore.getState().setConfig(DesignerConfig);
+      return;
+    }
     useMainStore.getState().setConfig(config);
   }, [config]);
 

@@ -1,8 +1,21 @@
-export interface ViewConfig {
-  style: React.CSSProperties;
-  pageConfig?: {
-    id: string;
-    title: string;
+import { CarouselElementType } from './elements/Carousel';
+import { ImageElementType } from './elements/Image';
+import { NavigationElementType } from './elements/Navigation';
+
+export const enum ElementTypes {
+  IMAGE = 'image',
+  CAROUSEL = 'carousel',
+  NAVIGATION = 'navigation',
+  TITLE = 'title',
+}
+
+export interface BaseElementType {
+  id: string;
+  title?: string;
+  'decorator-props'?: {
+    template: 'full' | 'card';
+    style?: React.CSSProperties;
+    title?: TitleConfig;
   };
 }
 
@@ -22,92 +35,31 @@ export interface TitleConfig {
   align?: 'left' | 'center';
 }
 
-export interface BaseElementType {
-  id: string;
-  'decorator-props'?: {
-    template: 'full' | 'card';
-    style?: React.CSSProperties;
-    title?: TitleConfig;
-  };
-}
-
-export interface ImageElementType extends BaseElementType {
-  component: string;
-  'component-props': {
-    images?: Array<{
-      linkStyle?: 'column' | 'link';
-      column?: string;
-      link?: string;
-      imgUrl?: string;
-    }>;
-  };
-}
-
-export interface CarouselElementType extends BaseElementType {
-  component: string;
-  'component-props'?: {
-    height?: string;
-    images?: Array<{
-      linkStyle?: 'column' | 'link';
-      column?: string;
-      link?: string;
-      imgUrl?: string;
-    }>;
-  };
-}
-
-export interface NavigationElementType extends BaseElementType {
-  component: string;
-  'component-props'?: {
-    count?: number;
-    sections?: Array<{
-      linkStyle?: 'column' | 'link';
-      column?: string;
-      link?: string;
-      imgUrl?: string;
-      title?: string;
-      color?: string;
-    }>;
-  };
-}
-
-export interface ApplyElementType extends BaseElementType {
-  component: string;
-  'component-props'?: {
-    type?: 'list' | 'image' | 'card' | 'title';
-    showInfo?: boolean;
-    showNumber?: boolean;
-    showCount?: number;
-    hideInEmpty?: boolean;
-    data?: Array<ApplyItemType>;
-  };
-}
-
-export interface ApplyItemType {
-  cover?: string;
-  title?: string;
-  deadline?: string;
-  new?: boolean;
-  status?: number;
-  progress?: number;
-  pv?: number;
-}
-
 export type ElementType =
   | ImageElementType
   | CarouselElementType
-  | NavigationElementType
-  | ApplyElementType;
+  | NavigationElementType;
 
-export interface TitleElementType extends BaseElementType {
-  component: 'title';
-  'component-props'?: TitleConfig;
-}
-
+/**
+ * 自定义配置
+ */
 export interface CustomerConfig {
   materials: any;
   elementsMap: any;
   configsMap: any;
   uploadConfig: any;
   hidePageStyle?: boolean;
+}
+
+/**
+ * 页面配置
+ * 页面样式信息
+ * 页面拓展信息
+ */
+export interface ViewConfig {
+  style: React.CSSProperties;
+  pageConfig?: {
+    id: string;
+    title: string;
+  };
 }

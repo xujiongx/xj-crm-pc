@@ -1,36 +1,41 @@
-import CarouselConfigure from '../elements/Carousel/Configure';
-import DemoConfig from '../elements/Demo/Configure';
-import ImageConfigure from '../elements/Image/Configure';
-import NavigationConfigure from '../elements/Navigation/Configure';
-import TitleConfigure from '../elements/Title/Configure';
-import { ElementTypes } from '../interface';
+import { CarouselConfigRender } from '@/components/Decoration/elements/Carousel';
+import { ImageConfigRender } from '@/components/Decoration/elements/Image';
+import { NavigationConfigRender } from '@/components/Decoration/elements/Navigation';
+import { TitleConfigRender } from '@/components/Decoration/elements/Title';
+import { ElementTypes } from '@/components/Decoration/interface';
+import { CourseConfigRender } from '../elements/Course';
+import { DemoConfigRender } from '../elements/Demo';
+import { CustomerElementTypes } from '../interface';
 
 export const ConfigTypeMap: Record<
-  ElementTypes,
+  ElementTypes & CustomerElementTypes,
   {
     component: () => React.ReactNode;
     config?: { hideTitle?: boolean; hideStyle?: boolean };
   }
 > = {
   [ElementTypes.IMAGE]: {
-    component: ImageConfigure,
+    component: ImageConfigRender,
     config: {
       // hideStyle: true,
     },
   },
   [ElementTypes.CAROUSEL]: {
-    component: CarouselConfigure,
+    component: CarouselConfigRender,
     config: {
       hideTitle: true,
     },
   },
   [ElementTypes.NAVIGATION]: {
-    component: NavigationConfigure,
+    component: NavigationConfigRender,
   },
   [ElementTypes.TITLE]: {
-    component: TitleConfigure,
+    component: TitleConfigRender,
   },
-  [ElementTypes.DEMO]: {
-    component: DemoConfig,
+  [CustomerElementTypes.DEMO]: {
+    component: DemoConfigRender,
+  },
+  [CustomerElementTypes.COURSE_APPLY]: {
+    component: CourseConfigRender,
   },
 };
