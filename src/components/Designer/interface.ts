@@ -1,4 +1,4 @@
-import { BaseElementType, ElementType } from '../Decoration/interface';
+import { BaseElementType, ElementType } from '@aicc/designer/es/interface';
 
 export const enum CustomerElementTypes {
   DEMO = 'demo',

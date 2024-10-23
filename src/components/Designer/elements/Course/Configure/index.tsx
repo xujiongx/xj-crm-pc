@@ -6,7 +6,7 @@ import listActiveImg from '@/assets/designer/list-active.png';
 import listImg from '@/assets/designer/list.png';
 import titleActiveImg from '@/assets/designer/title-active.png';
 import titleImg from '@/assets/designer/title.png';
-import ImageRadio from '@/components/Decoration/components/Configure/ImageRadio';
+import ImageRadio from '@aicc/designer/es/components/Configure/ImageRadio';
 import { Form, InputNumber, Space, Switch, Typography } from 'antd';
 
 interface ApplyConfigureProps {

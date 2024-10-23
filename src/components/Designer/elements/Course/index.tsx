@@ -1,7 +1,7 @@
 import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
-} from '@/components/Decoration/constants';
+} from '@aicc/designer/es/constants';
 import CourseConfigRender from './Configure';
 import CourseElementRender from './Element';
 

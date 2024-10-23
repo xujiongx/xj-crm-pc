@@ -1,5 +1,5 @@
-import { BaseElementType } from '@/components/Decoration/interface';
 import { CustomerElementTypes } from '@/components/Designer/interface';
+import { BaseElementType } from '@aicc/designer/es/interface';
 
 export interface ApplyElementType extends BaseElementType {
   component: CustomerElementTypes.NAVIGATION;

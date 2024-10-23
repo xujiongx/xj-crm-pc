@@ -1,4 +1,4 @@
-import { DefaultTemplateFullStyle } from '@/components/Decoration/constants';
+import { DefaultTemplateFullStyle } from '@aicc/designer/es/constants';
 import DemoConfigRender from './Configure';
 import DemoElementRender from './Element';
 

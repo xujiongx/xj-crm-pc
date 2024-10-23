@@ -1,6 +1,6 @@
-import { CarouselMaterial } from '@/components/Decoration/elements/Carousel';
-import { ImageMaterial } from '@/components/Decoration/elements/Image';
-import { NavigationMaterial } from '@/components/Decoration/elements/Navigation';
+import { CarouselMaterial } from '@aicc/designer/es/elements/Carousel';
+import { ImageMaterial } from '@aicc/designer/es/elements/Image';
+import { NavigationMaterial } from '@aicc/designer/es/elements/Navigation';
 import { CourseMaterial } from '../elements/Course';
 import { DemoMaterial } from '../elements/Demo';
 

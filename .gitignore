@@ -11,3 +11,6 @@
 /dist
 /.mfsu
 .swc
+
+packages/*/es/**
+packages/*/node_modules/**

@@ -1,0 +1,19 @@
+{
+  "name": "@aicc/designer",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "files": [
+    "/es"
+  ],
+  "scripts": {
+    "build": "father build",
+    "dev": "father dev"
+  },
+  "dependencies": {
+    "@aicc/shared": "workspace:*"
+  }
+}

@@ -1,5 +1,5 @@
-import { CustomerConfig } from '@/components/Decoration/interface';
 import { getToken, stringifySignatureWithUrl } from '@/utils';
+import { CustomerConfig } from '@aicc/designer/es/interface';
 import { ConfigTypeMap } from './configure';
 import { ElementTypeMap } from './element';
 import { Materials } from './material';

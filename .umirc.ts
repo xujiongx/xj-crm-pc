@@ -1,5 +1,6 @@
 import { defineConfig } from '@umijs/max';
 import proxyConfig from './config/proxy.config';
+const genAlias = require('./scripts/utils/genAlias');
 
 export default defineConfig({
   antd: {},
@@ -8,6 +9,20 @@ export default defineConfig({
   initialState: {},
   request: {},
   proxy: proxyConfig,
+  mfsu: {
+    strategy: 'normal',
+    shared: {
+      react: {
+        singleton: true,
+      },
+      'react-router': {
+        singleton: true,
+      },
+      'react-router-dom': {
+        singleton: true,
+      },
+    },
+  },
   layout: {
     title: '@umijs/max',
   },
@@ -38,4 +53,7 @@ export default defineConfig({
     },
   ],
   npmClient: 'pnpm',
+  alias: {
+    ...genAlias(),
+  },
 });

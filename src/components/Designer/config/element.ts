@@ -1,8 +1,8 @@
-import { CarouselElementRender } from '@/components/Decoration/elements/Carousel';
-import { ImageElementRender } from '@/components/Decoration/elements/Image';
-import { NavigationElementRender } from '@/components/Decoration/elements/Navigation';
-import { TitleElementRender } from '@/components/Decoration/elements/Title';
-import { ElementTypes } from '@/components/Decoration/interface';
+import { CarouselElementRender } from '@aicc/designer/es/elements/Carousel';
+import { ImageElementRender } from '@aicc/designer/es/elements/Image';
+import { NavigationElementRender } from '@aicc/designer/es/elements/Navigation';
+import { TitleElementRender } from '@aicc/designer/es/elements/Title';
+import { ElementTypes } from '@aicc/designer/es/interface';
 import { CourseElementRender } from '../elements/Course';
 import { DemoElementRender } from '../elements/Demo';
 import { CustomerElementTypes } from '../interface';
