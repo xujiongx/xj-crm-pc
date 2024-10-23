@@ -4,7 +4,12 @@ import { NavigationConfigRender } from '@aicc/designer/es/elements/Navigation';
 import { TitleConfigRender } from '@aicc/designer/es/elements/Title';
 import { ElementTypes } from '@aicc/designer/es/interface';
 import { CourseConfigRender } from '../elements/Course';
-import { DemoConfigRender } from '../elements/Demo';
+import { LiveConfigRender } from '../elements/Live';
+import { MomentConfigRender } from '../elements/Moment';
+import { PartnerConfigRender } from '../elements/Partner';
+import { ProgramConfigRender } from '../elements/Program';
+import { TextConfigRender } from '../elements/Text';
+import { VideoConfigRender } from '../elements/Video';
 import { CustomerElementTypes } from '../interface';
 
 export const ConfigTypeMap: Record<
@@ -32,10 +37,28 @@ export const ConfigTypeMap: Record<
   [ElementTypes.TITLE]: {
     component: TitleConfigRender,
   },
-  [CustomerElementTypes.DEMO]: {
-    component: DemoConfigRender,
-  },
+  // [CustomerElementTypes.DEMO]: {
+  //   component: DemoConfigRender,
+  // },
   [CustomerElementTypes.COURSE_APPLY]: {
-    component: CourseConfigRender,
+    component: () => <CourseConfigRender />,
+  },
+  [CustomerElementTypes.TEXT_APPLY]: {
+    component: () => <TextConfigRender showCover={false} />,
+  },
+  [CustomerElementTypes.PARTNER_APPLY]: {
+    component: () => <PartnerConfigRender />,
+  },
+  [CustomerElementTypes.VIDEO_APPLY]: {
+    component: () => <VideoConfigRender />,
+  },
+  [CustomerElementTypes.PROGRAM_APPLY]: {
+    component: () => <ProgramConfigRender />,
+  },
+  [CustomerElementTypes.LIVE_APPLY]: {
+    component: () => <LiveConfigRender />,
+  },
+  [CustomerElementTypes.MOMENT_APPLY]: {
+    component: () => <MomentConfigRender />,
   },
 };

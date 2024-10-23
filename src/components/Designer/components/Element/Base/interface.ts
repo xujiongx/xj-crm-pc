@@ -1,8 +1,10 @@
 import { CustomerElementTypes } from '@/components/Designer/interface';
-import { BaseElementType } from '@aicc/designer/es/interface';
+import { BaseElementType } from '@aicc/designer/src/interface';
 
 export interface ApplyElementType extends BaseElementType {
-  component: CustomerElementTypes.NAVIGATION;
+  component:
+    | CustomerElementTypes.COURSE_APPLY
+    | CustomerElementTypes.TEXT_APPLY;
   'component-props'?: {
     type?: 'list' | 'image' | 'card' | 'title';
     showInfo?: boolean;

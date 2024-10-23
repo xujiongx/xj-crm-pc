@@ -2,11 +2,24 @@ import { CarouselMaterial } from '@aicc/designer/es/elements/Carousel';
 import { ImageMaterial } from '@aicc/designer/es/elements/Image';
 import { NavigationMaterial } from '@aicc/designer/es/elements/Navigation';
 import { CourseMaterial } from '../elements/Course';
-import { DemoMaterial } from '../elements/Demo';
+import { LiveMaterial } from '../elements/Live';
+import { MomentMaterial } from '../elements/Moment';
+import { PartnerMaterial } from '../elements/Partner';
+import { ProgramMaterial } from '../elements/Program';
+import { TextMaterial } from '../elements/Text';
+import { VideoMaterial } from '../elements/Video';
 
 const MaterialBase = [CarouselMaterial, NavigationMaterial, ImageMaterial];
 
-const CustomerComponents = [DemoMaterial, CourseMaterial];
+const CustomerComponents = [
+  CourseMaterial,
+  TextMaterial,
+  PartnerMaterial,
+  VideoMaterial,
+  ProgramMaterial,
+  LiveMaterial,
+  MomentMaterial,
+];
 
 export const Materials = [
   {

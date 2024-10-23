@@ -54,7 +54,12 @@ const Decorate = <T,>(props: Props<T>) => {
 
   return (
     <Spin spinning={loading}>
-      <div className={styles.layout}>
+      <div
+        className={styles.layout}
+        style={{
+          ...config?.layoutStyles,
+        }}
+      >
         <Header className={styles['layout-header']} handleSave={handleSave} />
         <div className={styles['layout-content']}>
           <Material

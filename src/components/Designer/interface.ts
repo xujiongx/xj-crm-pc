@@ -1,9 +1,13 @@
-import { BaseElementType, ElementType } from '@aicc/designer/es/interface';
+import { BaseElementType, ElementType } from '@aicc/designer/src/interface';
 
 export const enum CustomerElementTypes {
-  DEMO = 'demo',
-  NAVIGATION = 'navigation',
   COURSE_APPLY = 'course_apply',
+  LIVE_APPLY = 'live_apply',
+  PROGRAM_APPLY = 'program_apply',
+  MOMENT_APPLY = 'moment_apply',
+  PARTNER_APPLY = 'partner_apply',
+  TEXT_APPLY = 'text_apply',
+  VIDEO_APPLY = 'video_apply',
 }
 
 export interface DemoElementType extends BaseElementType {

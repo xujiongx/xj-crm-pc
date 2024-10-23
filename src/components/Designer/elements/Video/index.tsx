@@ -2,15 +2,14 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
-import { CustomerElementTypes } from '../../interface';
-import CourseConfigRender from './Configure';
-import CourseElementRender from './Element';
+import VideoConfigRender from './Configure';
+import VideoElementRender from './Element';
 
-const CourseMaterial = {
+const VideoMaterial = {
   id: '',
-  title: '课程',
-  icon: 'course',
-  component: CustomerElementTypes.COURSE_APPLY,
+  title: '互动视频',
+  icon: 'video',
+  component: 'video_apply',
   'component-props': {
     type: 'list',
     showInfo: true,
@@ -18,17 +17,17 @@ const CourseMaterial = {
     hideInEmpty: true,
     data: [
       {
-        title: '数字时代的交流：社交媒体客服',
+        title: '新产品快速演示培训',
         deadline: '2022-09-08',
         new: true,
       },
       {
-        title: '服务至上：提升客户满意度',
+        title: '公司发展历程与企业价值观培训',
         deadline: '2022-09-08',
         status: 1,
       },
       {
-        title: '新晋基层管理者36计',
+        title: '优秀销售成单秘籍',
         deadline: '2022-09-08',
         status: 2,
       },
@@ -40,10 +39,10 @@ const CourseMaterial = {
     title: {
       visible: true,
       ...DefaultTitleConfig['component-props'],
-      title: '课程',
-      moreColumn: 'course',
+      title: '互动视频',
+      moreColumn: 'video',
     },
   },
 };
 
-export { CourseConfigRender, CourseElementRender, CourseMaterial };
+export { VideoConfigRender, VideoElementRender, VideoMaterial };

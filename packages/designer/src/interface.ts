@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { CarouselElementType } from './elements/Carousel';
 import { ImageElementType } from './elements/Image';
 import { NavigationElementType } from './elements/Navigation';
@@ -12,6 +13,7 @@ export const enum ElementTypes {
 export interface BaseElementType {
   id: string;
   title?: string;
+  icon?: string;
   'decorator-props'?: {
     template: 'full' | 'card';
     style?: React.CSSProperties;
@@ -49,6 +51,7 @@ export interface CustomerConfig {
   configsMap: any;
   uploadConfig: any;
   hidePageStyle?: boolean;
+  layoutStyles: CSSProperties;
 }
 
 /**

@@ -1,5 +1,3 @@
-// import config from '@aicc/config';
-// import { getToken, stringifySignature } from '@aicc/shared';
 import { Space, Upload, message } from 'antd';
 import DisabledContext from 'antd/es/config-provider/DisabledContext';
 import { RcFile } from 'antd/es/upload';
