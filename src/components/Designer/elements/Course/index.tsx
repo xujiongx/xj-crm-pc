@@ -2,11 +2,12 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
+import { ApplyElementType } from '../../components/Element/Base/interface';
 import { CustomerElementTypes } from '../../interface';
 import CourseConfigRender from './Configure';
 import CourseElementRender from './Element';
 
-const CourseMaterial = {
+const CourseMaterial: ApplyElementType = {
   id: '',
   title: '课程',
   icon: 'course',

@@ -2,14 +2,16 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
+import { ApplyElementType } from '../../components/Element/Base/interface';
+import { CustomerElementTypes } from '../../interface';
 import ProgramConfigRender from './Configure';
 import ProgramElementRender from './Element';
 
-const ProgramMaterial = {
+const ProgramMaterial: ApplyElementType = {
   id: '',
   title: '学习地图',
   icon: 'text',
-  component: 'program_apply',
+  component: CustomerElementTypes.PROGRAM_APPLY,
   'component-props': {
     type: 'image',
     showInfo: true,

@@ -13,7 +13,7 @@ import DIcon from '../../../components/Element/DIcon';
 import useMainStore from '../../../store';
 import styles from './index.less';
 
-const Viewport = <T,>() => {
+const Viewport = () => {
   const listRef = useRef<HTMLDivElement>(null);
 
   const preview = useMainStore((store) => store.preview);
@@ -30,8 +30,8 @@ const Viewport = <T,>() => {
     height: 0,
   });
 
-  const onSelect = (element: T) => {
-    useMainStore.getState().setSelectedElement<T>(element);
+  const onSelect = (element) => {
+    useMainStore.getState().setSelectedElement(element);
   };
 
   useEffect(() => {

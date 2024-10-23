@@ -2,14 +2,16 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
+import { ApplyElementType } from '../../components/Element/Base/interface';
+import { CustomerElementTypes } from '../../interface';
 import MomentConfigRender from './Configure';
 import MomentElementRender from './Element';
 
-const MomentMaterial = {
+const MomentMaterial: ApplyElementType = {
   id: '',
   title: '精彩瞬间',
   icon: 'moment',
-  component: 'moment_apply',
+  component: CustomerElementTypes.MOMENT_APPLY,
   'component-props': {
     type: 'list',
     showInfo: true,

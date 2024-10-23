@@ -2,14 +2,16 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
+import { ApplyElementType } from '../../components/Element/Base/interface';
+import { CustomerElementTypes } from '../../interface';
 import VideoConfigRender from './Configure';
 import VideoElementRender from './Element';
 
-const VideoMaterial = {
+const VideoMaterial: ApplyElementType = {
   id: '',
   title: '互动视频',
   icon: 'video',
-  component: 'video_apply',
+  component: CustomerElementTypes.VIDEO_APPLY,
   'component-props': {
     type: 'list',
     showInfo: true,

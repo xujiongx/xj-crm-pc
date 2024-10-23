@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { uid } from '../utils';
 import { Actions, State } from './interface';
 
-const initialState: State<any> = {
+const initialState: State = {
   preview: false,
   viewConfig: {
     style: {
@@ -23,7 +23,7 @@ const initialState: State<any> = {
   },
 };
 
-const useMainStore = create<State<any> & Actions>((set, get) => ({
+const useMainStore = create<State & Actions>((set, get) => ({
   ...initialState,
 
   reset() {

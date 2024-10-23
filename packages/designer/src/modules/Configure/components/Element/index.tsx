@@ -44,7 +44,7 @@ const ElementConfigure = () => {
       onValuesChange={onValuesChange}
     >
       <div className={styles.card}>
-        <ComponentConfig.component />
+        <ComponentConfig.component form={form} />
       </div>
       <Collapse
         defaultActiveKey={['title', 'style']}

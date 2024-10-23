@@ -2,14 +2,16 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
+import { ApplyElementType } from '../../components/Element/Base/interface';
+import { CustomerElementTypes } from '../../interface';
 import LiveConfigRender from './Configure';
 import LiveElementRender from './Element';
 
-const LiveMaterial = {
+const LiveMaterial: ApplyElementType = {
   id: '',
   title: '直播',
   icon: 'live',
-  component: 'live_apply',
+  component: CustomerElementTypes.LIVE_APPLY,
   'component-props': {
     type: 'list',
     showInfo: true,

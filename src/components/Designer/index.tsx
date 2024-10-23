@@ -1,5 +1,5 @@
 import Decoration from '@aicc/designer';
-import { ElementType } from '@aicc/designer/es/src/interface';
+import { ElementType } from '@aicc/designer/es/interface';
 import { DesignerConfig } from './config/index';
 import { CustomerElementType, ViewConfig } from './interface';
 
@@ -13,7 +13,12 @@ interface Props<T> {
 }
 
 const Designer = (props: Props<ElementType & CustomerElementType>) => {
-  return <Decoration {...props} config={DesignerConfig} />;
+  return (
+    <Decoration<ElementType & CustomerElementType>
+      {...props}
+      config={DesignerConfig}
+    />
+  );
 };
 
 export default Designer;

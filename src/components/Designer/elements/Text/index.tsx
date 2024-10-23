@@ -2,14 +2,16 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
+import { ApplyElementType } from '../../components/Element/Base/interface';
+import { CustomerElementTypes } from '../../interface';
 import TextConfigRender from './Configure';
 import TextElementRender from './Element';
 
-const TextMaterial = {
+const TextMaterial: ApplyElementType = {
   id: '',
   title: '文本考试',
   icon: 'text',
-  component: 'text_apply',
+  component: CustomerElementTypes.TEXT_APPLY,
   'component-props': {
     type: 'title',
     showInfo: true,

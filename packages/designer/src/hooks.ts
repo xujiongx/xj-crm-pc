@@ -1,11 +1,11 @@
 import useMainStore from './store';
 import { uid } from './utils';
 
-export const useMaterialOperate = <T>() => {
+export const useMaterialOperate = () => {
   const preview = useMainStore((store) => store.preview);
   const configMaterial = useMainStore((store) => store.config.materials);
   const add = (item: any) => {
-    useMainStore.getState().onAddElement<T>({
+    useMainStore.getState().onAddElement({
       ...item,
       id: uid(),
     });

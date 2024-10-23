@@ -2,14 +2,16 @@ import {
   DefaultTemplateFullStyle,
   DefaultTitleConfig,
 } from '@aicc/designer/es/constants';
+import { ApplyElementType } from '../../components/Element/Base/interface';
+import { CustomerElementTypes } from '../../interface';
 import PartnerConfigRender from './Configure';
 import PartnerElementRender from './Element';
 
-const PartnerMaterial = {
+const PartnerMaterial: ApplyElementType = {
   id: '',
   title: '人机对练',
   icon: 'partner',
-  component: 'partner_apply',
+  component: CustomerElementTypes.PARTNER_APPLY,
   'component-props': {
     type: 'list',
     showInfo: true,

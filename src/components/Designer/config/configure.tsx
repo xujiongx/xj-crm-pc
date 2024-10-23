@@ -41,24 +41,24 @@ export const ConfigTypeMap: Record<
   //   component: DemoConfigRender,
   // },
   [CustomerElementTypes.COURSE_APPLY]: {
-    component: () => <CourseConfigRender />,
+    component: (props) => <CourseConfigRender {...props} />,
   },
   [CustomerElementTypes.TEXT_APPLY]: {
-    component: () => <TextConfigRender showCover={false} />,
+    component: (props) => <TextConfigRender {...props} showCover={false} />,
   },
   [CustomerElementTypes.PARTNER_APPLY]: {
-    component: () => <PartnerConfigRender />,
+    component: (props) => <PartnerConfigRender {...props} />,
   },
   [CustomerElementTypes.VIDEO_APPLY]: {
-    component: () => <VideoConfigRender />,
+    component: (props) => <VideoConfigRender {...props} />,
   },
   [CustomerElementTypes.PROGRAM_APPLY]: {
-    component: () => <ProgramConfigRender />,
+    component: (props) => <ProgramConfigRender {...props} />,
   },
   [CustomerElementTypes.LIVE_APPLY]: {
-    component: () => <LiveConfigRender />,
+    component: (props) => <LiveConfigRender {...props} />,
   },
   [CustomerElementTypes.MOMENT_APPLY]: {
-    component: () => <MomentConfigRender />,
+    component: (props) => <MomentConfigRender {...props} />,
   },
 };

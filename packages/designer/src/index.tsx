@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { DesignerConfig } from './config';
 import { useMaterialOperate } from './hooks';
 import styles from './index.less';
-import { CustomerConfig, ViewConfig } from './interface';
+import { CustomerConfig, ElementType, ViewConfig } from './interface';
 import Canvas from './modules/Canvas';
 import Configure from './modules/Configure';
 import Header from './modules/Header';
@@ -34,7 +34,8 @@ const Decorate = <T,>(props: Props<T>) => {
   }, [preview]);
 
   useEffect(() => {
-    useMainStore.getState().setElements<T>(elements);
+    // TODO: 样式待优化
+    useMainStore.getState().setElements(elements as ElementType[]);
   }, [elements]);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const Decorate = <T,>(props: Props<T>) => {
             add={add}
           />
           <div className={styles['layout-content-center']}>
-            <Canvas<T> />
+            <Canvas />
           </div>
           <Configure className={styles['layout-content-right']} />
         </div>

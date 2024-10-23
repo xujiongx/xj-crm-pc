@@ -1,4 +1,5 @@
-import { BaseElementType, ElementType } from '@aicc/designer/src/interface';
+import { BaseElementType, ElementType } from '@aicc/designer/es/interface';
+import { ApplyElementType } from './components/Element/Base/interface';
 
 export const enum CustomerElementTypes {
   COURSE_APPLY = 'course_apply',
@@ -17,7 +18,10 @@ export interface DemoElementType extends BaseElementType {
   };
 }
 
-export type CustomerElementType = ElementType | DemoElementType;
+export type CustomerElementType =
+  | ElementType
+  | DemoElementType
+  | ApplyElementType;
 
 export interface ViewConfig {
   style: React.CSSProperties;

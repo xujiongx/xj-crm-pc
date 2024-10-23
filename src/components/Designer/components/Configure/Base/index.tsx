@@ -13,7 +13,8 @@ interface ApplyConfigureProps {
   showCover?: boolean;
 }
 
-const ApplyConfigure = ({ showCover = true }: ApplyConfigureProps) => {
+const ApplyConfigure = ({ form, showCover = true }: ApplyConfigureProps) => {
+  console.log('👭', form);
   return (
     <>
       <Form.Item name={['component-props', 'type']} noStyle>
