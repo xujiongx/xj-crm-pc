@@ -15,6 +15,7 @@ export type Actions = {
   setElements: (elements: ElementType[]) => void;
   setSelectedElement: (element?: ElementType) => void;
   updateViewStyle: (style: React.CSSProperties) => void;
+  updateViewPageConfig: (pageConfig: ViewConfig['pageConfig']) => void;
   onUpElement: (index: number) => void;
   onDownElement: (index: number) => void;
   onCopyElement: (index: number) => void;

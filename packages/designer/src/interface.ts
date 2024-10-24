@@ -43,18 +43,6 @@ export type ElementType =
   | NavigationElementType;
 
 /**
- * 自定义配置
- */
-export interface CustomerConfig {
-  materials: any;
-  elementsMap: any;
-  configsMap: any;
-  uploadConfig: any;
-  hidePageStyle?: boolean;
-  layoutStyles: CSSProperties;
-}
-
-/**
  * 页面配置
  * 页面样式信息
  * 页面拓展信息
@@ -65,4 +53,18 @@ export interface ViewConfig {
     id: string;
     title: string;
   };
+}
+
+/**
+ * 自定义配置
+ */
+export interface CustomerConfig {
+  materials: any;
+  elementsMap: any;
+  configsMap: any;
+  uploadConfig: any;
+  hidePageStyle?: boolean;
+  layoutStyles: CSSProperties;
+  headerRender?: null | (() => JSX.Element);
+  linkOptions?: { label: string; value: string }[];
 }

@@ -7,9 +7,10 @@ interface Props<T> {
   preview?: boolean;
   system?: boolean;
   loading?: boolean;
-  elements?: T[];
-  viewConfig?: ViewConfig;
+  value: { elements?: T[]; viewConfig?: ViewConfig };
   handleSave?: (data: { elements: T[]; viewConfig: ViewConfig }) => void;
+  handlePublic?: (data: { elements: T[]; viewConfig: ViewConfig }) => void;
+  onChange?: (data: { elements: T[]; viewConfig: ViewConfig }) => void;
 }
 
 const Designer = (props: Props<ElementType & CustomerElementType>) => {

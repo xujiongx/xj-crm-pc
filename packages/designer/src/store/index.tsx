@@ -61,6 +61,17 @@ const useMainStore = create<State & Actions>((set, get) => ({
       },
     });
   },
+  updateViewPageConfig(pageConfig) {
+    set({
+      viewConfig: {
+        ...get().viewConfig,
+        pageConfig: {
+          ...get().viewConfig.pageConfig,
+          ...pageConfig,
+        },
+      },
+    });
+  },
 
   onUpElement(index) {
     const elements = get().elements;

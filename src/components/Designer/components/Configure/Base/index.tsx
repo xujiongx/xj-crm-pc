@@ -7,14 +7,24 @@ import listImg from '@/assets/designer/list.png';
 import titleActiveImg from '@/assets/designer/title-active.png';
 import titleImg from '@/assets/designer/title.png';
 import ImageRadio from '@aicc/designer/es/components/Configure/ImageRadio';
-import { Form, InputNumber, Space, Switch, Typography } from 'antd';
+import {
+  Form,
+  FormInstance,
+  InputNumber,
+  Space,
+  Switch,
+  Typography,
+} from 'antd';
 
 interface ApplyConfigureProps {
   showCover?: boolean;
 }
 
-const ApplyConfigure = ({ form, showCover = true }: ApplyConfigureProps) => {
-  console.log('👭', form);
+const ApplyConfigure = ({
+  form,
+  showCover = true,
+}: { form: FormInstance } & ApplyConfigureProps) => {
+  console.log('👭', form.getFieldsValue());
   return (
     <>
       <Form.Item name={['component-props', 'type']} noStyle>

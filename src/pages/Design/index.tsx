@@ -5,11 +5,20 @@ const DesignPage: React.FC = () => {
 
   return (
     <Designer
-      viewConfig={data?.viewConfig}
-      elements={data?.elements || []}
-      // preview={true}
+      value={{
+        elements: data?.elements,
+        viewConfig: data?.viewConfig,
+      }}
+      onChange={(data) => {
+        console.log('👩‍🎨onChange', data);
+      }}
+      preview={true}
       handleSave={(data) => {
-        console.log('😣', data);
+        console.log('😣handleSave', data);
+        localStorage.setItem('data', JSON.stringify(data));
+      }}
+      handlePublic={(data) => {
+        console.log('😣handlePublic', data);
         localStorage.setItem('data', JSON.stringify(data));
       }}
     />

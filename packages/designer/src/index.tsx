@@ -14,9 +14,13 @@ interface Props<T> {
   config?: CustomerConfig;
   preview?: boolean;
   loading?: boolean;
-  elements?: T[];
-  viewConfig?: ViewConfig;
+  value?: {
+    elements?: T[];
+    viewConfig?: ViewConfig;
+  };
+  onChange?: (data: { elements: any[]; viewConfig: ViewConfig }) => void;
   handleSave?: (data: { elements: any[]; viewConfig: ViewConfig }) => void;
+  handlePublic?: (data: { elements: any[]; viewConfig: ViewConfig }) => void;
 }
 
 const Decorate = <T,>(props: Props<T>) => {
@@ -24,10 +28,18 @@ const Decorate = <T,>(props: Props<T>) => {
     loading = false,
     config,
     preview = false,
-    elements = [],
-    viewConfig = { style: {} },
+    value = { elements: [], viewConfig: { style: {} } },
     handleSave,
+    handlePublic,
+    onChange,
   } = props;
+
+  const {
+    elements,
+    viewConfig = {
+      style: {},
+    },
+  } = value;
 
   useEffect(() => {
     useMainStore.getState().setPreview(preview);
@@ -35,10 +47,12 @@ const Decorate = <T,>(props: Props<T>) => {
 
   useEffect(() => {
     // TODO: 样式待优化
+    if (!elements) return;
     useMainStore.getState().setElements(elements as ElementType[]);
   }, [elements]);
 
   useEffect(() => {
+    if (!viewConfig) return;
     useMainStore.getState().setViewConfig(viewConfig);
   }, [viewConfig]);
 
@@ -53,6 +67,13 @@ const Decorate = <T,>(props: Props<T>) => {
 
   const { configMaterial, add } = useMaterialOperate();
 
+  const curElements = useMainStore((store) => store.elements);
+  const curViewConfig = useMainStore((store) => store.viewConfig);
+
+  useEffect(() => {
+    onChange?.({ elements: curElements, viewConfig: curViewConfig });
+  }, [curElements, curViewConfig]);
+
   return (
     <Spin spinning={loading}>
       <div
@@ -61,7 +82,15 @@ const Decorate = <T,>(props: Props<T>) => {
           ...config?.layoutStyles,
         }}
       >
-        <Header className={styles['layout-header']} handleSave={handleSave} />
+        {config?.headerRender ? (
+          <config.headerRender />
+        ) : (
+          <Header
+            className={styles['layout-header']}
+            handleSave={handleSave}
+            handlePublic={handlePublic}
+          />
+        )}
         <div className={styles['layout-content']}>
           <Material
             className={styles['layout-content-left']}

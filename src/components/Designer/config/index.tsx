@@ -1,5 +1,6 @@
 import { getToken, stringifySignatureWithUrl } from '@/utils';
 import { CustomerConfig } from '@aicc/designer/es/interface';
+import { linkOptions } from '../constant';
 import { ConfigTypeMap } from './configure';
 import { ElementTypeMap } from './element';
 import { Materials } from './material';
@@ -14,6 +15,8 @@ export const DesignerConfig: CustomerConfig = {
   elementsMap: ElementTypeMap,
   configsMap: ConfigTypeMap,
   uploadConfig,
-  // hidePageStyle: true,
+  hidePageStyle: false,
   layoutStyles: {},
+  // headerRender: () => <div>hello</div>,
+  linkOptions,
 };

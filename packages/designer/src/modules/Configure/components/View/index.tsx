@@ -1,15 +1,21 @@
 import { Form } from 'antd';
+import { useEffect } from 'react';
 import Color from '../../../../components/Configure/Color';
 import useMainStore from '../../../../store';
 
 const ViewConfigure = () => {
+  const [form] = Form.useForm();
   const viewConfig = useMainStore((state) => state.viewConfig);
   const preview = useMainStore((store) => store.preview);
 
+  useEffect(() => {
+    form.setFieldsValue(viewConfig.style);
+  }, [viewConfig.style]);
+
   return (
     <Form
+      form={form}
       disabled={preview}
-      initialValues={viewConfig.style}
       onValuesChange={(value) => {
         useMainStore.getState().updateViewStyle(value);
       }}
