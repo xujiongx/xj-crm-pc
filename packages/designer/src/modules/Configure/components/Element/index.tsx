@@ -1,8 +1,8 @@
-import { TitleMaterial } from '@aicc/designer/es/elements/Title';
 import { Collapse, Form, Space, Switch } from 'antd';
 import { useEffect } from 'react';
 import ElementStyleConfiure from '../../../../components/Configure/Style';
 import TitleConfiure from '../../../../components/Configure/Title';
+import { TitleMaterial } from '../../../../elements/Title';
 import useMainStore from '../../../../store';
 import styles from './index.less';
 

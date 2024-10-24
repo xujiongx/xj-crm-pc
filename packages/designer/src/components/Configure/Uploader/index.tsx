@@ -3,7 +3,7 @@ import DisabledContext from 'antd/es/config-provider/DisabledContext';
 import { RcFile } from 'antd/es/upload';
 import React from 'react';
 
-import useMainStore from '@aicc/designer/es/store';
+import useMainStore from '../../../store';
 import DIcon from '../../Element/DIcon';
 import styles from './index.less';
 

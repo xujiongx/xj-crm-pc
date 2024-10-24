@@ -1,5 +1,5 @@
-import DIcon from '@aicc/designer/es/components/Element/DIcon';
 import { NavigationElementType } from '..';
+import DIcon from '../../../components/Element/DIcon';
 import styles from './index.less';
 
 interface NavigationElementProps {

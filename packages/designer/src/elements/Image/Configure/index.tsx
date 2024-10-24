@@ -1,11 +1,11 @@
-import ColumnSelect from '@aicc/designer/es/components/Configure/Column';
-import Sorter from '@aicc/designer/es/components/Configure/Sorter';
-import SorterItem from '@aicc/designer/es/components/Configure/Sorter/item';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Radio, Space, Typography } from 'antd';
+import ColumnSelect from '../../../components/Configure/Column';
+import Sorter from '../../../components/Configure/Sorter';
+import SorterItem from '../../../components/Configure/Sorter/item';
 
-import Uploader from '@aicc/designer/es/components/Configure/Uploader';
-import ImageUploader from '@aicc/designer/es/components/Configure/Uploader/image';
+import Uploader from '../../../components/Configure/Uploader';
+import ImageUploader from '../../../components/Configure/Uploader/image';
 import { ImageMaterial } from '../index';
 import styles from './index.less';
 

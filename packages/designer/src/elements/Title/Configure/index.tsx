@@ -1,7 +1,7 @@
-import Color from '@aicc/designer/es/components/Configure/Color';
-import ColumnSelect from '@aicc/designer/es/components/Configure/Column';
-import IconRadio from '@aicc/designer/es/components/Configure/IconRadio';
 import { Divider, Form, Input, Radio, Switch } from 'antd';
+import Color from '../../../components/Configure/Color';
+import ColumnSelect from '../../../components/Configure/Column';
+import IconRadio from '../../../components/Configure/IconRadio';
 
 const TitleConfigure = () => {
   return (

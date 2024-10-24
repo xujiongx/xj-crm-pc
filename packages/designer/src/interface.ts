@@ -50,8 +50,8 @@ export type ElementType =
 export interface ViewConfig {
   style: React.CSSProperties;
   pageConfig?: {
-    id: string;
-    title: string;
+    id?: string;
+    title?: string;
   };
 }
 
@@ -64,7 +64,7 @@ export interface CustomerConfig {
   configsMap: any;
   uploadConfig: any;
   hidePageStyle?: boolean;
-  layoutStyles: CSSProperties;
+  layoutStyles?: CSSProperties;
   headerRender?: null | (() => JSX.Element);
   linkOptions?: { label: string; value: string }[];
 }

@@ -1,5 +1,5 @@
-import DefaultImage from '@aicc/designer/es/components/Element/DefaultImage';
 import { ImageElementType } from '..';
+import DefaultImage from '../../../components/Element/DefaultImage';
 import styles from './index.less';
 
 interface ImageElementProps {

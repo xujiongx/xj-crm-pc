@@ -1,5 +1,5 @@
-import useMainStore from '@aicc/designer/es/store';
 import { Select, SelectProps } from 'antd';
+import useMainStore from '../../../store';
 
 const ColumnSelect = ({ ...rest }: SelectProps) => {
   const linkOptions = useMainStore((store) => store.config.linkOptions);

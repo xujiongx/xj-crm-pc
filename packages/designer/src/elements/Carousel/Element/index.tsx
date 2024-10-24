@@ -1,5 +1,5 @@
-import DefaultImage from '@aicc/designer/es/components/Element/DefaultImage';
 import { Carousel } from 'antd';
+import DefaultImage from '../../../components/Element/DefaultImage';
 import { CarouselElementType, CarouselMaterial } from '../index';
 import './index.less';
 

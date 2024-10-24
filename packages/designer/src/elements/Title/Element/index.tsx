@@ -1,6 +1,6 @@
-import DIcon from '@aicc/designer/es/components/Element/DIcon';
 import { RightOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
+import DIcon from '../../../components/Element/DIcon';
 import { TitleElementType, TitleMaterial } from '../index';
 import './index.less';
 

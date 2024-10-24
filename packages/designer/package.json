@@ -14,7 +14,6 @@
     "dev": "father dev"
   },
   "dependencies": {
-    "@aicc/designer": "workspace:*",
     "@aicc/shared": "workspace:*"
   }
 }

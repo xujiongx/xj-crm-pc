@@ -1,4 +1,4 @@
-import TitleElement from '@aicc/designer/es/elements/Title/Element';
+import TitleElement from '../../../../../elements/Title/Element';
 import { ElementType } from '../../../../../interface';
 import useMainStore from '../../../../../store';
 
