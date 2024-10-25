@@ -24,8 +24,13 @@ export default [
     component: './Design',
   },
   {
-    name: 'Dnd',
+    name: 'Dnd象棋',
     path: '/dnd',
     component: './Dnd',
+  },
+  {
+    name: '图片设计器',
+    path: '/q-designer',
+    component: './QDesigner',
   },
 ];
