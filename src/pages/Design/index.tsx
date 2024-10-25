@@ -12,7 +12,6 @@ const DesignPage: React.FC = () => {
       onChange={(data) => {
         console.log('👩‍🎨onChange', data);
       }}
-      preview={true}
       handleSave={(data) => {
         console.log('😣handleSave', data);
         localStorage.setItem('data', JSON.stringify(data));

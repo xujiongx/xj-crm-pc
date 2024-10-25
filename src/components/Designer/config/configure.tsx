@@ -4,6 +4,7 @@ import { NavigationConfigRender } from '@aicc/designer/es/elements/Navigation';
 import { TitleConfigRender } from '@aicc/designer/es/elements/Title';
 import { ElementTypes } from '@aicc/designer/es/interface';
 import { CourseConfigRender } from '../elements/Course';
+import { DemoConfigRender } from '../elements/Demo';
 import { LiveConfigRender } from '../elements/Live';
 import { MomentConfigRender } from '../elements/Moment';
 import { PartnerConfigRender } from '../elements/Partner';
@@ -60,5 +61,8 @@ export const ConfigTypeMap: Record<
   },
   [CustomerElementTypes.MOMENT_APPLY]: {
     component: (props) => <MomentConfigRender {...props} />,
+  },
+  [CustomerElementTypes.DEMO]: {
+    component: (props) => <DemoConfigRender {...props} />,
   },
 };

@@ -9,6 +9,7 @@ export const enum CustomerElementTypes {
   PARTNER_APPLY = 'partner_apply',
   TEXT_APPLY = 'text_apply',
   VIDEO_APPLY = 'video_apply',
+  DEMO = 'demo',
 }
 
 export interface DemoElementType extends BaseElementType {

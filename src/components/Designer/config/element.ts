@@ -4,6 +4,7 @@ import { NavigationElementRender } from '@aicc/designer/es/elements/Navigation';
 import { TitleElementRender } from '@aicc/designer/es/elements/Title';
 import { ElementTypes } from '@aicc/designer/es/interface';
 import { CourseElementRender } from '../elements/Course';
+import { DemoElementRender } from '../elements/Demo';
 import { LiveElementRender } from '../elements/Live';
 import { MomentElementRender } from '../elements/Moment';
 import { PartnerElementRender } from '../elements/Partner';
@@ -25,4 +26,5 @@ export const ElementTypeMap: Record<string, any> = {
   [CustomerElementTypes.PROGRAM_APPLY]: ProgramElementRender,
   [CustomerElementTypes.LIVE_APPLY]: LiveElementRender,
   [CustomerElementTypes.MOMENT_APPLY]: MomentElementRender,
+  [CustomerElementTypes.DEMO]: DemoElementRender,
 };
