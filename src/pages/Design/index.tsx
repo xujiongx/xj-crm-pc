@@ -6,8 +6,8 @@ const DesignPage: React.FC = () => {
   return (
     <Designer
       value={{
-        elements: data?.elements,
-        viewConfig: data?.viewConfig,
+        elements: data?.elements || [],
+        viewConfig: data?.viewConfig || {},
       }}
       onChange={(data) => {
         console.log('👩‍🎨onChange', data);

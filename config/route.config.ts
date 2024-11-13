@@ -29,6 +29,11 @@ export default [
     component: './Dnd',
   },
   {
+    name: 'Utils',
+    path: '/utils',
+    component: './Utils',
+  },
+  {
     name: 'Flow',
     path: '/flow',
     component: './Flow',
