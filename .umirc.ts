@@ -10,6 +10,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   proxy: proxyConfig,
+  esbuildMinifyIIFE: true,
   mfsu: {
     strategy: 'normal',
     shared: {

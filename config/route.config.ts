@@ -28,4 +28,9 @@ export default [
     path: '/dnd',
     component: './Dnd',
   },
+  {
+    name: 'Utils',
+    path: '/utils',
+    component: './Utils',
+  },
 ];
