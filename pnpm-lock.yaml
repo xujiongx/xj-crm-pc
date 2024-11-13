@@ -24,6 +24,21 @@ importers:
       '@ant-design/pro-components':
         specifier: ^2.4.4
         version: 2.8.0(antd@5.17.4)(rc-field-form@2.4.0)(react-dom@18.3.1)(react@18.3.1)
+      '@antv/x6':
+        specifier: ^2.18.1
+        version: 2.18.1
+      '@antv/x6-plugin-history':
+        specifier: ^2.2.4
+        version: 2.2.4(@antv/x6@2.18.1)
+      '@antv/x6-plugin-snapline':
+        specifier: ^2.1.7
+        version: 2.1.7(@antv/x6@2.18.1)
+      '@antv/x6-plugin-transform':
+        specifier: ^2.1.8
+        version: 2.1.8(@antv/x6@2.18.1)
+      '@antv/x6-react-shape':
+        specifier: ^2.2.3
+        version: 2.2.3(@antv/x6@2.18.1)(react-dom@18.3.1)(react@18.3.1)
       '@dnd-kit/core':
         specifier: ^6.1.0
         version: 6.1.0(react-dom@18.3.1)(react@18.3.1)
@@ -504,6 +519,61 @@ packages:
 
   /@antfu/utils@0.7.10:
     resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
+    dev: false
+
+  /@antv/x6-common@2.0.17:
+    resolution: {integrity: sha512-37g7vmRkNdYzZPdwjaMSZEGv/MMH0S4r70/Jwoab1mioycmuIBN73iyziX8m56BvJSDucZ3J/6DU07otWqzS6A==}
+    dependencies:
+      lodash-es: 4.17.21
+      utility-types: 3.11.0
+    dev: false
+
+  /@antv/x6-geometry@2.0.5:
+    resolution: {integrity: sha512-MId6riEQkxphBpVeTcL4ZNXL4lScyvDEPLyIafvWMcWNTGK0jgkK7N20XSzqt8ltJb0mGUso5s56mrk8ysHu2A==}
+    dev: false
+
+  /@antv/x6-plugin-history@2.2.4(@antv/x6@2.18.1):
+    resolution: {integrity: sha512-9gHHvEW4Fla+1hxUV49zNgJyIMoV9CjVM52MrFgAJcvyRn1Kvxz4MfxiKlG+DEZUs+/zvfjl9pS6gJOd8laRkg==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+    dependencies:
+      '@antv/x6': 2.18.1
+    dev: false
+
+  /@antv/x6-plugin-snapline@2.1.7(@antv/x6@2.18.1):
+    resolution: {integrity: sha512-AsysoCb9vES0U2USNhEpYuO/W8I0aYfkhlbee5Kt4NYiMfQfZKQyqW/YjDVaS2pm38C1NKu1LdPVk/BBr4CasA==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+    dependencies:
+      '@antv/x6': 2.18.1
+    dev: false
+
+  /@antv/x6-plugin-transform@2.1.8(@antv/x6@2.18.1):
+    resolution: {integrity: sha512-GvJuiJ4BKp0H7+qx3R1I+Vzbw5gXp9+oByXo/WyVxE3urOC7LC5sqnaDfIjyYMN6ROLPYPZraLSeSyYBgMgcDw==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+    dependencies:
+      '@antv/x6': 2.18.1
+    dev: false
+
+  /@antv/x6-react-shape@2.2.3(@antv/x6@2.18.1)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-42PGxk3XLnx9bsHQiRPauai5UQCrsh0MbWI3MyHRpjQaC30FK1rqyjH/EJ8qH0p6/cAndszZzCaiPqBbs3FqLQ==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+      react: 18.3.1
+      react-dom: 18.3.1
+    dependencies:
+      '@antv/x6': 2.18.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /@antv/x6@2.18.1:
+    resolution: {integrity: sha512-FkWdbLOpN9J7dfJ+kiBxzowSx2N6syBily13NMVdMs+wqC6Eo5sLXWCZjQHateTFWgFw7ZGi2y9o3Pmdov1sXw==}
+    dependencies:
+      '@antv/x6-common': 2.0.17
+      '@antv/x6-geometry': 2.0.5
+      utility-types: 3.11.0
     dev: false
 
   /@babel/code-frame@7.25.7:
@@ -11779,6 +11849,11 @@ packages:
 
   /utila@0.4.0:
     resolution: {integrity: sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==}
+    dev: false
+
+  /utility-types@3.11.0:
+    resolution: {integrity: sha512-6Z7Ma2aVEWisaL6TvBCy7P8rm2LQoPv6dJ7ecIaIixHcwfbJ0x7mWdbcwlIM5IGQxPZSFYeqRCqlOOeKoJYMkw==}
+    engines: {node: '>= 4'}
     dev: false
 
   /utils-merge@1.0.1:

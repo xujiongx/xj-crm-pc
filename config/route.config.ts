@@ -28,4 +28,9 @@ export default [
     path: '/dnd',
     component: './Dnd',
   },
+  {
+    name: 'Flow',
+    path: '/flow',
+    component: './Flow',
+  },
 ];
