@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@aicc/designer": "workspace:^",
+    "@aicc/shared": "workspace:^",
     "@ant-design/icons": "^5.0.1",
     "@ant-design/pro-components": "^2.4.4",
     "@antv/x6": "^2.18.1",
+    "@antv/x6-plugin-dnd": "^2.1.1",
     "@antv/x6-plugin-history": "^2.2.4",
+    "@antv/x6-plugin-selection": "^2.2.2",
     "@antv/x6-plugin-snapline": "^2.1.7",
     "@antv/x6-plugin-transform": "^2.1.8",
     "@antv/x6-react-shape": "^2.2.3",
