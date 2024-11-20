@@ -38,4 +38,9 @@ export default [
     path: '/flow',
     component: './Flow',
   },
+  {
+    name: '图片设计器',
+    path: '/image-designer',
+    component: './IDesigner',
+  },
 ];
