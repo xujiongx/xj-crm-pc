@@ -1,6 +1,4 @@
 import { useEffect } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useGraph } from './hooks/graph';
 import { useRegister } from './hooks/register';
 import styles from './index.less';
@@ -10,7 +8,7 @@ import Elements from './modules/elements';
 import Operate from './modules/operate';
 
 const Page: React.FC = () => {
-  const { containerRef, graph, state, isLoaded, dnd } = useGraph();
+  const { containerRef, graph, status, isLoaded, dnd } = useGraph();
 
   useRegister();
 
@@ -23,14 +21,14 @@ const Page: React.FC = () => {
   }, [graph, isLoaded]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <div>
       <div>header</div>
       <div className={styles['main']}>
         <div>
           <Elements dnd={dnd} graph={graph} />
         </div>
         <div>
-          <Operate graph={graph} state={state} />
+          <Operate graph={graph} status={status} />
           <ContainerRender containerRef={containerRef} />
         </div>
         <div>
@@ -38,7 +36,7 @@ const Page: React.FC = () => {
         </div>
       </div>
       <div>bottom</div>
-    </DndProvider>
+    </div>
   );
 };
 

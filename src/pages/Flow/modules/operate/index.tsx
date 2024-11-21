@@ -1,6 +1,6 @@
 import { uid } from '@aicc/shared/es';
 import { Button } from 'antd';
-import useStore from '../../store';
+import useGraphStore from '../../store';
 
 const commonAttrs = {
   body: {
@@ -18,7 +18,7 @@ const commonAttrs = {
 };
 
 const Operate = (props: any) => {
-  const { graph, state } = props;
+  const { graph, status } = props;
 
   const exportGraph = () => {
     const json = graph.toJSON();
@@ -148,16 +148,16 @@ const Operate = (props: any) => {
     <>
       <Button
         onClick={() => {
-          useStore.getState().deleteNode();
+          useGraphStore.getState().deleteNode();
         }}
       >
         删除
       </Button>
       <Button onClick={() => graph.centerContent()}>centerContent</Button>
-      <Button onClick={() => graph.undo()} disabled={!state.canUndo}>
+      <Button onClick={() => graph.undo()} disabled={!status.canUndo}>
         撤销
       </Button>
-      <Button onClick={() => graph.redo()} disabled={!state.canRedo}>
+      <Button onClick={() => graph.redo()} disabled={!status.canRedo}>
         重做
       </Button>
       <Button onClick={() => exportGraph()}>保存</Button>
