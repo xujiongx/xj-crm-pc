@@ -33,6 +33,7 @@
     "@types/crypto-js": "^4.2.2",
     "@types/qs": "^6.9.16",
     "@umijs/max": "^4.3.27",
+    "@xzdarcy/react-timeline-editor": "^0.1.9",
     "ahooks": "^3.8.1",
     "antd": "5.17.4",
     "clsx": "^2.1.1",
