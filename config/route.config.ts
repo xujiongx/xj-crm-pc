@@ -38,4 +38,9 @@ export default [
     path: '/flow',
     component: './Flow',
   },
+  {
+    name: 'MG动画编辑器',
+    path: '/mg',
+    component: './MG',
+  },
 ];

@@ -1,18 +1,14 @@
-import Board from './components/board';
-import { Observe } from './components/game';
+// import Cheers from "./modules/cheers"
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import SortRender from './modules/sortRender';
 
 const Page: React.FC = () => {
   return (
-    <div
-      style={{
-        width: '400px',
-        height: '400px',
-      }}
-    >
-      {Observe((knightPosition, action) => (
-        <Board knightPosition={knightPosition} action={action} />
-      ))}
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      {/* <Cheers /> */}
+      <SortRender />
+    </DndProvider>
   );
 };
 
