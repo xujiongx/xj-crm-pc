@@ -1,0 +1,55 @@
+.border-line {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0;
+  border: 0 dashed var(--ant-color-primary);
+
+  &-top {
+    border-top-width: 1px;
+  }
+  &-bottom {
+    border-bottom-width: 1px;
+  }
+  &-left {
+    border-left-width: 1px;
+  }
+  &-right {
+    border-right-width: 1px;
+  }
+
+  &-wide {
+    &::before {
+      content: '';
+      position: absolute;
+      background: transparent;
+      cursor: move;
+    }
+
+    .border-line-top::before {
+      top: -8px;
+      left: -8px;
+      width: calc(100% + 16px);
+      height: 16px;
+    }
+    .border-line-bottom::before {
+      bottom: -8px;
+      left: -8px;
+      width: calc(100% + 16px);
+      height: 16px;
+    }
+    .border-line-left::before {
+      top: -8px;
+      left: -8px;
+      width: 16px;
+      height: calc(100% + 16px);
+    }
+    .border-line-right::before {
+      top: -8px;
+      right: -8px;
+      width: 16px;
+      height: calc(100% + 16px);
+    }
+  }
+}

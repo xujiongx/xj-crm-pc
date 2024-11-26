@@ -1,0 +1,23 @@
+.configure {
+  border-left: solid 1px #eee;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+
+}
+
+:global {
+  .configure-tabs {
+    display: flex;
+    height: 100%;
+    .ant-tabs-nav {
+      margin-bottom: 0;
+    }
+    .ant-tabs-content-holder {
+      padding: 12px;
+      font-size: 13px;
+      overflow: overlay;
+    }
+  }  
+}

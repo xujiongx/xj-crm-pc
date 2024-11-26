@@ -1,0 +1,42 @@
+.select-group {
+  display: flex;
+  align-items: center;
+
+  ::v-deep(.select-wrap) {
+    .select {
+      border-radius: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+    }
+
+    & + .select-wrap {
+      .select {
+        border-left-width: 1px;
+      }
+    }
+
+    &:hover {
+      & + .select-wrap {
+        .select {
+          border-left-color: #d14424;
+        }
+      }
+    }
+
+    &:first-child {
+      .select {
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+        border-left-width: 1px;
+      }
+    }
+
+    &:last-child {
+      .select {
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-right-width: 1px;
+      }
+    }
+  }
+}

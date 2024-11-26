@@ -1,0 +1,30 @@
+.material {
+  border-right: solid 1px #eee;
+  background-color: #fff;
+  display: flex;
+  user-select: none;
+}
+
+.tabs {
+  background-color: #f9f9f9;
+  height: 100%;
+  width: 50px;
+  flex-shrink: 0;
+
+  .tab {
+    cursor: pointer;
+    text-align: center;
+    padding: 8px 0;
+    background-color: #fff;
+  }
+
+  .tab-active {
+    background-color: #fff;
+  }
+}
+
+.content {
+  flex: 1;
+  background-color: #fff;
+  overflow-y: auto;
+}
