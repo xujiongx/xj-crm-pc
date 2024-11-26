@@ -25,7 +25,7 @@ const TABS: Array<TabItem> = [
     key: 'role',
     label: '角色',
     icon: 'user',
-    component: <SceneMaterial />,
+    component: null,
   },
   {
     key: 'text',
@@ -43,7 +43,7 @@ const TABS: Array<TabItem> = [
     key: 'shape',
     label: '形状',
     icon: 'user',
-    component: <SceneMaterial />,
+    component: null,
   },
 ];
 
@@ -54,7 +54,7 @@ const Material = ({ className }: { className: string }) => {
   return (
     <div className={clsx(className, styles.material)}>
       <div className={styles.tabs}>
-        {TABS.slice(0, slideIndex === -1 ? 1 : TABS.length).map((tab) => (
+        {TABS.map((tab) => (
           <div
             key={tab.key}
             onClick={() => setSelectedTab(tab)}

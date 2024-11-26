@@ -6,10 +6,29 @@ type PPTTextData = Omit<PPTTextElement, 'id' | 'type' | 'left' | 'top'>;
 
 const DefaultTextGroup: Array<PPTTextData> = [
   {
+    name:'添加标题文字',
     width: 120,
     height: 0,
     content: '默认文本',
-    lineHeight: 1.5,
+    lineHeight: 1.0,
+    wordSpace: 0,
+    rotate: 0,
+  },
+  {
+    name:'添加副标题文字',
+    width: 120,
+    height: 0,
+    content: '默认文本',
+    lineHeight: 1.0,
+    wordSpace: 0,
+    rotate: 0,
+  },
+  {
+    name:'添加正文文字',
+    width: 120,
+    height: 0,
+    content: '默认文本',
+    lineHeight: 1.0,
     wordSpace: 0,
     rotate: 0,
   },

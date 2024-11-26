@@ -1,6 +1,6 @@
 import { ElementTypes, PPTElement } from '@/pages/MotionVideo/Editor/interface';
-import ImageElement from '../../../Element/Image';
-import TextElement from '../../../Element/Text';
+import ImageElement from '../../../../components/Element/Image';
+import TextElement from '../../../../components/Element/Text';
 import styles from './index.less';
 
 interface EditableElementProps {

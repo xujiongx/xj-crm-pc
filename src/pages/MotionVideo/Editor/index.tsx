@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import Canvas from './components/Canvas';
-import CanvasTool from './components/CanvasTool';
-import Configure from './components/Configure';
-import Header from './components/Header';
-import Material from './components/Material';
 import useGlobalHotkey from './hooks/useGlobalHotkey';
 import styles from './index.less';
-import { useSlidesStore } from './store'
+import Canvas from './modules/Canvas';
+import CanvasTool from './modules/CanvasTool';
+import Configure from './modules/Configure';
+import Header from './modules/Header';
+import Material from './modules/Material';
+import TimeLine from './modules/TimeLine';
+import { useSlidesStore } from './store';
 
 const MotionVideoEditor = () => {
   useGlobalHotkey();
@@ -15,9 +16,13 @@ const MotionVideoEditor = () => {
     document.oncontextmenu = (e) => e.preventDefault();
   }, []);
 
-  const slides = useSlidesStore((state) => state.slides);
+  const slidesData = localStorage.getItem('slides');
 
-  console.log('👨‍⚖️', slides);
+  useEffect(() => {
+    if (slidesData) {
+      useSlidesStore.getState().setSlides(JSON.parse(slidesData));
+    }
+  }, [slidesData]);
 
   return (
     <div className={styles.layout}>
@@ -27,6 +32,7 @@ const MotionVideoEditor = () => {
         <div className={styles['layout-content-center']}>
           <CanvasTool className={styles['center-top']} />
           <Canvas />
+          <TimeLine />
         </div>
         <Configure className={styles['layout-content-right']} />
       </div>

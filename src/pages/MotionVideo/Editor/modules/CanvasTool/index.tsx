@@ -11,7 +11,7 @@ import useHistorySnapshot from '../../hooks/useHistorySnapshot';
 import useScaleCanvas from '../../hooks/useScaleCanvas';
 import useMainStore from '../../store/main';
 import useSnapshotStore from '../../store/snapshot';
-import ActionIcon from '../Canvas/components/ActionIcon';
+import ActionIcon from '../../modules/Canvas/components/ActionIcon';
 import styles from './index.less';
 
 const CanvasTool = ({ className }: { className: string }) => {

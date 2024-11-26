@@ -10,8 +10,8 @@ import useKeyboardStore from '../../store/keyboard';
 import useMainStore from '../../store/main';
 import useSlidesStore from '../../store/slides';
 import { removeAllRanges } from '../../utils/selection';
-import ContextMenu from '../ContextMenu';
-import Operate from '../Operate';
+import ContextMenu from '../../components/ContextMenu';
+import Operate from '../../components/Operate';
 import useClipboard from '../../hooks/useClipboard'
 import DragMask from './components/DragMask';
 import EditableElement from './components/EditableElement';

@@ -88,7 +88,9 @@ const useCreateElement = () => {
         defaultColor: theme.fontColor,
         vertical,
       },
-      () => {},
+      () => {
+        
+      },
     );
   };
 

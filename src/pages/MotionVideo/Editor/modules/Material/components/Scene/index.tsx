@@ -9,9 +9,9 @@ import clsx from 'clsx';
 import { useRef } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { SortEnd } from 'react-sortable-hoc/types'
-import ScreenView from '../../../ScreenView';
+import ScreenView from '../../../../components/ScreenView';
 import styles from './index.less';
-import ContextMenu from '../../../ContextMenu';
+import ContextMenu from '../../../../components/ContextMenu';
 import useAddSlidesOrElements from '../../../../hooks/useAddSlidesOrElements'
 import snapshotStore from '../../../../store/snapshot'
 import { SlideItem } from '@/pages/MotionVideo/Editor/interface';

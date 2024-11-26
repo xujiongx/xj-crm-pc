@@ -4,7 +4,7 @@ import ElementAnimationPanel from './components/ElementAnimationPanel'
 import { useMemo } from 'react';
 import styles from './index.less';
 import { ToolbarStates } from './enum'
-import TextStylePanel from './components/ElementStylePanel/TextStylePanel'
+import TextStylePanel from './components/ElementStylePanel/TextStylePannel'
 import SlideDesignPanel from './components/SlideDesignPanel/index'
 import ElementPositionPanel from './components/ElementPositionPanel'
 import useMainStore from '../../store/main';

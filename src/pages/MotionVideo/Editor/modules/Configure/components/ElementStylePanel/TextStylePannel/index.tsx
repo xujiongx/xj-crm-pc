@@ -5,15 +5,15 @@ import {
   VerticalAlignTopOutlined,
   ColumnWidthOutlined
 } from '@ant-design/icons';
-import Divider from '../Divider/index'
-import RichTextBase from '../RichTextBase/index'
-import Select from '../Select';
+import Divider from '../../Divider/index'
+import RichTextBase from '../../RichTextBase/index'
+import Select from '../../Select';
 import useMainStore from '@/pages/MotionVideo/Editor/store/main';
 import useSlidesStore from '@/pages/MotionVideo/Editor/store/slides';
 import { PPTTextElement } from '@/pages/MotionVideo/Editor/interface';
 import useHistorySnapshot from '@/pages/MotionVideo/Editor/store/snapshot';
-import ActionIcon from '../../../Canvas/components/ActionIcon';
-import './TextStylePanel.less';
+import ActionIcon from '../../../../Canvas/components/ActionIcon';
+import './index.less';
 import emitter, { EmitterEvents, type RichTextAction } from '@/pages/MotionVideo/Editor/utils/emitter';
 
 
