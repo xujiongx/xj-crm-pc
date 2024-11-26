@@ -134,4 +134,10 @@ export default {
     changeOrigin: true,
     secure: false,
   },
+  '/zdarcy': {
+    target: 'https://zdarcy.com/',
+    changeOrigin: true,
+    secure: false,
+    pathRewrite: { '^/zdarcy': '' },
+  },
 };

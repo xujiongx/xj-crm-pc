@@ -5,6 +5,7 @@
 
 import { defineApp } from '@umijs/max';
 import './global.less';
+import 'animate.css';
 
 export default defineApp({
   layout: () => {

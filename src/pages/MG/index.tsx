@@ -1,11 +1,11 @@
 import styles from './index.less';
+import TimelineEditor from './modules/timeline'
 
-import { Timeline } from '@xzdarcy/react-timeline-editor';
 const Page = () => {
   return (
     <div className={styles['page']}>
       MG动画编辑器
-      <Timeline editorData={[]} effects={{}} />
+      <TimelineEditor />
     </div>
   );
 };

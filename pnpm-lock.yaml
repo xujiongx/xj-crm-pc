@@ -84,9 +84,15 @@ importers:
       ahooks:
         specifier: ^3.8.1
         version: 3.8.1(react@18.3.1)
+      animate.css:
+        specifier: ^4.1.1
+        version: 4.1.1
       antd:
         specifier: 5.17.4
         version: 5.17.4(react-dom@18.3.1)(react@18.3.1)
+      classnames:
+        specifier: ^2.5.1
+        version: 2.5.1
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -99,9 +105,21 @@ importers:
       father:
         specifier: ^4.5.1
         version: 4.5.1(@babel/core@7.26.0)(@types/node@20.12.12)(styled-components@6.1.13)(webpack@5.96.1)
+      gsap:
+        specifier: ^3.12.5
+        version: 3.12.5
+      howler:
+        specifier: ^2.2.4
+        version: 2.2.4
       immer:
         specifier: ^10.1.1
         version: 10.1.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      lottie-web:
+        specifier: ^5.12.2
+        version: 5.12.2
       qs:
         specifier: ^6.13.0
         version: 6.13.0
@@ -4147,6 +4165,10 @@ packages:
       require-from-string: 2.0.2
     dev: false
 
+  /animate.css@4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
+    dev: false
+
   /ansi-escapes@5.0.0:
     resolution: {integrity: sha512-5GFMVX8HqE/TB+FuBJGuO5XG0WrsA6ptUqoODaT/n9mmUaZFkqnBueB4leqGBCmrUHnCnC4PCZTCd0E7QQ83bA==}
     engines: {node: '>=12'}
@@ -6983,6 +7005,10 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: false
 
+  /gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
+    dev: false
+
   /handle-thing@2.0.1:
     resolution: {integrity: sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==}
     dev: false
@@ -7099,6 +7125,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       lru-cache: 6.0.0
+    dev: false
+
+  /howler@2.2.4:
+    resolution: {integrity: sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==}
     dev: false
 
   /hpack.js@2.1.6:
@@ -8215,6 +8245,10 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
+
+  /lottie-web@5.12.2:
+    resolution: {integrity: sha512-uvhvYPC8kGPjXT3MyKMrL3JitEAmDMp30lVkuq/590Mw9ok6pWcFCwXJveo0t5uqYw1UREQHofD+jVpdjBv8wg==}
     dev: false
 
   /lower-case@2.0.2:
