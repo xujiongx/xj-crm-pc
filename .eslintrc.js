@@ -5,6 +5,5 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-param-reassign': 'off',
     'no-use-before-define': 'off',
-    'no-unknown-functions': ['error', { ignoreFunctions: ['fade'] }],
   },
 };

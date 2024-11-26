@@ -1,3 +1,4 @@
+import { uid } from '@aicc/shared/es';
 import { Timeline, TimelineState } from '@xzdarcy/react-timeline-editor';
 import { Button, Switch } from 'antd';
 import classNames from 'classnames';
@@ -33,6 +34,54 @@ const TimelineEditor = () => {
   const elements = useTimelineStore((state) => state.elements);
 
   const handleSave = () => {};
+  const handleAdd = () => {
+    setData((prev) => {
+      const newData = cloneDeep(prev);
+      const newRow = {
+        id: uid(),
+        actions: [
+          {
+            id: uid(),
+            start: 0,
+            end: 2,
+            effectId: 'effect2',
+            data: {
+              id: uid(),
+              src: '',
+              text: '我是文本',
+              name: '我是文本',
+              type: 'text',
+            },
+          },
+          {
+            id: uid(),
+            start: 5,
+            end: 10,
+            effectId: 'effect3',
+            data: {
+              id: uid(),
+              src: require('@/assets/designer/card.png'),
+              text: '我是图片',
+              name: '图片',
+              type: 'image',
+            },
+          },
+          {
+            id: uid(),
+            start: 10,
+            end: 16,
+            effectId: 'effect1',
+            data: {
+              src: '/zdarcy/lottie/lottie1/data.json',
+              name: '点赞',
+            },
+          },
+        ],
+      };
+      newData.push(newRow);
+      return newData;
+    });
+  };
 
   return (
     <div className="timeline-editor-engine">
@@ -51,6 +100,13 @@ const TimelineEditor = () => {
         }}
       >
         保存
+      </Button>
+      <Button
+        onClick={() => {
+          handleAdd();
+        }}
+      >
+        新增
       </Button>
       <div
         className="player-panel"

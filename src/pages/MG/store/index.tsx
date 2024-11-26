@@ -1,22 +1,21 @@
-// import gsap from 'gsap';
+import { cloneDeep } from 'lodash';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-
 interface State {
   elements: any[];
-  timeLineData: [];
+  timeLines: [];
 }
 
 interface Actions {
   setElements: (elements) => void;
   updateElement: (element: any) => void;
-  updateTimeLineData: (timeLineData) => void;
-  timeLineDataAdd: (data) => void;
+  setTimeLines: (timeLineData) => void;
+  addTimeLine: (data) => void;
 }
 
 const initState: State = {
   elements: [],
-  timeLineData: [],
+  timeLines: [],
 };
 
 const useTimelineStore = create(
@@ -41,12 +40,14 @@ const useTimelineStore = create(
         });
       });
     },
-    updateTimeLineData: (timeLineData) => {
-      set({ timeLineData });
+    setTimeLines: (timeLines) => {
+      console.log('👩‍🍳', timeLines, cloneDeep(timeLines));
+      set({ timeLines: cloneDeep(timeLines) });
     },
-    timeLineDataAdd: (data: any) => {
+    addTimeLine: (data: any) => {
       set((state) => {
-        state.timeLineData.push(data);
+        const item = cloneDeep(data);
+        state.timeLines.push(item);
       });
     },
   })),
