@@ -8,7 +8,7 @@ import { VIEWPORT_SIZE } from './useViewportSize';
 
 const useDragElement = (
   elements: PPTElement[],
-  alignmentLines: AlignmentLineProps[],
+  alignmentLines?: AlignmentLineProps[],
 ) => {
   const viewportRatio = useMainStore((store) => store.viewportRatio);
   const activeElementIds = useMainStore((store) => store.activeElementIds);

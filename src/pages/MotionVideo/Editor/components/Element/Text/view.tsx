@@ -36,7 +36,10 @@ const TextView = ({ element }: TextViewProps) => {
             writingMode: element.vertical ? 'vertical-rl' : 'horizontal-tb',
           }}
         >
-          <div className={styles['text']}>{element.content}</div>
+          <div
+            className={styles['text']}
+            dangerouslySetInnerHTML={{ __html: element.content }}
+          ></div>
         </div>
       </div>
     </div>

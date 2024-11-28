@@ -88,7 +88,6 @@ const ProsemirrorEditor: React.FC<ProsemirrorEditorProps> = ({
 
   const handleClick = debounce(
     (editorView) => {
-      console.log('🧚‍♀️', editorView);
       if (editorView) {
         const attrs = getTextAttrs(editorView, {
           color: defaultColor,
@@ -304,8 +303,7 @@ const ProsemirrorEditor: React.FC<ProsemirrorEditorProps> = ({
     }
 
     editorView.focus();
-    handleInput();
-    handleClick();
+    handleKeydown(editorView);
   };
 
   // 鼠标抬起时，执行格式刷命令

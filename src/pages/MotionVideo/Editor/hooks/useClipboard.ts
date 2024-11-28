@@ -96,7 +96,6 @@ const useClipboard = () => {
     // 普通文本
     else if (!onlyElements && !onlySlide) {
       const string = parseText2Paragraphs(clipboardData)
-      console.log(string, 'string')
       createTextElementFromClipboard(string)
     }
   }

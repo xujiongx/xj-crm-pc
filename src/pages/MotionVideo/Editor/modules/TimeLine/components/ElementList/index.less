@@ -1,0 +1,53 @@
+.container {
+  .operate {
+    background-color: #f7f7f7;
+    height: 32px;
+    border-right: 1px solid #e8e8e8;
+  }
+
+  :global {
+    /* 隐藏滚动条 */
+    ::-webkit-scrollbar {
+      display: none; /* 对于WebKit浏览器（如Chrome、Safari） */
+    }
+  }
+}
+&.timeline-list {
+  width: 150px;
+  height: 200px;
+  flex: 0 1 auto;
+  overflow: scroll;
+  padding-top: 10px;
+
+  &-item {
+    height: 32px;
+    padding: 2px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #F2F2F2;
+
+    &.text {
+      color: #fff;
+      height: 28px;
+      width: 100%;
+      padding-left: 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      background-color: #333;
+    }
+
+    &-active {
+      background-color: #e8e8e8;
+    }
+  }
+
+  :global {
+    /* 隐藏滚动条 */
+    ::-webkit-scrollbar {
+      display: none; /* 对于WebKit浏览器（如Chrome、Safari） */
+    }
+  }
+}

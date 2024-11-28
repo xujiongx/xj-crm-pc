@@ -29,7 +29,7 @@ const EditableElement = ({
     <div
       className={styles.element}
       id={`element-${element.id}`}
-      style={{ zIndex }}
+      style={{ zIndex, visibility: 'hidden' }}
     >
       <Component element={element as never} onSelect={onSelect} />
     </div>

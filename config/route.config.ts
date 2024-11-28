@@ -48,4 +48,9 @@ export default [
     path: '/mgEditor',
     component: './MotionVideo/Editor',
   },
+  {
+    name: 'MG动画编辑器预览',
+    path: '/mgEditor/preview',
+    component: './MotionVideo/Preview',
+  },
 ];

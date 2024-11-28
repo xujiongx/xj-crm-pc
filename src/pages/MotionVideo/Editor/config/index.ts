@@ -1,10 +1,15 @@
-import { TurningMode } from "../interface"
+import { TurningMode } from '../interface';
 
-export const ANIMATION_DEFAULT_DURATION = 1000
-export const ANIMATION_DEFAULT_TRIGGER = 'click'
-export const ANIMATION_CLASS_PREFIX = 'animate__'
+export const ANIMATION_DEFAULT_DURATION = 1000;
+export const ANIMATION_DEFAULT_TRIGGER = 'click';
+export const ANIMATION_CLASS_PREFIX = 'animate__';
 
 export const ENTER_ANIMATIONS = [
+  {
+    type: 'show',
+    name: '展示',
+    children: [{ name: '一直展示', value: 'show' }],
+  },
   {
     type: 'bounce',
     name: '弹跳',
@@ -93,7 +98,7 @@ export const ENTER_ANIMATIONS = [
       { name: '从左飞入', value: 'lightSpeedInLeft' },
     ],
   },
-]
+];
 
 export const EXIT_ANIMATIONS = [
   {
@@ -184,7 +189,7 @@ export const EXIT_ANIMATIONS = [
       { name: '从左飞出', value: 'lightSpeedOutLeft' },
     ],
   },
-]
+];
 
 export const ATTENTION_ANIMATIONS = [
   {
@@ -211,11 +216,11 @@ export const ATTENTION_ANIMATIONS = [
       { name: '心跳（快）', value: 'heartBeat' },
     ],
   },
-]
+];
 
 interface SlideAnimation {
-  label: string
-  value: TurningMode
+  label: string;
+  value: TurningMode;
 }
 
 export const SLIDE_ANIMATIONS: SlideAnimation[] = [
@@ -231,4 +236,4 @@ export const SLIDE_ANIMATIONS: SlideAnimation[] = [
   { label: '左右展开', value: 'scaleX' },
   { label: '放大', value: 'scale' },
   { label: '缩小', value: 'scaleReverse' },
-]
+];

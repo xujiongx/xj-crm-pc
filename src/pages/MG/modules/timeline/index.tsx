@@ -1,5 +1,5 @@
+import { Timeline, TimelineState } from '@/components/react-timeline-edit';
 import { uid } from '@aicc/shared/es';
-import { Timeline, TimelineState } from '@xzdarcy/react-timeline-editor';
 import { Button, Switch } from 'antd';
 import classNames from 'classnames';
 import { cloneDeep } from 'lodash';

@@ -1,7 +1,14 @@
+import { nanoid } from 'nanoid';
 import { create } from 'zustand';
-import { PPTElement, SlideItem, SlideTheme } from '../interface';
+import { PPTAnimation, PPTElement, SlideItem, SlideTheme } from '../interface';
+import { runAnimation } from '../utils/animation';
 import useMainStore from './main';
 import useSnapshotStore from './snapshot';
+
+interface FormatedAnimation {
+  animations: PPTAnimation[];
+  autoNext: boolean;
+}
 
 type State = {
   theme: SlideTheme;
@@ -17,6 +24,8 @@ interface UpdateElementData {
 
 type Actions = {
   currentSlide: () => SlideItem;
+  currentSlideAnimations: () => PPTAnimation[];
+  formatedAnimations: () => FormatedAnimation[];
   activeElements: () => PPTElement[];
   setSlide: (slide: SlideItem) => void;
   setSlides: (slides: SlideItem[]) => void;
@@ -28,6 +37,9 @@ type Actions = {
   deleteElement: (elementId: string | string[]) => void;
   updateElement: (data: UpdateElementData) => void;
   setTheme: (themeProps: Partial<SlideTheme>) => void;
+  addAnimation: (data: any) => void;
+  deleteAnimation: (id: string) => void;
+  updateAnimation: (id: string, data: any) => void;
 };
 
 const defaultTheme = {
@@ -46,6 +58,47 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
   theme: defaultTheme,
 
   currentSlide: () => get().slides[get().slideIndex],
+
+  currentSlideAnimations: () => {
+    const currentSlide = get().currentSlide();
+    if (!currentSlide?.animations) return [];
+
+    const els = currentSlide.elements;
+    const elIds = els.map((el) => el.id);
+    return currentSlide.animations.filter((animation) =>
+      elIds.includes(animation.elId),
+    );
+  },
+  formatedAnimations: () => {
+    const currentSlide = get().currentSlide();
+    if (!currentSlide?.animations) return [];
+
+    const els = currentSlide.elements;
+    const elIds = els.map((el) => el.id);
+    const animations = currentSlide.animations.filter((animation) =>
+      elIds.includes(animation.elId),
+    );
+
+    const formatedAnimations: FormatedAnimation[] = [];
+    for (const animation of animations) {
+      if (animation.trigger === 'click' || !formatedAnimations.length) {
+        formatedAnimations.push({ animations: [animation], autoNext: false });
+      } else if (animation.trigger === 'meantime') {
+        const last = formatedAnimations[formatedAnimations.length - 1];
+        last.animations = last.animations.filter(
+          (item) => item.elId !== animation.elId,
+        );
+        last.animations.push(animation);
+        formatedAnimations[formatedAnimations.length - 1] = last;
+      } else if (animation.trigger === 'auto') {
+        const last = formatedAnimations[formatedAnimations.length - 1];
+        last.autoNext = true;
+        formatedAnimations[formatedAnimations.length - 1] = last;
+        formatedAnimations.push({ animations: [animation], autoNext: false });
+      }
+    }
+    return formatedAnimations;
+  },
 
   // 活跃幻灯片的活跃元素
   activeElements: () => {
@@ -127,12 +180,27 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
   addElement(element: PPTElement | PPTElement[]) {
     set((state) => {
       const elements = Array.isArray(element) ? element : [element];
+
+      const animations = elements.map((el) => {
+        return {
+          id: nanoid(10),
+          elId: el.id,
+          effect: 'fadeIn',
+          start: 0,
+          end: 1,
+          name: '弹入',
+          type: 'in' as const,
+        };
+      });
+
       const slides = state.slides;
       const slideIndex = state.slideIndex;
       const currentElements = slides[slideIndex].elements;
+      const currentAnimations = slides[slideIndex].animations || [];
       slides[slideIndex] = {
         ...slides[slideIndex],
         elements: [...currentElements, ...elements],
+        animations: [...currentAnimations, ...animations],
       };
       return { slides };
     });
@@ -168,6 +236,46 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
     });
     slides[slideIndex].elements = elements as PPTElement[];
     set(() => ({ slides }));
+  },
+
+  addAnimation: (data: any) => {
+    const handleElementId = useMainStore.getState().activeElementId;
+
+    const animations: PPTAnimation[] = JSON.parse(
+      JSON.stringify(get().currentSlideAnimations()),
+    );
+    animations.push({
+      id: nanoid(10),
+      elId: handleElementId,
+      ...data,
+    });
+    console.log('👨‍👨‍👧', animations);
+    get().updateSlide({ animations });
+    useSnapshotStore.getState().add();
+
+    setTimeout(() => {
+      runAnimation(handleElementId, data.effect, data.end - data.start);
+    }, 0);
+  },
+
+  deleteAnimation: (id: string) => {
+    const animations = get()
+      .currentSlideAnimations()
+      .filter((item) => item.id !== id);
+    get().updateSlide({ animations });
+
+    useSnapshotStore.getState().add();
+  },
+
+  updateAnimation: (id: string, data: any) => {
+    const animations = get()
+      .currentSlideAnimations()
+      .map((item) => {
+        if (item.id === id) return { ...item, ...data };
+        return item;
+      });
+    get().updateSlide({ animations });
+    useSnapshotStore.getState().add();
   },
 }));
 

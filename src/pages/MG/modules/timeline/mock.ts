@@ -1,9 +1,9 @@
-import { uid } from '@aicc/shared/es';
 import {
   TimelineAction,
   TimelineEffect,
   TimelineRow,
-} from '@xzdarcy/react-timeline-editor';
+} from '@/components/react-timeline-edit';
+import { uid } from '@aicc/shared/es';
 import useTimelineStore from '../../store';
 import audioControl from './audioControl';
 import lottieControl from './lottieControl';

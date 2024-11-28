@@ -494,7 +494,19 @@ export interface SlideBackground {
   gradientRotate?: number;
 }
 
-export interface PPTAnimation {}
+export type AnimationTrigger = 'click' | 'meantime' | 'auto';
+
+export interface PPTAnimation {
+  id: string;
+  name: string;
+  elId: string;
+  effect: string;
+  type: AnimationType;
+  // duration?: number;
+  // trigger?: AnimationTrigger;
+  start: number;
+  end: number;
+}
 
 export type TurningMode =
   | 'no'
@@ -527,3 +539,5 @@ export interface SlideTheme {
   fontColor: string;
   fontName: string;
 }
+
+export type AnimationType = 'in' | 'out' | 'attention';

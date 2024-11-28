@@ -1,0 +1,28 @@
+{
+  "name": "@aicc/react-timeline-editor",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "files": [
+    "/es"
+  ],
+  "scripts": {
+    "build": "father build",
+    "dev": "father dev"
+  },
+  "dependencies": {
+    "@interactjs/types": "^1.10.11",
+    "@types/react-virtualized": "^9.21.14",
+    "framework-utils": "^1.1.0",
+    "interactjs": "^1.10.11",
+    "react-virtualized": "^9.22.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.177",
+    "@types/react": "^17.0.17",
+    "lodash": "^4.17.21"
+  }
+}

@@ -1,0 +1,17 @@
+.timeline-editor-container {
+  background-color: #fff;
+  display: flex;
+
+  :global {
+    .timeline-editor {
+      height: 200px;
+      flex: 1 1 auto;
+
+      &-action {
+        height: 20px !important;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
