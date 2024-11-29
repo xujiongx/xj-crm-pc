@@ -50,7 +50,7 @@ export default [
   },
   {
     name: 'MG动画编辑器预览',
-    path: '/mgEditor/preview',
+    path: '/edit-preview',
     component: './MotionVideo/Preview',
   },
 ];

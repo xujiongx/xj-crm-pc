@@ -22,6 +22,8 @@ export default () => {
     screenStore.setScreening(false)
     if (isFullscreen()) exitFullscreen()
   }
+  
+  
 
   return {
     enterScreening,

@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import Preview from '../Preview';
+import useFullscreen from './hooks/useFullscreen';
 import useGlobalHotkey from './hooks/useGlobalHotkey';
 import styles from './index.less';
 import Canvas from './modules/Canvas';
@@ -11,6 +13,7 @@ import { useSlidesStore } from './store';
 
 const MotionVideoEditor = () => {
   useGlobalHotkey();
+  const { screening } = useFullscreen();
 
   useEffect(() => {
     document.oncontextmenu = (e) => e.preventDefault();
@@ -23,6 +26,10 @@ const MotionVideoEditor = () => {
       useSlidesStore.getState().setSlides(JSON.parse(slidesData));
     }
   }, [slidesData]);
+
+  if (screening) {
+    return <Preview></Preview>;
+  }
 
   return (
     <div className={styles.layout}>

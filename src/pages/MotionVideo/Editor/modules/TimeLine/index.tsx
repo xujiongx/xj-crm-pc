@@ -1,6 +1,12 @@
 import { Timeline, TimelineState } from '@/components/react-timeline-edit';
 import { cloneDeep } from 'lodash';
-import { useEffect, useRef, useState } from 'react';
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { useMainStore, useSlidesStore } from '../../store';
 import ElementList from './components/ElementList';
 import TimelinePlayer from './components/Player';
@@ -12,7 +18,8 @@ const defaultEditorData = cloneDeep(mockData);
 
 const height = 250;
 
-const TimelineEditor = () => {
+const TimelineEditor = forwardRef((props, ref) => {
+  const { style } = props;
   const [data, setData] = useState([]);
   const domRef = useRef<HTMLDivElement>();
   const timelineState = useRef<TimelineState>();
@@ -59,9 +66,20 @@ const TimelineEditor = () => {
     handleElementIds,
   ]);
 
+  // 对外暴露出timelineState
+  useImperativeHandle(ref, () => ({
+    timelineState: timelineState.current,
+    onPlay: () => {
+      timelineState.current?.play({ autoEnd: true });
+    },
+  }));
+
   console.log('🏃‍♀️', animations, currentSlide, data);
+
+
+  
   return (
-    <div>
+    <div style={{ ...style }}>
       <TimelinePlayer
         timelineState={timelineState}
         autoScrollWhenPlay={false}
@@ -108,6 +126,6 @@ const TimelineEditor = () => {
       </div>
     </div>
   );
-};
+});
 
 export default TimelineEditor;

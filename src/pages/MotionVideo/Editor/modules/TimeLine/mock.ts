@@ -103,7 +103,7 @@ export const mockEffect: Record<string, TimelineEffect> = {
         console.log('🦸‍♀️', data, time, action.end);
         if (
           (data.type === 'out' && time > action.end) ||
-          (data.type === 'in', time < action.start)
+          (data.type === 'in' && data.effect !== 'show' && time < action.start)
         ) {
           setElementProperty(data.elId, {
             visibility: 'hidden',

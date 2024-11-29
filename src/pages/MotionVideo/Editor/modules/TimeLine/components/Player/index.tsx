@@ -1,6 +1,7 @@
 import { TimelineState } from '@/components/react-timeline-edit';
+import { useSlidesStore } from '@/pages/MotionVideo/Editor/store';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
-import { Button, Select, Switch } from 'antd';
+import { Select, Switch } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { scale, scaleWidth, startLeft } from '../../mock';
 import styles from './index.less';
@@ -16,6 +17,29 @@ const TimelinePlayer: FC<{
   const [isEnd, setIsEnd] = useState(false);
   const [time, setTime] = useState(0);
 
+  const currentSlide = useSlidesStore.getState().currentSlide();
+  const elements = currentSlide?.elements;
+
+  // 重置
+  const currentSlideAnimations = useSlidesStore
+    .getState()
+    .currentSlideAnimations();
+  const handleResetElement = (elements, currentSlideAnimations) => {
+    elements.forEach((element) => {
+      const curElementAnimations = currentSlideAnimations.filter(
+        (item) => item.elId === element.id,
+      );
+      const show =
+        curElementAnimations[0].type === 'in' &&
+        curElementAnimations[0].effect === 'show';
+
+      const elRef = document.querySelector(`#element-${element.id}`);
+      if (elRef) {
+        elRef.style.visibility = show ? 'visible' : 'hidden';
+      }
+    });
+  };
+
   useEffect(() => {
     if (!timelineState.current) return;
     const engine = timelineState.current;
@@ -29,6 +53,21 @@ const TimelinePlayer: FC<{
       setTime(time);
     });
     engine.listener.on('ended', () => {
+      // if (
+      //   useSlidesStore.getState().slideIndex ===
+      //   useSlidesStore.getState().slides.length - 1
+      // ) {
+      //   return;
+      // }
+      // console.log('😀', useSlidesStore.getState().slideIndex);
+      // timelineState.current.setTime(0);
+      // useSlidesStore
+      //   .getState()
+      //   .updateSlideIndex(useSlidesStore.getState().slideIndex + 1);
+      // setTimeout(() => {
+      //   timelineState.current.play({ autoEnd: true });
+      // }, 0);
+
       setIsEnd(true);
     });
     engine.listener.on('setTimeByTick', ({ time }) => {
@@ -53,14 +92,25 @@ const TimelinePlayer: FC<{
     if (timelineState.current.isPlaying) {
       timelineState.current.pause();
     } else {
+      if (isEnd) {
+        timelineState.current.setTime(0);
+        handleResetElement(elements, currentSlideAnimations);
+        setIsEnd(false);
+        timelineState.current.play({ autoEnd: true });
+      } else {
+        timelineState.current.play({ autoEnd: true });
+      }
+
       // if (isEnd) {
       //   timelineState.current.setTime(0);
-      //   setIsEnd(false);
+      //   useSlidesStore
+      //     .getState()
+      //     .updateSlideIndex(useSlidesStore.getState().slideIndex + 1);
       //   timelineState.current.play({ autoEnd: true });
-      // } else {
-      //   timelineState.current.play({ autoEnd: true });
+      //   return;
       // }
-      timelineState.current.play({ autoEnd: true });
+
+      // timelineState.current.play({ autoEnd: true });
     }
   };
 

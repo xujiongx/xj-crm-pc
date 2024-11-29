@@ -1,5 +1,8 @@
-import { useEffect, useRef } from 'react';
 import { MenuProps } from 'antd';
+import { useRef } from 'react';
+import ContextMenu from '../../components/ContextMenu';
+import Operate from '../../components/Operate';
+import useClipboard from '../../hooks/useClipboard';
 import useDragElement from '../../hooks/useDragElement';
 import useRotateElement from '../../hooks/useRotateElement';
 import useScaleElement from '../../hooks/useScaleElement';
@@ -10,15 +13,13 @@ import useKeyboardStore from '../../store/keyboard';
 import useMainStore from '../../store/main';
 import useSlidesStore from '../../store/slides';
 import { removeAllRanges } from '../../utils/selection';
-import ContextMenu from '../../components/ContextMenu';
-import Operate from '../../components/Operate';
-import useClipboard from '../../hooks/useClipboard'
 import DragMask from './components/DragMask';
 import EditableElement from './components/EditableElement';
 import ViewportBackground from './components/ViewportBackground';
 import styles from './index.less';
 
-const Canvas = () => {
+const Canvas = (props) => {
+  const { viewportWrapperStyle } = props;
   const canvasRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const alignmentLinesRef = useRef<AlignmentLineProps[]>([]);
@@ -33,8 +34,7 @@ const Canvas = () => {
 
   const { dragViewport, viewportStyles } = useViewportSize(canvasRef);
 
-  const { pasteElement, copyText, cutElement, deleteElement } = useClipboard()
-
+  const { pasteElement, copyText, cutElement, deleteElement } = useClipboard();
 
   const { drag } = useDragElement(
     currentSlide()?.elements,
@@ -55,7 +55,8 @@ const Canvas = () => {
   // 点击画布的空白区域：清空焦点元素、清除文字选区
   const clickBlankArea = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     // 点击右键菜单的按钮，保持原元素焦点
-    if (document.querySelector('#contextMenuID')?.contains(e.target as Node)) return
+    if (document.querySelector('#contextMenuID')?.contains(e.target as Node))
+      return;
     if (activeElementIds.length) {
       useMainStore.getState().setActiveElementIds([]);
     }
@@ -67,10 +68,12 @@ const Canvas = () => {
   };
 
   //  viewport-wrapper 右键菜单
-  const CONTEXTMENU_Blank = [{
-    key: 'paste',
-    label: '粘贴',
-  }]
+  const CONTEXTMENU_Blank = [
+    {
+      key: 'paste',
+      label: '粘贴',
+    },
+  ];
 
   const CONTEXTMENU_Ele = [
     {
@@ -85,33 +88,41 @@ const Canvas = () => {
       key: 'delete',
       label: '删除',
     },
-  ]
-  const viewportWrapperContextMenu: MenuProps['items'] = activeElementIds.length ? CONTEXTMENU_Ele : CONTEXTMENU_Blank;
+  ];
+  const viewportWrapperContextMenu: MenuProps['items'] = activeElementIds.length
+    ? CONTEXTMENU_Ele
+    : CONTEXTMENU_Blank;
 
   const contextMenuClickFn = {
     copy: function () {
-      const activeElementsInfo: PPTElement[] = activeElements()
+      const activeElementsInfo: PPTElement[] = activeElements();
       const text = JSON.stringify({
         type: 'elements',
         data: activeElementsInfo,
-      })
-      copyText(text).then(res => { console.log(res) }).catch(e => { console.log(e) })
+      });
+      copyText(text)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
     paste: function () {
-      pasteElement()
+      pasteElement();
     },
     delete: function () {
-      deleteElement()
+      deleteElement();
     },
     cut: function () {
-      const activeElementsInfo: PPTElement[] = activeElements()
+      const activeElementsInfo: PPTElement[] = activeElements();
       const text = JSON.stringify({
         type: 'elements',
         data: activeElementsInfo,
-      })
-      cutElement(text)
-    }
-  }
+      });
+      cutElement(text);
+    },
+  };
 
   return (
     <>
@@ -129,6 +140,7 @@ const Canvas = () => {
             height: viewportStyles.height * canvasScale + 'px',
             left: viewportStyles.left + 'px',
             top: viewportStyles.top + 'px',
+            ...viewportWrapperStyle,
           }}
         >
           <div className={styles.operate}>
@@ -160,12 +172,15 @@ const Canvas = () => {
               />
             ))}
           </div>
-          <ContextMenu MenuItem={viewportWrapperContextMenu} targetEl={viewportwrapperRef.current as HTMLDivElement} contextMenuClickFn={contextMenuClickFn}></ContextMenu>
+          <ContextMenu
+            MenuItem={viewportWrapperContextMenu}
+            targetEl={viewportwrapperRef.current as HTMLDivElement}
+            contextMenuClickFn={contextMenuClickFn}
+          ></ContextMenu>
         </div>
 
         <DragMask />
       </div>
-
     </>
   );
 };

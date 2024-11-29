@@ -185,7 +185,7 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
         return {
           id: nanoid(10),
           elId: el.id,
-          effect: 'fadeIn',
+          effect: 'show',
           start: 0,
           end: 1,
           name: '弹入',
