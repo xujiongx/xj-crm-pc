@@ -1,9 +1,9 @@
-import { useKeyPress } from 'ahooks';
 import { Button, InputNumber } from 'antd';
 import { useEffect, useRef } from 'react';
-import Canvas from '../Editor/modules/Canvas';
-import Timeline from '../Editor/modules/TimeLine';
-import { useMainStore, useSlidesStore } from '../Editor/store';
+import { ANIMATION_CLASS_PREFIX } from '../PPTEditor/config';
+import Canvas from '../PPTEditor/modules/Canvas';
+import Timeline from '../PPTEditor/modules/TimeLine';
+import { useMainStore, useSlidesStore } from '../PPTEditor/store';
 
 const Page = () => {
   const slidesData = localStorage.getItem('slides');
@@ -41,23 +41,55 @@ const Page = () => {
     }
   }, []);
 
-  useEffect(() => {
-    ref.current?.timelineState.listener?.on('ended', () => {
-      if (
-        useSlidesStore.getState().slideIndex ===
-        useSlidesStore.getState().slides.length - 1
-      ) {
-        return;
-      }
-      console.log('😀', useSlidesStore.getState().slideIndex);
+  // 执行元素动画
+  const runAnimation = () => {
+    return new Promise<void>((resolve) => {
+      const turningMode = useSlidesStore.getState().currentSlide().turningMode;
+      // const animationName = `${ANIMATION_CLASS_PREFIX}${turningMode}`;
+      const animationName = `${ANIMATION_CLASS_PREFIX}${'fadeOutDown'}`;
+      const elRef = document.querySelector(`#viewport-wrapper`);
+      console.log('👩‍💼', elRef);
+      if (!elRef) return;
+      // 执行动画
+      elRef.style.setProperty('--animate-duration', `${1000}ms`);
+      elRef.classList.add(animationName, `${ANIMATION_CLASS_PREFIX}animated`);
 
-      useSlidesStore
-        .getState()
-        .updateSlideIndex(useSlidesStore.getState().slideIndex + 1);
-      ref.current?.timelineState.setTime(0);
-      setTimeout(() => {
-        ref.current?.timelineState.play({ autoEnd: true });
-      }, 0);
+      const handleAnimationEnd = () => {
+        document.documentElement.style.removeProperty('--animate-duration');
+        elRef.classList.remove(
+          `${ANIMATION_CLASS_PREFIX}animated`,
+          animationName,
+        );
+        resolve();
+      };
+      elRef.addEventListener('animationend', handleAnimationEnd, {
+        once: true,
+      });
+    });
+  };
+
+  const nextScreen = async () => {
+    if (
+      useSlidesStore.getState().slideIndex ===
+      useSlidesStore.getState().slides.length - 1
+    ) {
+      return;
+    }
+    await runAnimation();
+    console.log('😀', useSlidesStore.getState().slideIndex);
+
+    useSlidesStore
+      .getState()
+      .updateSlideIndex(useSlidesStore.getState().slideIndex + 1);
+    ref.current?.timelineState.setTime(0);
+    setTimeout(() => {
+      ref.current?.timelineState.play({ autoEnd: true });
+    }, 10);
+  };
+
+  useEffect(() => {
+    ref.current?.timelineState.listener?.on('ended', async () => {
+      nextScreen();
     });
   }, []);
 
@@ -67,14 +99,6 @@ const Page = () => {
       handleStart();
     }, 1000);
   }, []);
-
-  // useEffect(() => {
-  //   handleStart()
-  // },[])
-
-  useKeyPress(['shift'], () => {
-    handleReStart();
-  });
 
   return (
     <div>
