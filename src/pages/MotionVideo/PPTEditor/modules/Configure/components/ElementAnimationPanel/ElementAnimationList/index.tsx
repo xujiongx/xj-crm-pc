@@ -5,8 +5,6 @@ import styles from './index.less';
 const ElementAnimationList = (props) => {
   const { list, deleteAnimation, updateAnimation, manualRunAnimation } = props;
 
-  console.log('🤓', list)
-
   return (
     <div className={styles['list']}>
       {list.map((item) => (

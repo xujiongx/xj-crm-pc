@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 import { useMainStore, useSlidesStore } from '../../store';
+import ActionRender from './components/ActionRender';
 import ElementList from './components/ElementList';
 import TimelinePlayer from './components/Player';
 import { useTileLine } from './hooks';
@@ -45,7 +46,7 @@ const TimelineEditor = forwardRef((props, ref) => {
           end: animate.end || 0,
           // start: index,
           // end: index + animate.duration / 1000,
-          effectId: 'effect0',
+          effectId: 'animate',
           data: animate,
         }));
 
@@ -58,13 +59,13 @@ const TimelineEditor = forwardRef((props, ref) => {
       };
     });
 
-    console.log('🤗rows', rows);
     setData(rows);
   }, [
-    JSON.stringify(currentSlide),
+    JSON.stringify(currentSlide?.elements),
     JSON.stringify(animations),
     handleElementIds,
   ]);
+
 
   // 对外暴露出timelineState
   useImperativeHandle(ref, () => ({
@@ -74,10 +75,7 @@ const TimelineEditor = forwardRef((props, ref) => {
     },
   }));
 
-  console.log('🏃‍♀️', animations, currentSlide, data);
 
-
-  
   return (
     <div style={{ ...style }}>
       <TimelinePlayer
@@ -115,13 +113,15 @@ const TimelineEditor = forwardRef((props, ref) => {
           }}
           onActionMoveEnd={(params) => {
             const data = params.action.data;
-            console.log('💁‍♂️onActionMoving', params, data);
             updateAnimation(data.id, {
               data,
               start: params.action.start,
               end: params.action.end,
             });
           }}
+          getActionRender={(action, row) => (
+            <ActionRender action={action} row={row} />
+          )}
         />
       </div>
     </div>

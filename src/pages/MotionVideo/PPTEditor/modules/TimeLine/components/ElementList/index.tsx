@@ -1,7 +1,12 @@
 import IconFont from '@/components/IconFont';
+import useDeleteElements from '@/pages/MotionVideo/PPTEditor/hooks/useDeleteElements';
 import useDragElement from '@/pages/MotionVideo/PPTEditor/hooks/useDragElement';
+import useHideElement from '@/pages/MotionVideo/PPTEditor/hooks/useHideElement';
 import useSelectElement from '@/pages/MotionVideo/PPTEditor/hooks/useSelectElement';
-import { useSlidesStore } from '@/pages/MotionVideo/PPTEditor/store';
+import {
+  useMainStore,
+  useSlidesStore,
+} from '@/pages/MotionVideo/PPTEditor/store';
 import { Space } from 'antd';
 import clsx from 'clsx';
 import styles from './index.less';
@@ -19,12 +24,35 @@ const ElementList = (props: any) => {
     select(e, item);
   };
 
+  const { toggleHideElement, showAllElements, hideAllElements } =
+    useHideElement();
+
+  const handleElementId = useMainStore((store) => store.activeElementId);
+
+  const hiddenElementIdList = useMainStore(
+    (store) => store.hiddenElementIdList,
+  );
+
+  const isHidden = hiddenElementIdList.includes(handleElementId);
+
+  const { deleteElement } = useDeleteElements();
+  const handleDeleteElement = () => {
+    deleteElement();
+  };
+
   return (
     <div className={styles['container']}>
       <div className={styles['operate']}>
         <Space align="center">
-          <IconFont type="icon-user" />
-          <IconFont type="icon-user" />
+          <IconFont
+            type="icon-user"
+            onClick={() => {
+              toggleHideElement(handleElementId);
+            }}
+          />
+          {isHidden ? '显示' : '隐藏'}
+          <IconFont type="icon-user" onClick={() => handleDeleteElement()} />
+          删除
         </Space>
       </div>
       <div
@@ -47,7 +75,18 @@ const ElementList = (props: any) => {
               key={item.id}
               onClick={(e) => handleSelectElement(e, item)}
             >
-              <div className={styles['text']}>{`row-${item.name}`}</div>
+              <div className={styles['text']}>
+                {`row-${item.name}`}
+                <span>
+                  <IconFont
+                    type="icon-user"
+                    onClick={() => {
+                      toggleHideElement(item.id);
+                    }}
+                  />
+                  {hiddenElementIdList.includes(item.id) ? '显示' : '隐藏'}
+                </span>
+              </div>
             </div>
           );
         })}

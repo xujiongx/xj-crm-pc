@@ -31,7 +31,6 @@ export default () => {
     exitFullscreen();
   };
   const manualEnterFullscreen = () => {
-    console.log('🤜', manualEnterFullscreen);
     if (screening) return;
     enterFullscreen();
   };

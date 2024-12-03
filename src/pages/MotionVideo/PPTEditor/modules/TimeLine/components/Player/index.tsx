@@ -72,11 +72,9 @@ const TimelinePlayer: FC<{
     });
     engine.listener.on('setTimeByTick', ({ time }) => {
       setTime(time);
-      if (autoScrollWhenPlay.current) {
-        const autoScrollFrom = 500;
-        const left = time * (scaleWidth / scale) + startLeft - autoScrollFrom;
-        timelineState.current.setScrollLeft(left);
-      }
+      const autoScrollFrom = 500;
+      const left = time * (scaleWidth / scale) + startLeft - autoScrollFrom;
+      timelineState.current.setScrollLeft(left);
     });
 
     return () => {

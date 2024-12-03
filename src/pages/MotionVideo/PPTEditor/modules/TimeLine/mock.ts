@@ -7,7 +7,7 @@ import { CSSProperties } from 'react';
 import { ANIMATION_CLASS_PREFIX } from '../../config';
 
 export const scaleWidth = 160;
-export const scale = 5;
+export const scale = 1;
 export const startLeft = 10;
 
 // 执行动画预览
@@ -18,7 +18,6 @@ const runAnimation = (
   type?: any,
 ) => {
   const elRef = document.querySelector(`#element-${elId}`);
-  console.log('👩‍🦳', elRef);
   if (elRef) {
     const animationName = `${ANIMATION_CLASS_PREFIX}${effect}`;
     document.documentElement.style.setProperty(
@@ -64,13 +63,12 @@ export interface CustomTimelineAction extends TimelineAction {
 }
 
 export const mockEffect: Record<string, TimelineEffect> = {
-  effect0: {
+  animate: {
     id: 'effect0',
     name: '效果0',
     source: {
       start: ({ action, engine, isPlaying, time }) => {
         const data = (action as CustomTimelineAction).data;
-        console.log('🤧', data);
         if (isPlaying) {
           runAnimation(
             data.elId,
@@ -100,7 +98,6 @@ export const mockEffect: Record<string, TimelineEffect> = {
       },
       leave: ({ action, engine, isPlaying, time }) => {
         const data = (action as CustomTimelineAction).data;
-        console.log('🦸‍♀️', data, time, action.end);
         if (
           (data.type === 'out' && time > action.end) ||
           (data.type === 'in' && data.effect !== 'show' && time < action.start)

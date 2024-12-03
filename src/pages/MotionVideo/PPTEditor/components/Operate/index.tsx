@@ -37,6 +37,14 @@ const Operate = ({ element, isSelected, onRotate, onScale }: OperateProps) => {
 
   const Component = ElementTypeMap[element.type];
 
+  const hiddenElementIdList = useMainStore(
+    (store) => store.hiddenElementIdList,
+  );
+
+  if (hiddenElementIdList.includes(element.id)) {
+    return null;
+  }
+
   return (
     <div
       className={clsx(styles.operate)}
@@ -44,7 +52,9 @@ const Operate = ({ element, isSelected, onRotate, onScale }: OperateProps) => {
         top: element.top * canvasScale + 'px',
         left: element.left * canvasScale + 'px',
         transform: `rotate(${rotate}deg)`,
-        transformOrigin: `${(element.width * canvasScale) / 2}px ${(height * canvasScale) / 2}px`,
+        transformOrigin: `${(element.width * canvasScale) / 2}px ${
+          (height * canvasScale) / 2
+        }px`,
       }}
     >
       {isSelected && (

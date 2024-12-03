@@ -30,8 +30,6 @@ const AddAnimationPop = (props) => {
     },
   ];
 
-  console.log('😍', tab);
-
   return (
     <Tabs
       className={styles['add-animation-pop']}

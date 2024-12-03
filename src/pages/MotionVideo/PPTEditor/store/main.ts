@@ -28,6 +28,7 @@ type State = {
   availableFonts: typeof SYS_FONTS; // 当前环境可用字体
   creatingElement: CreatingElement | null;
   editorAreaFocus: boolean; //  编辑区域聚焦
+  hiddenElementIdList: string[];
 };
 
 type Actions = {
@@ -43,6 +44,7 @@ type Actions = {
   setAvailableFonts: (availableFonts: typeof SYS_FONTS) => void;
   setCreatingElement: (element: CreatingElement | null) => void;
   setEditorareaFocus: (isFocus: boolean) => void;
+  setHiddenElementIdList: (hiddenElementIdList: string[]) => void;
 };
 
 const useMainStore = create<State & Actions>((set, get) => ({
@@ -59,6 +61,7 @@ const useMainStore = create<State & Actions>((set, get) => ({
   availableFonts: SYS_FONTS, // 当前环境可用字体
   creatingElement: null, // 正在插入的元素信息，需要通过绘制插入的元素（文字、形状、线条）
   editorAreaFocus: false,
+  hiddenElementIdList: [],
   setCanvasScale: (scale: number) => set(() => ({ canvasScale: scale })),
   setCanvasPercentage: (percentage: number) =>
     set(() => ({ canvasPercentage: percentage })),
@@ -92,6 +95,8 @@ const useMainStore = create<State & Actions>((set, get) => ({
     set(() => ({ creatingElement: element })),
   setEditorareaFocus: (isFocus: boolean) =>
     set(() => ({ editorAreaFocus: isFocus })),
+  setHiddenElementIdList: (hiddenElementIdList: string[]) =>
+    set(() => ({ hiddenElementIdList: hiddenElementIdList })),
 }));
 
 export default useMainStore;

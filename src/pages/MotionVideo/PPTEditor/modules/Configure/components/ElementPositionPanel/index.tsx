@@ -16,7 +16,6 @@ const ElementPositionPanel = () => {
     // const animationName = `${ANIMATION_CLASS_PREFIX}${turningMode}`;
     const animationName = `${ANIMATION_CLASS_PREFIX}${'fadeOutDown'}`;
     const elRef = document.querySelector(`#viewport-wrapper`);
-    console.log('👩‍💼', elRef);
     if (!elRef) return;
     // 执行动画
     elRef.style.setProperty('--animate-duration', `${1000}ms`);
@@ -74,7 +73,6 @@ const ElementPositionPanel = () => {
           应用到全部
         </Button>
       </div>
-      位置
       <Button onClick={() => handleRunAnimation()}>转场动画</Button>
     </div>
   );

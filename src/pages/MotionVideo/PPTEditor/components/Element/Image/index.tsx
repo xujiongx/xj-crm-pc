@@ -41,11 +41,15 @@ const ImageElement = ({ element, onSelect }: ImageElementProps) => {
         left: element.left,
         width: element.width,
         height: element.height,
+        borderRadius: `${element.radius}px`,
+        overflow: 'hidden',
       }}
     >
       <div
         className={styles['rotate-wrapper']}
-        style={{ transform: `rotate(${element.rotate}deg)` }}
+        style={{
+          transform: `rotate(${element.rotate}deg)`,
+        }}
       >
         <div
           onMouseDown={onMouseDown}

@@ -231,7 +231,7 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
       ? slides.findIndex((item) => item.id === slideId)
       : get().slideIndex;
     const slide = slides[slideIndex];
-    const elements = slide.elements.map((el) => {
+    const elements = slide.elements?.map((el) => {
       return elIdList.includes(el.id) ? { ...el, ...props } : el;
     });
     slides[slideIndex].elements = elements as PPTElement[];
@@ -249,7 +249,6 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
       elId: handleElementId,
       ...data,
     });
-    console.log('👨‍👨‍👧', animations);
     get().updateSlide({ animations });
     useSnapshotStore.getState().add();
 

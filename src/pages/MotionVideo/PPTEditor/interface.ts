@@ -138,18 +138,16 @@ export interface PPTTextElement extends PPTBaseElement {
 /** 图片元素 */
 export interface PPTImageElement extends PPTBaseElement {
   type: 'image';
-  /** 固定图片宽高比例 */
   fixedRatio: boolean;
-  /** 地址 */
   src: string;
-  /** 边框 */
   outline?: PPTElementOutline;
-  /** 水平翻转 */
+  // filters?: ImageElementFilters;
+  // clip?: ImageElementClip;
   flipH?: boolean;
-  /** 垂直翻转 */
   flipV?: boolean;
-  /** 阴影 */
   shadow?: PPTElementShadow;
+  radius?: number;
+  colorMask?: string;
 }
 
 /**
@@ -541,3 +539,16 @@ export interface SlideTheme {
 }
 
 export type AnimationType = 'in' | 'out' | 'attention';
+
+
+/**
+ * 图片翻转、形状翻转
+ * 
+ * flipH?: 水平翻转
+ * 
+ * flipV?: 垂直翻转
+ */
+export interface ImageOrShapeFlip {
+  flipH?: boolean
+  flipV?: boolean
+}

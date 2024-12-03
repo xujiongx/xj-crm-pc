@@ -1,5 +1,11 @@
-import { ElementTypes, PPTElement } from '@/pages/MotionVideo/PPTEditor/interface';
-import { useSlidesStore } from '@/pages/MotionVideo/PPTEditor/store';
+import {
+  ElementTypes,
+  PPTElement,
+} from '@/pages/MotionVideo/PPTEditor/interface';
+import {
+  useMainStore,
+  useSlidesStore,
+} from '@/pages/MotionVideo/PPTEditor/store';
 import ImageElement from '../../../../components/Element/Image';
 import TextElement from '../../../../components/Element/Text';
 import styles from './index.less';
@@ -38,11 +44,21 @@ const EditableElement = ({
     curElementAnimations[0].type === 'in' &&
     curElementAnimations[0].effect === 'show';
 
+  const hiddenElementIdList = useMainStore(
+    (store) => store.hiddenElementIdList,
+  );
+
+  const isHidden = hiddenElementIdList.includes(element.id);
+
   return (
     <div
       className={styles.element}
       id={`element-${element.id}`}
-      style={{ zIndex, visibility: show ? 'visible' : 'hidden' }}
+      style={{
+        zIndex,
+        visibility: show ? 'visible' : 'hidden',
+        display: isHidden ? 'none' : '',
+      }}
     >
       <Component element={element as never} onSelect={onSelect} />
     </div>

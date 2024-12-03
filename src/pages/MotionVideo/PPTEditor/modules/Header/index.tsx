@@ -8,8 +8,6 @@ const Header = ({ className }: { className: string }) => {
   const slides = useSlidesStore((state) => state.slides);
   const { enterScreeningFromStart } = useScreening();
 
-  console.log('🤟', slides);
-
   const handleSave = () => {
     localStorage.setItem('slides', JSON.stringify(slides));
   };
