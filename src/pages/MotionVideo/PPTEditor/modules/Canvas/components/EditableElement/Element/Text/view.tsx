@@ -1,4 +1,4 @@
-import { PPTTextElement } from '../../../interface';
+import { PPTTextElement } from '../../../../../../interface';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
 

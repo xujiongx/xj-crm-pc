@@ -1,25 +1,13 @@
 import { useMemo } from 'react';
-import 'video-react/dist/video-react.css';
-import { PPTVideoElement } from '../../../interface';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
+import { PPTVideoElement } from '../../../../../../interface'
 
 interface ElementProps {
   element: PPTVideoElement;
-  onSelect: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    element: PPTVideoElement,
-    canMove?: boolean,
-  ) => void;
 }
 
-const VideoElement = ({ element, onSelect }: ElementProps) => {
-  const onMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (element.lock) return;
-    e.stopPropagation();
-    onSelect(e, element);
-  };
-
+const VideoView = ({ element }: ElementProps) => {
   const flipStyle = useMemo(() => {
     let style = '';
     if (element.flipH && element.flipV)
@@ -34,8 +22,6 @@ const VideoElement = ({ element, onSelect }: ElementProps) => {
     [element.shadow],
   );
 
-  console.log('😟', element);
-
   return (
     <div
       className={styles['image-element']}
@@ -48,21 +34,17 @@ const VideoElement = ({ element, onSelect }: ElementProps) => {
     >
       <div
         className={styles['rotate-wrapper']}
-        style={{
-          transform: `rotate(${element.rotate}deg)`,
-        }}
+        style={{ transform: `rotate(${element.rotate}deg)` }}
       >
         <div
-          onMouseDown={onMouseDown}
           className={styles['element-content']}
           style={{
             filter: shadowStyle ? `drop-shadow(${shadowStyle})` : '',
             transform: flipStyle,
           }}
         >
-          <div className={styles['image-content']} id="container">
+          <div className={styles['image-content']}>
             <video
-              id={`video-${element.id}`}
               src={element.src}
               style={{
                 top: 0,
@@ -70,7 +52,6 @@ const VideoElement = ({ element, onSelect }: ElementProps) => {
                 width: '100%',
                 height: '100%',
               }}
-              draggable={false}
               onDragStart={(e) => e.preventDefault()}
               poster={element.poster}
             />
@@ -81,4 +62,4 @@ const VideoElement = ({ element, onSelect }: ElementProps) => {
   );
 };
 
-export default VideoElement;
+export default VideoView;

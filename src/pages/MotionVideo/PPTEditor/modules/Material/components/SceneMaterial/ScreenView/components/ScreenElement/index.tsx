@@ -2,9 +2,9 @@ import {
   ElementTypes,
   PPTElement,
 } from '@/pages/MotionVideo/PPTEditor/interface';
-import ImageView from '../../../../../../components/Element/Image/view';
-import TextView from '../../../../../../components/Element/Text/view';
-import VideoView from '../../../../../../components/Element/VideoElement/view';
+import ImageView from '../../../../../../Canvas/components/EditableElement/Element/Image/view';
+import TextView from '../../../../../../Canvas/components/EditableElement/Element/Text/view';
+import VideoView from '../../../../../../Canvas/components/EditableElement/Element/VideoElement/view';
 
 interface ViewElement {
   zIndex: number;

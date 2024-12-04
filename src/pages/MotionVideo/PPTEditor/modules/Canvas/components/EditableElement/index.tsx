@@ -1,4 +1,4 @@
-import VideoElement from '@/pages/MotionVideo/PPTEditor/components/Element/VideoElement';
+import VideoElement from '@/pages/MotionVideo/PPTEditor/modules/Canvas/components/EditableElement/Element/VideoElement';
 import {
   ElementTypes,
   PPTElement,
@@ -7,8 +7,8 @@ import {
   useMainStore,
   useSlidesStore,
 } from '@/pages/MotionVideo/PPTEditor/store';
-import ImageElement from '../../../../components/Element/Image';
-import TextElement from '../../../../components/Element/Text';
+import ImageElement from './Element/Image';
+import TextElement from './Element/Text';
 import styles from './index.less';
 
 interface EditableElementProps {

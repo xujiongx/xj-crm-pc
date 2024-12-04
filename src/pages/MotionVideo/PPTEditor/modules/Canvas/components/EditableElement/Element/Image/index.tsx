@@ -1,13 +1,24 @@
 import { useMemo } from 'react';
-import { PPTImageElement } from '../../../interface';
+import { PPTImageElement } from '../../../../../../interface';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
 
-interface ImageViewProps {
+interface ImageElementProps {
   element: PPTImageElement;
+  onSelect: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    element: PPTImageElement,
+    canMove?: boolean,
+  ) => void;
 }
 
-const ImageView = ({ element }: ImageViewProps) => {
+const ImageElement = ({ element, onSelect }: ImageElementProps) => {
+  const onMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (element.lock) return;
+    e.stopPropagation();
+    onSelect(e, element);
+  };
+
   const flipStyle = useMemo(() => {
     let style = '';
     if (element.flipH && element.flipV)
@@ -30,13 +41,18 @@ const ImageView = ({ element }: ImageViewProps) => {
         left: element.left,
         width: element.width,
         height: element.height,
+        borderRadius: `${element.radius}px`,
+        overflow: 'hidden',
       }}
     >
       <div
         className={styles['rotate-wrapper']}
-        style={{ transform: `rotate(${element.rotate}deg)` }}
+        style={{
+          transform: `rotate(${element.rotate}deg)`,
+        }}
       >
         <div
+          onMouseDown={onMouseDown}
           className={styles['element-content']}
           style={{
             filter: shadowStyle ? `drop-shadow(${shadowStyle})` : '',
@@ -63,4 +79,4 @@ const ImageView = ({ element }: ImageViewProps) => {
   );
 };
 
-export default ImageView;
+export default ImageElement;

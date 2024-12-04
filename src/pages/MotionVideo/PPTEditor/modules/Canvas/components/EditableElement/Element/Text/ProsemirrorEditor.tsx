@@ -3,24 +3,24 @@ import { debounce } from 'lodash';
 import { lift, toggleMark, wrapIn } from 'prosemirror-commands';
 import { EditorView } from 'prosemirror-view';
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
-import useMainStore from '../../../store/main';
-import type { TextFormatPainterKeys } from '../../../types/edit';
+import useMainStore from '../../../../../../store/main';
+import type { TextFormatPainterKeys } from '../../../../../../types/edit';
 import emitter, {
   EmitterEvents,
   type RichTextAction,
   type RichTextCommand,
-} from '../../../utils/emitter';
+} from '../../../../../../utils/emitter';
 import {
   createDocument,
   initProsemirrorEditor,
-} from '../../../utils/prosemirror';
-import { setListStyle } from '../../../utils/prosemirror/commands/setListStyle';
-import { alignmentCommand } from '../../../utils/prosemirror/commands/setTextAlign';
+} from '../../../../../../utils/prosemirror';
+import { setListStyle } from '../../../../../../utils/prosemirror/commands/setListStyle';
+import { alignmentCommand } from '../../../../../../utils/prosemirror/commands/setTextAlign';
 import {
   indentCommand,
   textIndentCommand,
-} from '../../../utils/prosemirror/commands/setTextIndent';
-import { toggleList } from '../../../utils/prosemirror/commands/toggleList';
+} from '../../../../../../utils/prosemirror/commands/setTextIndent';
+import { toggleList } from '../../../../../../utils/prosemirror/commands/toggleList';
 import {
   addMark,
   autoSelectAll,
@@ -29,7 +29,7 @@ import {
   getTextAttrs,
   isActiveOfParentNodeType,
   markActive,
-} from '../../../utils/prosemirror/utils';
+} from '../../../../../../utils/prosemirror/utils';
 import styles from './index.less';
 
 interface ProsemirrorEditorProps {

@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import useSlidesStore from '../../store/slides';
 import ImageMaterial from './components/Resources/ImageMaterial';
-import SceneMaterial from './components/Scene';
-import TextMaterial from './components/Text';
+import SceneMaterial from './components/SceneMaterial';
+import TextMaterial from './components/TextMaterial';
 import styles from './index.less';
 import Resources from './components/Resources'
 

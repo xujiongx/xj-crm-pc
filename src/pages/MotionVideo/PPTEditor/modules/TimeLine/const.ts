@@ -3,7 +3,7 @@ import {
   TimelineEffect,
 } from '@/components/react-timeline-edit';
 import { CSSProperties } from 'react';
-import videoPlayerControl from '../../components/Element/VideoElement/videoControl';
+import videoPlayerControl from '../Canvas/components/EditableElement/Element/VideoElement/videoControl';
 import { ANIMATION_CLASS_PREFIX } from '../../config';
 
 export const scaleWidth = 160;

@@ -1,4 +1,4 @@
-import { PPTElementShadow } from '../../../interface';
+import { PPTElementShadow } from '../../../../../../interface';
 
 export const computeShadowStyle = (value?: PPTElementShadow) => {
   if (!value) return '';

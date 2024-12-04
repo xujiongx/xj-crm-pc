@@ -1,6 +1,6 @@
 import { MenuProps } from 'antd';
 import { useRef } from 'react';
-import ContextMenu from '../../components/ContextMenu';
+import ContextMenu from './components/ContextMenu';
 import useClipboard from '../../hooks/useClipboard';
 import useDragElement from '../../hooks/useDragElement';
 import useRotateElement from '../../hooks/useRotateElement';

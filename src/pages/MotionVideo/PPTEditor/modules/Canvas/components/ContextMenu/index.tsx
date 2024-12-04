@@ -1,9 +1,9 @@
 import { useClickAway, useEventListener } from 'ahooks';
 import { Menu, MenuProps } from 'antd';
 import React, { useRef, useState } from 'react';
-import useHistorySnapshot from '../../hooks/useHistorySnapshot';
-import useMainStore from '../../store/main';
-import useSlidesStore from '../../store/slides';
+import useHistorySnapshot from '../../../../hooks/useHistorySnapshot';
+import useMainStore from '../../../../store/main';
+import useSlidesStore from '../../../../store/slides';
 import styles from './index.less';
 
 interface ContextMenuClickFn {

@@ -2,10 +2,10 @@ import { useLatest } from 'ahooks';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 import ProsemirrorEditor from './ProsemirrorEditor'
-import useHistorySnapshot from '../../../hooks/useHistorySnapshot'
-import { PPTTextElement } from '../../../interface';
-import useMainStore from '../../../store/main';
-import useSlidesStore from '../../../store/slides';
+import useHistorySnapshot from '../../../../../../hooks/useHistorySnapshot'
+import { PPTTextElement } from '../../../../../../interface';
+import useMainStore from '../../../../../../store/main';
+import useSlidesStore from '../../../../../../store/slides';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
 
