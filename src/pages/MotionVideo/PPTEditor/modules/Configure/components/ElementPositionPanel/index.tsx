@@ -1,79 +1,157 @@
-import {
-  ANIMATION_CLASS_PREFIX,
-  SLIDE_ANIMATIONS,
-} from '@/pages/MotionVideo/PPTEditor/config';
+import useAlignElementToCanvas from '@/pages/MotionVideo/PPTEditor/hooks/useAlignElementToCanvas';
 import useHistorySnapshot from '@/pages/MotionVideo/PPTEditor/hooks/useHistorySnapshot';
-import { TurningMode } from '@/pages/MotionVideo/PPTEditor/interface';
-import { useSlidesStore } from '@/pages/MotionVideo/PPTEditor/store';
-import { Button } from 'antd';
-import clsx from 'clsx';
+import useOrderElement from '@/pages/MotionVideo/PPTEditor/hooks/useOrderElement';
+import {
+  useMainStore,
+  useSlidesStore,
+} from '@/pages/MotionVideo/PPTEditor/store';
+import {
+  ElementAlignCommands,
+  ElementOrderCommands,
+} from '@/pages/MotionVideo/PPTEditor/types/edit';
+import { ColumnHeightOutlined } from '@ant-design/icons';
+import { Button, InputNumber } from 'antd';
+import ActionIcon from '../../../Canvas/components/ActionIcon';
+import ButtonGroup from '../ButtonGroup';
+import Divider from '../Divider';
 import styles from './index.less';
 const ElementPositionPanel = () => {
-  const animations = SLIDE_ANIMATIONS;
   const { add } = useHistorySnapshot();
-  const handleRunAnimation = () => {
-    const turningMode = useSlidesStore.getState().currentSlide().turningMode;
-    // const animationName = `${ANIMATION_CLASS_PREFIX}${turningMode}`;
-    const animationName = `${ANIMATION_CLASS_PREFIX}${'fadeOutDown'}`;
-    const elRef = document.querySelector(`#viewport-wrapper`);
-    if (!elRef) return;
-    // 执行动画
-    elRef.style.setProperty('--animate-duration', `${1000}ms`);
-    elRef.classList.add(animationName, `${ANIMATION_CLASS_PREFIX}animated`);
+  const activeElementId = useMainStore((state) => state.activeElementId);
 
-    const handleAnimationEnd = () => {
-      document.documentElement.style.removeProperty('--animate-duration');
-      elRef.classList.remove(
-        `${ANIMATION_CLASS_PREFIX}animated`,
-        animationName,
-      );
-    };
-    elRef.addEventListener('animationend', handleAnimationEnd, {
-      once: true,
+  const handleElement =
+    useSlidesStore((state) =>
+      state.currentSlide().elements.find((item) => item.id === activeElementId),
+    ) || {};
+  const { orderElement } = useOrderElement();
+
+  const { alignElementToCanvas } = useAlignElementToCanvas();
+
+  const handleUpdateElement = (data) => {
+    useSlidesStore.getState().updateElement({
+      id: handleElement.id,
+      props: { ...data },
     });
-  };
-
-  const currentTurningMode =
-    useSlidesStore((state) => state.currentSlide().turningMode) || 'scaleY';
-
-  const updateTurningMode = (mode: TurningMode) => {
-    if (mode === currentTurningMode) return;
-    useSlidesStore.getState().updateSlide({ turningMode: mode });
     add();
   };
-  const currentSlide = useSlidesStore((state) => state.currentSlide);
 
-  const applyAllSlide = () => {};
+  console.log('💁handleElement', handleElement);
 
   return (
-    <div className={styles['slide-animation-panel']}>
-      <div className={styles['animation-pool']}>
-        {animations.map((item) => (
-          <div
-            key={item.label}
-            className={clsx({
-              [styles['animation-item']]: true,
-              [styles['active']]: item.value === currentSlide().turningMode,
-            })}
-            onClick={() => updateTurningMode(item.value)}
-          >
-            <div
-              className={clsx({
-                [styles['animation-block']]: true,
-                [styles[item.value]]: true,
-              })}
-            ></div>
-            <div className={styles['animation-text']}>{item.label}</div>
-          </div>
-        ))}
+    <div className={styles['element-position-panel']}>
+      <div className={styles['title']}>层级：</div>
+      <ButtonGroup className="row">
         <Button
-          style={{ width: '100%', marginTop: '20px' }}
-          onClick={() => applyAllSlide()}
+          style={{ flex: '1' }}
+          onClick={() => orderElement(handleElement!, ElementOrderCommands.TOP)}
         >
-          应用到全部
+          <ColumnHeightOutlined className="btn-icon" /> 置顶
         </Button>
+        <Button
+          style={{ flex: '1' }}
+          onClick={() =>
+            orderElement(handleElement!, ElementOrderCommands.BOTTOM)
+          }
+        >
+          <ColumnHeightOutlined className="btn-icon" /> 置底
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup className="row">
+        <Button
+          style={{ flex: '1' }}
+          onClick={() => orderElement(handleElement!, ElementOrderCommands.UP)}
+        >
+          <ColumnHeightOutlined className="btn-icon" /> 上移
+        </Button>
+        <Button
+          style={{ flex: '1' }}
+          onClick={() =>
+            orderElement(handleElement!, ElementOrderCommands.DOWN)
+          }
+        >
+          <ColumnHeightOutlined className="btn-icon" /> 下移
+        </Button>
+      </ButtonGroup>
+
+      <Divider />
+
+      <div className={styles['title']}>对齐：</div>
+      <ButtonGroup className="row">
+        <Button
+          style={{ flex: '1' }}
+          onClick={() => alignElementToCanvas(ElementAlignCommands.LEFT)}
+        >
+          <ActionIcon tooltip="左对齐" icon={<ColumnHeightOutlined />} />
+        </Button>
+        <Button
+          style={{ flex: '1' }}
+          onClick={() => alignElementToCanvas(ElementAlignCommands.HORIZONTAL)}
+        >
+          <ActionIcon tooltip="水平居中" icon={<ColumnHeightOutlined />} />
+        </Button>
+        <Button
+          style={{ flex: '1' }}
+          onClick={() => alignElementToCanvas(ElementAlignCommands.RIGHT)}
+        >
+          <ActionIcon tooltip="右对齐" icon={<ColumnHeightOutlined />} />
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup className="row">
+        <Button
+          style={{ flex: '1' }}
+          onClick={() => alignElementToCanvas(ElementAlignCommands.TOP)}
+        >
+          <ActionIcon tooltip="上对齐" icon={<ColumnHeightOutlined />} />
+        </Button>
+        <Button
+          style={{ flex: '1' }}
+          onClick={() => alignElementToCanvas(ElementAlignCommands.VERTICAL)}
+        >
+          <ActionIcon tooltip="垂直居中" icon={<ColumnHeightOutlined />} />
+        </Button>
+        <Button
+          style={{ flex: '1' }}
+          onClick={() => alignElementToCanvas(ElementAlignCommands.BOTTOM)}
+        >
+          <ActionIcon tooltip="下对齐" icon={<ColumnHeightOutlined />} />
+        </Button>
+      </ButtonGroup>
+      <Divider />
+
+      <div className={styles['row']}>
+        <InputNumber
+          value={handleElement.left}
+          step={0.1}
+          addonBefore="水平"
+          style={{ width: '45%', flex: '1', marginRight: '10px' }}
+          onChange={(value) => handleUpdateElement({ left: value })}
+        ></InputNumber>
+        <InputNumber
+          value={handleElement.top}
+          step={0.1}
+          addonBefore="垂直"
+          style={{ width: '45%', flex: '1' }}
+          onChange={(value) => handleUpdateElement({ top: value })}
+        ></InputNumber>
       </div>
-      <Button onClick={() => handleRunAnimation()}>转场动画</Button>
+      <div className={styles['row']}>
+        <InputNumber
+          value={handleElement.width}
+          step={1}
+          addonBefore="宽度"
+          style={{ width: '45%', flex: '1', marginRight: '10px' }}
+          onChange={(value) => handleUpdateElement({ width: value })}
+        ></InputNumber>
+        {handleElement?.height && (
+          <InputNumber
+            value={handleElement.height}
+            step={1}
+            addonBefore="高度"
+            style={{ width: '45%', flex: '1' }}
+            onChange={(value) => handleUpdateElement({ height: value })}
+          ></InputNumber>
+        )}
+      </div>
     </div>
   );
 };

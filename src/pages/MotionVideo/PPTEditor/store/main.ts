@@ -1,11 +1,13 @@
 import { create } from 'zustand';
 import { SYS_FONTS } from '../config/font';
+import { PPTElement } from '../interface';
 import { CreatingElement, TextFormatPainter } from '../types/edit';
 import { isSupportFont } from '../utils/font';
 import {
   defaultRichTextAttrs,
   type TextAttrs,
 } from '../utils/prosemirror/utils';
+import useSlidesStore from './slides';
 
 type State = {
   /** 画布缩放比例（基于宽度1000px） */
@@ -45,6 +47,8 @@ type Actions = {
   setCreatingElement: (element: CreatingElement | null) => void;
   setEditorareaFocus: (isFocus: boolean) => void;
   setHiddenElementIdList: (hiddenElementIdList: string[]) => void;
+  activeElementList: () => PPTElement[];
+  handleElement: () => PPTElement | null;
 };
 
 const useMainStore = create<State & Actions>((set, get) => ({
@@ -62,6 +66,22 @@ const useMainStore = create<State & Actions>((set, get) => ({
   creatingElement: null, // 正在插入的元素信息，需要通过绘制插入的元素（文字、形状、线条）
   editorAreaFocus: false,
   hiddenElementIdList: [],
+  activeElementList: () => {
+    const currentSlide = useSlidesStore.getState().currentSlide();
+    if (!currentSlide || !currentSlide.elements) return [];
+    return currentSlide.elements.filter((element) =>
+      get().activeElementIds.includes(element.id),
+    );
+  },
+  handleElement: () => {
+    const currentSlide = useSlidesStore.getState().currentSlide();
+    if (!currentSlide || !currentSlide.elements) return null;
+    return (
+      currentSlide.elements.find(
+        (element) => get().activeElementId === element.id,
+      ) || null
+    );
+  },
   setCanvasScale: (scale: number) => set(() => ({ canvasScale: scale })),
   setCanvasPercentage: (percentage: number) =>
     set(() => ({ canvasPercentage: percentage })),

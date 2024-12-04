@@ -106,7 +106,7 @@ const useCreateElement = () => {
         const video = document.createElement('video');
         video.src = videoUrl;
         video.addEventListener('loadedmetadata', () => {
-          resolve(video.duration);
+          resolve(video);
         });
         video.addEventListener('error', () => {
           reject(new Error('Failed to load video'));
@@ -115,20 +115,20 @@ const useCreateElement = () => {
     };
     // await getDurationByUrl(element.src);
 
-    getDurationByUrl(src).then((duration: number) => {
-      console.log(duration);
+    getDurationByUrl(src).then((video: any) => {
+      console.log('video', video, video.videoWidth, video.videoHeight);
 
       createElement({
         type: 'video',
         id: nanoid(10),
-        width: 500,
-        height: 300,
+        width: video.videoWidth,
+        height: video.videoHeight,
         rotate: 0,
-        left: (VIEWPORT_SIZE - 500) / 2,
-        top: (VIEWPORT_SIZE * viewportRatio - 300) / 2,
+        left: (VIEWPORT_SIZE - video.videoWidth) / 2,
+        top: (VIEWPORT_SIZE * viewportRatio - video.videoHeight) / 2,
         src,
         autoplay: false,
-        duration,
+        duration: video.duration,
       });
     });
   };

@@ -1,5 +1,5 @@
-import { ElementTypes, PPTElement } from '../../../../interface';
-import TextView from '../../../Element/Text/view';
+import { ElementTypes, PPTElement } from '../../../../../../interface';
+import TextView from '../../../../../../components/Element/Text/view';
 
 interface ViewElementProps {
   zIndex: number;

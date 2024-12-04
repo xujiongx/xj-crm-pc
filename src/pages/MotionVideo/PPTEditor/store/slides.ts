@@ -180,22 +180,7 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
   addElement(element: PPTElement | PPTElement[]) {
     set((state) => {
       const elements = Array.isArray(element) ? element : [element];
-
-      // // 通过url链接获取视频时长
-      // const getDurationByUrl = async (videoUrl) => {
-      //   return new Promise((resolve, reject) => {
-      //     const video = document.createElement('video');
-      //     video.src = videoUrl;
-      //     video.addEventListener('loadedmetadata', () => {
-      //       resolve(video.duration);
-      //     });
-      //     video.addEventListener('error', () => {
-      //       reject(new Error('Failed to load video'));
-      //     });
-      //   });
-      // };
-      // await getDurationByUrl(element.src);
-
+console.log('🤒', elements);
       const animations = elements.map((el) => {
         return {
           id: nanoid(10),

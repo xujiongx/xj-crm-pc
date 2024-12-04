@@ -1,14 +1,13 @@
 import { useMemo } from 'react';
-import { PPTImageElement } from '../../../interface';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
-import ReactPlayer from 'react-player'
+import { PPTVideoElement } from '../../../interface'
 
-interface ImageViewProps {
-  element: PPTImageElement;
+interface ElementProps {
+  element: PPTVideoElement;
 }
 
-const VideoView = ({ element }: ImageViewProps) => {
+const VideoView = ({ element }: ElementProps) => {
   const flipStyle = useMemo(() => {
     let style = '';
     if (element.flipH && element.flipV)
@@ -45,10 +44,16 @@ const VideoView = ({ element }: ImageViewProps) => {
           }}
         >
           <div className={styles['image-content']}>
-            <ReactPlayer
-              width={element.width}
-              height={element.height}
-              url={element.src}
+            <video
+              src={element.src}
+              style={{
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+              }}
+              onDragStart={(e) => e.preventDefault()}
+              poster={element.poster}
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
-import useBackgroundStyle from '../../hooks/useBackgroundStyle';
-import { VIEWPORT_SIZE } from '../../hooks/useViewportSize';
-import { SlideItem } from '../../interface';
+import useBackgroundStyle from '../../../../hooks/useBackgroundStyle';
+import { VIEWPORT_SIZE } from '../../../../hooks/useViewportSize';
+import { SlideItem } from '../../../../interface';
 import ScreenElement from './components/ScreenElement';
 import styles from './index.less';
 

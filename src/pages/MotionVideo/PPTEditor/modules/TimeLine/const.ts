@@ -96,6 +96,25 @@ export const mockEffect: Record<string, TimelineEffect> = {
           visibility: 'visible',
         });
       },
+      update: ({ action, engine, isPlaying, time }) => {
+        const data = (action as CustomTimelineAction).data;
+        if (time === 0) {
+          if (
+            (data.type === 'out' && time > action.end) ||
+            (data.type === 'in' &&
+              data.effect !== 'show' &&
+              time <= action.start)
+          ) {
+            setElementProperty(data.elId, {
+              visibility: 'hidden',
+            });
+          }
+        } else {
+          setElementProperty(data.elId, {
+            visibility: 'visible',
+          });
+        }
+      },
       leave: ({ action, engine, isPlaying, time }) => {
         const data = (action as CustomTimelineAction).data;
         if (

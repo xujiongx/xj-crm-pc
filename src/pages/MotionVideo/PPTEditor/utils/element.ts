@@ -131,3 +131,29 @@ export const createSlideIdMap = (slides: SlideItem[]) => {
   }
   return slideIdMap
 }
+
+/**
+ * 计算一组元素在画布中的位置范围
+ * @param elementList 一组元素信息
+ */
+export const getElementListRange = (elementList: PPTElement[]) => {
+  const leftValues: number[] = []
+  const topValues: number[] = []
+  const rightValues: number[] = []
+  const bottomValues: number[] = []
+
+  elementList.forEach(element => {
+    const { minX, maxX, minY, maxY } = getElementRange(element)
+    leftValues.push(minX)
+    topValues.push(minY)
+    rightValues.push(maxX)
+    bottomValues.push(maxY)
+  })
+
+  const minX = Math.min(...leftValues)
+  const maxX = Math.max(...rightValues)
+  const minY = Math.min(...topValues)
+  const maxY = Math.max(...bottomValues)
+
+  return { minX, maxX, minY, maxY }
+}

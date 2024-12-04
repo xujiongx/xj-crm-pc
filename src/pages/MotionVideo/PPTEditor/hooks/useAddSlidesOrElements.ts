@@ -1,4 +1,5 @@
 import { PPTElement, SlideItem } from '@/pages/MotionVideo/PPTEditor/interface';
+import { nanoid } from 'nanoid';
 import useMainStore from '../store/main';
 import slidesStore from '../store/slides';
 import snapshotStore from '../store/snapshot';
@@ -89,6 +90,12 @@ const addSlidesOrElements = () => {
         element.id = elIdMap[element.id];
         if (element.groupId) element.groupId = groupIdMap[element.groupId];
       }
+      for (const animate of slide.animations) {
+        animate.elId = elIdMap[animate.elId];
+        animate.id = nanoid(10);
+      }
+
+      console.log('😧', slide);
 
       return {
         ...slide,
