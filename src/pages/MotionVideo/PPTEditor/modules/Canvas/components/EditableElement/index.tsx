@@ -1,3 +1,4 @@
+import VideoElement from '@/pages/MotionVideo/PPTEditor/components/Element/VideoElement';
 import {
   ElementTypes,
   PPTElement,
@@ -23,6 +24,7 @@ interface EditableElementProps {
 const ElementTypeMap = {
   [ElementTypes.TEXT]: TextElement,
   [ElementTypes.IMAGE]: ImageElement,
+  [ElementTypes.VIDEO]: VideoElement,
 };
 
 const EditableElement = ({

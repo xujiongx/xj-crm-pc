@@ -1,4 +1,5 @@
 import { uid } from '@aicc/shared';
+import { nanoid } from 'nanoid';
 import { PPTElement } from '../interface';
 import useMainStore from '../store/main';
 import useSlidesStore from '../store/slides';
@@ -88,15 +89,54 @@ const useCreateElement = () => {
         defaultColor: theme.fontColor,
         vertical,
       },
-      () => {
-        
-      },
+      () => {},
     );
+  };
+
+  /**
+   * 创建视频元素
+   * @param src 视频地址
+   */
+  const createVideoElement = (src: string) => {
+    const viewportRatio = useMainStore.getState().viewportRatio;
+
+    // // 通过url链接获取视频时长
+    const getDurationByUrl = async (videoUrl) => {
+      return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        video.src = videoUrl;
+        video.addEventListener('loadedmetadata', () => {
+          resolve(video.duration);
+        });
+        video.addEventListener('error', () => {
+          reject(new Error('Failed to load video'));
+        });
+      });
+    };
+    // await getDurationByUrl(element.src);
+
+    getDurationByUrl(src).then((duration: number) => {
+      console.log(duration);
+
+      createElement({
+        type: 'video',
+        id: nanoid(10),
+        width: 500,
+        height: 300,
+        rotate: 0,
+        left: (VIEWPORT_SIZE - 500) / 2,
+        top: (VIEWPORT_SIZE * viewportRatio - 300) / 2,
+        src,
+        autoplay: false,
+        duration,
+      });
+    });
   };
 
   return {
     createTextElement,
     createImageElement,
+    createVideoElement,
   };
 };
 

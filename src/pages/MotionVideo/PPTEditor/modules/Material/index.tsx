@@ -2,10 +2,11 @@ import IconFont from '@/components/IconFont';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import useSlidesStore from '../../store/slides';
-import ImageMaterial from './components/Image';
+import ImageMaterial from './components/Resources/ImageMaterial';
 import SceneMaterial from './components/Scene';
 import TextMaterial from './components/Text';
 import styles from './index.less';
+import Resources from './components/Resources'
 
 interface TabItem {
   key: string;
@@ -37,7 +38,7 @@ const TABS: Array<TabItem> = [
     key: 'material',
     label: '素材',
     icon: 'user',
-    component: <ImageMaterial />,
+    component: <Resources />,
   },
   {
     key: 'shape',

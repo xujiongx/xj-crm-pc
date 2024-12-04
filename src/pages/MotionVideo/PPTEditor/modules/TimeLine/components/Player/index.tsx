@@ -3,7 +3,7 @@ import { useSlidesStore } from '@/pages/MotionVideo/PPTEditor/store';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
 import { Select, Switch } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
-import { scale, scaleWidth, startLeft } from '../../mock';
+import { scale, scaleWidth, startLeft } from '../../const';
 import styles from './index.less';
 
 const { Option } = Select;
@@ -68,7 +68,7 @@ const TimelinePlayer: FC<{
       //   timelineState.current.play({ autoEnd: true });
       // }, 0);
 
-      setIsEnd(true);
+      // setIsEnd(true);
     });
     engine.listener.on('setTimeByTick', ({ time }) => {
       setTime(time);

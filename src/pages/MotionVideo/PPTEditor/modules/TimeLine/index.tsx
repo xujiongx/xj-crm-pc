@@ -1,5 +1,4 @@
 import { Timeline, TimelineState } from '@/components/react-timeline-edit';
-import { cloneDeep } from 'lodash';
 import {
   forwardRef,
   useEffect,
@@ -11,11 +10,10 @@ import { useMainStore, useSlidesStore } from '../../store';
 import ActionRender from './components/ActionRender';
 import ElementList from './components/ElementList';
 import TimelinePlayer from './components/Player';
+import { mockEffect, scale, scaleWidth, startLeft } from './const';
 import { useTileLine } from './hooks';
 import './index.less';
 import styles from './index.less';
-import { mockData, mockEffect, scale, scaleWidth, startLeft } from './mock';
-const defaultEditorData = cloneDeep(mockData);
 
 const height = 250;
 
@@ -40,15 +38,24 @@ const TimelineEditor = forwardRef((props, ref) => {
     const rows = elements.map((item, index) => {
       const actions = animations
         .filter((animate) => animate.elId === item.id)
-        .map((animate, index) => ({
-          id: animate.id,
-          start: animate.start || 0,
-          end: animate.end || 0,
-          // start: index,
-          // end: index + animate.duration / 1000,
-          effectId: 'animate',
-          data: animate,
-        }));
+        .map((animate, index) => {
+          if (animate.type === 'video') {
+            return {
+              id: animate.id,
+              start: animate.start || 0,
+              end: animate.end || 0,
+              effectId: 'video',
+              data: animate,
+            };
+          }
+          return {
+            id: animate.id,
+            start: animate.start || 0,
+            end: animate.end || 0,
+            effectId: 'animate',
+            data: animate,
+          };
+        });
 
       return {
         ...item,
@@ -66,7 +73,6 @@ const TimelineEditor = forwardRef((props, ref) => {
     handleElementIds,
   ]);
 
-
   // 对外暴露出timelineState
   useImperativeHandle(ref, () => ({
     timelineState: timelineState.current,
@@ -74,7 +80,6 @@ const TimelineEditor = forwardRef((props, ref) => {
       timelineState.current?.play({ autoEnd: true });
     },
   }));
-
 
   return (
     <div style={{ ...style }}>
@@ -112,6 +117,14 @@ const TimelineEditor = forwardRef((props, ref) => {
             }
           }}
           onActionMoveEnd={(params) => {
+            const data = params.action.data;
+            updateAnimation(data.id, {
+              data,
+              start: params.action.start,
+              end: params.action.end,
+            });
+          }}
+          onActionResizeEnd={(params) => {
             const data = params.action.data;
             updateAnimation(data.id, {
               data,

@@ -181,6 +181,21 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
     set((state) => {
       const elements = Array.isArray(element) ? element : [element];
 
+      // // 通过url链接获取视频时长
+      // const getDurationByUrl = async (videoUrl) => {
+      //   return new Promise((resolve, reject) => {
+      //     const video = document.createElement('video');
+      //     video.src = videoUrl;
+      //     video.addEventListener('loadedmetadata', () => {
+      //       resolve(video.duration);
+      //     });
+      //     video.addEventListener('error', () => {
+      //       reject(new Error('Failed to load video'));
+      //     });
+      //   });
+      // };
+      // await getDurationByUrl(element.src);
+
       const animations = elements.map((el) => {
         return {
           id: nanoid(10),
@@ -193,6 +208,20 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
         };
       });
 
+      const videoAnimations = elements
+        .filter((el) => el.type === 'video')
+        .map((el) => {
+          return {
+            id: nanoid(10),
+            elId: el.id,
+            effect: 'show',
+            start: 1,
+            end: element.duration + 1,
+            name: '一直展示',
+            type: 'video' as const,
+          };
+        });
+
       const slides = state.slides;
       const slideIndex = state.slideIndex;
       const currentElements = slides[slideIndex].elements;
@@ -200,7 +229,7 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
       slides[slideIndex] = {
         ...slides[slideIndex],
         elements: [...currentElements, ...elements],
-        animations: [...currentAnimations, ...animations],
+        animations: [...currentAnimations, ...animations, ...videoAnimations],
       };
       return { slides };
     });

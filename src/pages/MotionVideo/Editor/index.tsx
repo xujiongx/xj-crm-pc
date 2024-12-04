@@ -6,9 +6,9 @@ import Preview from '../Preview';
 const Editor = () => {
   useGlobalHotkey();
   const { screening } = useFullscreen();
-  if (screening) {
-    return <Preview></Preview>;
-  }
+  // if (screening) {
+  //   return <Preview></Preview>;
+  // }
   return <PPTEditor />;
 };
 

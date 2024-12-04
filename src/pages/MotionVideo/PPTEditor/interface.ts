@@ -28,6 +28,7 @@ export interface CreateElementSelectionData {
 export const enum ElementTypes {
   TEXT = 'text',
   IMAGE = 'image',
+  VIDEO = 'video',
 }
 
 export const enum OperateBorderLines {
@@ -422,6 +423,7 @@ export interface PPTVideoElement extends PPTBaseElement {
   autoplay: boolean;
   poster?: string;
   ext?: string;
+  duration?: number;
 }
 
 /**
@@ -540,15 +542,14 @@ export interface SlideTheme {
 
 export type AnimationType = 'in' | 'out' | 'attention';
 
-
 /**
  * 图片翻转、形状翻转
- * 
+ *
  * flipH?: 水平翻转
- * 
+ *
  * flipV?: 垂直翻转
  */
 export interface ImageOrShapeFlip {
-  flipH?: boolean
-  flipV?: boolean
+  flipH?: boolean;
+  flipV?: boolean;
 }

@@ -5,6 +5,7 @@ import {
   PPTElement,
 } from '../../interface';
 import useMainStore from '../../store/main';
+import CommonElementOperate from './CommonElementOperate';
 import ImageElementOperate from './Image';
 import TextElementOperate from './Text';
 import styles from './index.less';
@@ -27,6 +28,7 @@ interface OperateProps {
 const ElementTypeMap = {
   [ElementTypes.TEXT]: TextElementOperate,
   [ElementTypes.IMAGE]: ImageElementOperate,
+  [ElementTypes.VIDEO]: CommonElementOperate,
 };
 
 const Operate = ({ element, isSelected, onRotate, onScale }: OperateProps) => {

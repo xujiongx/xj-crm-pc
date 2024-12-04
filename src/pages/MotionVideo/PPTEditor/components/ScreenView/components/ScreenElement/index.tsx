@@ -1,6 +1,10 @@
-import { ElementTypes, PPTElement } from '@/pages/MotionVideo/PPTEditor/interface';
+import {
+  ElementTypes,
+  PPTElement,
+} from '@/pages/MotionVideo/PPTEditor/interface';
 import ImageView from '../../../Element/Image/view';
 import TextView from '../../../Element/Text/view';
+import VideoView from '../../../Element/VideoElement/view';
 
 interface ViewElement {
   zIndex: number;
@@ -10,6 +14,7 @@ interface ViewElement {
 const ElementTypeMap = {
   [ElementTypes.TEXT]: TextView,
   [ElementTypes.IMAGE]: ImageView,
+  [ElementTypes.VIDEO]: VideoView,
 };
 
 const ScreenElement = ({ element, zIndex }: ViewElement) => {
