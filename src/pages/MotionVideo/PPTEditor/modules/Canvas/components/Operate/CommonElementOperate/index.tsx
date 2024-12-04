@@ -1,12 +1,15 @@
-import useOperate from '../../../hooks/useOperate';
-import { OperateResizeHandlers, PPTImageElement } from '../../../interface';
-import useMainStore from '../../../store/main';
+import useOperate from '../../../../../hooks/useOperate';
+import {
+  OperateResizeHandlers,
+  PPTImageElement,
+} from '../../../../../interface';
+import useMainStore from '../../../../../store/main';
 import BorderLine from '../component/BorderLine';
 import Resize from '../component/Resize';
 import Rotate from '../component/Rotate';
 import styles from './index.less';
 
-interface ImageElementOperateProps {
+interface ElementOperateProps {
   element: PPTImageElement;
   handlerVisible?: boolean;
   onRotate: (
@@ -20,12 +23,12 @@ interface ImageElementOperateProps {
   ) => void;
 }
 
-const ImageElementOperate = ({
+const CommonElementOperate = ({
   element,
   handlerVisible,
   onRotate,
   onScale,
-}: ImageElementOperateProps) => {
+}: ElementOperateProps) => {
   const canvasScale = useMainStore((store) => store.canvasScale);
 
   const scaleWidth = element.width * canvasScale;
@@ -64,4 +67,4 @@ const ImageElementOperate = ({
   );
 };
 
-export default ImageElementOperate;
+export default CommonElementOperate;

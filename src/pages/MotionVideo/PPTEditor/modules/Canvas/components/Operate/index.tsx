@@ -1,10 +1,11 @@
 import clsx from 'clsx';
+
 import {
   ElementTypes,
   OperateResizeHandlers,
   PPTElement,
-} from '../../interface';
-import useMainStore from '../../store/main';
+} from '@/pages/MotionVideo/PPTEditor/interface';
+import { useMainStore } from '@/pages/MotionVideo/PPTEditor/store';
 import CommonElementOperate from './CommonElementOperate';
 import ImageElementOperate from './Image';
 import TextElementOperate from './Text';

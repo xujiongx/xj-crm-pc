@@ -1,6 +1,6 @@
-import useOperate from '../../../hooks/useOperate';
-import { OperateResizeHandlers, PPTTextElement } from '../../../interface';
-import useMainStore from '../../../store/main';
+import useOperate from '../../../../../hooks/useOperate';
+import { OperateResizeHandlers, PPTTextElement } from '../../../../../interface';
+import useMainStore from '../../../../../store/main';
 import BorderLine from '../component/BorderLine';
 import Resize from '../component/Resize';
 import Rotate from '../component/Rotate';
