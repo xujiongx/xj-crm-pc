@@ -2,6 +2,9 @@ import { VIEWPORT_SIZE } from '@/pages/MotionVideo/PPTEditor/hooks/useViewportSi
 import { SlideItem } from '@/pages/MotionVideo/PPTEditor/interface';
 import useMainStore from '@/pages/MotionVideo/PPTEditor/store/main';
 import useSlidesStore from '@/pages/MotionVideo/PPTEditor/store/slides';
+import emitter, {
+  EmitterEvents,
+} from '@/pages/MotionVideo/PPTEditor/utils/emitter';
 import { uid } from '@aicc/shared';
 import { PlusOutlined } from '@ant-design/icons';
 import { useSize } from 'ahooks';
@@ -11,9 +14,9 @@ import clsx from 'clsx';
 import { useRef } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { SortEnd } from 'react-sortable-hoc/types';
-import ContextMenu from '../../../Canvas/components/ContextMenu';
 import useAddSlidesOrElements from '../../../../hooks/useAddSlidesOrElements';
 import snapshotStore from '../../../../store/snapshot';
+import ContextMenu from '../../../Canvas/components/ContextMenu';
 import ScreenView from './ScreenView';
 import styles from './index.less';
 
@@ -60,6 +63,8 @@ const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
       })}
       onClick={() => {
         updateSlideIndex(index);
+        emitter.emit(EmitterEvents.SET_TIMELINE_TIME, 0);
+        // 重置时间轴时间
       }}
     >
       <ScreenView

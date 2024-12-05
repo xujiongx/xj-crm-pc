@@ -5,6 +5,8 @@ export const enum EmitterEvents {
   SYNC_RICH_TEXT_ATTRS_TO_STORE = 'SYNC_RICH_TEXT_ATTRS_TO_STORE',
   OPEN_CHART_DATA_EDITOR = 'OPEN_CHART_DATA_EDITOR',
   OPEN_LATEX_EDITOR = 'OPEN_LATEX_EDITOR',
+
+  SET_TIMELINE_TIME = 'SET_TIMELINE_TIME',
 }
 
 export interface RichTextAction {
@@ -18,11 +20,12 @@ export interface RichTextCommand {
 }
 
 type Events = {
-  [EmitterEvents.RICH_TEXT_COMMAND]: RichTextCommand
-  [EmitterEvents.SYNC_RICH_TEXT_ATTRS_TO_STORE]: void
-  [EmitterEvents.OPEN_CHART_DATA_EDITOR]: void
-  [EmitterEvents.OPEN_LATEX_EDITOR]: void
-} 
+  [EmitterEvents.RICH_TEXT_COMMAND]: RichTextCommand;
+  [EmitterEvents.SYNC_RICH_TEXT_ATTRS_TO_STORE]: void;
+  [EmitterEvents.OPEN_CHART_DATA_EDITOR]: void;
+  [EmitterEvents.OPEN_LATEX_EDITOR]: void;
+  [EmitterEvents.SET_TIMELINE_TIME]: number;
+}; 
 
 const emitter: Emitter<Events> = mitt<Events>()
 

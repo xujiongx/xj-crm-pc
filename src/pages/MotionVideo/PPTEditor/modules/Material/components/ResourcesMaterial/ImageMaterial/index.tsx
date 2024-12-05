@@ -2,6 +2,7 @@ import useCreateElement from '@/pages/MotionVideo/PPTEditor/hooks/useCreateEleme
 import { PPTTextElement } from '@/pages/MotionVideo/PPTEditor/interface';
 import { Button } from 'antd';
 import styles from './index.less';
+import { PlusOutlined } from '@ant-design/icons'
 
 type PPTTextData = Omit<PPTTextElement, 'id' | 'type' | 'left' | 'top'>;
 
@@ -27,7 +28,16 @@ const ImageMaterial = () => {
 
   return (
     <div className={styles.list}>
-      <Button onClick={() => onAdd()}>添加图片</Button>
+      <div className={styles.add}>
+        <Button
+          type="dashed"
+          block
+          icon={<PlusOutlined />}
+          onClick={() => onAdd()}
+        >
+          添加图片
+        </Button>
+      </div>
     </div>
   );
 };

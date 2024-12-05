@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 import { useMainStore, useSlidesStore } from '../../store';
+import emitter, { EmitterEvents } from '../../utils/emitter';
 import ActionRender from './components/ActionRender';
 import ElementList from './components/ElementList';
 import TimelinePlayer from './components/Player';
@@ -80,6 +81,19 @@ const TimelineEditor = forwardRef((props, ref) => {
       timelineState.current?.play({ autoEnd: true });
     },
   }));
+
+  useEffect(() => {
+    emitter.on(EmitterEvents.SET_TIMELINE_TIME, (time) => {
+      console.log('😻', time);
+      if (timelineState.current) {
+        timelineState.current.setTime(time);
+      }
+    });
+
+    return () => {
+      emitter.off(EmitterEvents.SET_TIMELINE_TIME);
+    };
+  }, []);
 
   return (
     <div style={{ ...style }}>
