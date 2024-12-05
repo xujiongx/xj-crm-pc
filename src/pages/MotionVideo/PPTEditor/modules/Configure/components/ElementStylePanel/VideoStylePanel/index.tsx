@@ -14,13 +14,11 @@ const VideoStylePanel = () => {
   const handleElementId = useMainStore((state) => state.activeElementId);
 
   const updateVideo = (props: Partial<PPTVideoElement>) => {
-    console.log('👍', props);
     if (!handleElement) return;
     useSlidesStore.getState().updateElement({ id: handleElementId, props });
     add();
   };
 
-  console.log('👙', handleElement);
   return (
     <div className="video-style-panel">
       <div className="title">视频预览封面</div>
@@ -32,7 +30,6 @@ const VideoStylePanel = () => {
         <ImageUploader
           value={handleElement?.poster}
           onChange={(v) => {
-            console.log('👙poster', v);
             updateVideo({ poster: v });
           }}
         />

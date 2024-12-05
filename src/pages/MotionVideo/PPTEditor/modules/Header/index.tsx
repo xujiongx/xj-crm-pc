@@ -2,14 +2,21 @@ import { Button, Space } from 'antd';
 import clsx from 'clsx';
 import useFullscreen from '../../hooks/useFullscreen';
 import useScreening from '../../hooks/useScreening';
-import { useSlidesStore } from '../../store';
+import { useMainStore, useSlidesStore } from '../../store';
 import styles from './index.less';
 const Header = ({ className }: { className: string }) => {
   const slides = useSlidesStore((state) => state.slides);
+  const hiddenElementIdList = useMainStore(
+    (state) => state.hiddenElementIdList,
+  );
   const { enterScreeningFromStart } = useScreening();
 
   const handleSave = () => {
     localStorage.setItem('slides', JSON.stringify(slides));
+    localStorage.setItem(
+      'hiddenElementIdList',
+      JSON.stringify(hiddenElementIdList),
+    );
   };
 
   const handleExport = () => {

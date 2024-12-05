@@ -1,13 +1,9 @@
-import {
-  useMainStore,
-  useSlidesStore,
-} from '@/pages/MotionVideo/PPTEditor/store';
+import { useSlidesStore } from '@/pages/MotionVideo/PPTEditor/store';
 import ImageStylePanel from './ImageStylePanel';
 import TextStylePanel from './TextStylePanel';
-import VideoStylePanel from './VideoStylePanel'
+import VideoStylePanel from './VideoStylePanel';
 
 const ElementStylePanel = () => {
-  const handleElementId = useMainStore((store) => store.activeElementId);
   const handleElement = useSlidesStore((store) => store.activeElements)()?.[0];
 
   const StylePanelMap = {
@@ -16,7 +12,6 @@ const ElementStylePanel = () => {
     video: <VideoStylePanel />,
   };
 
-  console.log('👗', handleElement.type);
   return StylePanelMap[handleElement.type];
 };
 

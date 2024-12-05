@@ -20,6 +20,7 @@ const ScreenView = ({ slide, scale, ratio }: ViewProps) => {
         width: VIEWPORT_SIZE,
         height: VIEWPORT_SIZE * ratio,
         transform: `scale(${scale})`,
+        pointerEvents: 'none',
       }}
     >
       <div className={styles['background']} style={{ ...backgroundStyle }} />

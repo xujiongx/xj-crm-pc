@@ -84,9 +84,9 @@ const TimelineEditor = forwardRef((props, ref) => {
 
   useEffect(() => {
     emitter.on(EmitterEvents.SET_TIMELINE_TIME, (time) => {
-      console.log('😻', time);
       if (timelineState.current) {
         timelineState.current.setTime(time);
+         timelineState.current.setScrollLeft(time);
       }
     });
 

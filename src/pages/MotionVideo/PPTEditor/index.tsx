@@ -1,3 +1,4 @@
+import { getUrlParams } from '@/utils';
 import { useEffect } from 'react';
 import useGlobalHotkey from './hooks/useGlobalHotkey';
 import styles from './index.less';
@@ -7,9 +8,10 @@ import Configure from './modules/Configure';
 import Header from './modules/Header';
 import Material from './modules/Material';
 import TimeLine from './modules/TimeLine';
-import { useSlidesStore } from './store';
+import { useMainStore, useSlidesStore } from './store';
 
 const MotionVideoEditor = () => {
+  const { type: viewportRatio } = getUrlParams<{ type: string }>();
   useGlobalHotkey();
 
   useEffect(() => {
@@ -17,16 +19,31 @@ const MotionVideoEditor = () => {
   }, []);
 
   const slidesData = localStorage.getItem('slides');
+  const hiddenElementIdList = localStorage.getItem('hiddenElementIdList');
 
   useEffect(() => {
     if (slidesData) {
       useSlidesStore.getState().setSlides(JSON.parse(slidesData));
     }
-  }, [slidesData]);
+    if (hiddenElementIdList) {
+      useMainStore
+        .getState()
+        .setHiddenElementIdList(JSON.parse(hiddenElementIdList));
+    }
+  }, [slidesData, hiddenElementIdList]);
 
   useEffect(() => {
     useSlidesStore.getState().updateSlideIndex(0);
   }, []);
+
+  useEffect(() => {
+    if (viewportRatio === '1') {
+      useMainStore.getState().setViewportRatio(9 / 16);
+    }
+    if (viewportRatio === '2') {
+      useMainStore.getState().setViewportRatio(16 / 9);
+    }
+  }, [viewportRatio]);
 
   return (
     <div className={styles.layout}>

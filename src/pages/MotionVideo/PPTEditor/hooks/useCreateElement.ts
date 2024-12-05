@@ -8,8 +8,8 @@ import useHistorySnapshot from './useHistorySnapshot';
 import { VIEWPORT_SIZE } from './useViewportSize';
 
 interface CommonElementPosition {
-  top: number;
-  left: number;
+  top?: number;
+  left?: number;
   width: number;
   height: number;
 }
@@ -70,7 +70,8 @@ const useCreateElement = () => {
     position: CommonElementPosition,
     data?: CreateTextData,
   ) => {
-    const { left, top, width, height } = position;
+    const { viewportRatio } = useMainStore.getState();
+    const { width, height } = position;
     const content = data?.content || '';
     const vertical = data?.vertical || false;
 
@@ -79,8 +80,8 @@ const useCreateElement = () => {
       {
         type: 'text',
         id,
-        left,
-        top,
+        left: (VIEWPORT_SIZE - width) / 2,
+        top: (VIEWPORT_SIZE * viewportRatio - height) / 2,
         width,
         height,
         content,

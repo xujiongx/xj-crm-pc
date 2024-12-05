@@ -34,8 +34,6 @@ const VideoElement = ({ element, onSelect }: ElementProps) => {
     [element.shadow],
   );
 
-  console.log('😟', element);
-
   return (
     <div
       className={styles['image-element']}

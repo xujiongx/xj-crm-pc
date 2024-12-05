@@ -1,11 +1,21 @@
-.list {
-  padding: var(--ant-padding);
+.images {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-top: 20px;
 
-  .item {
-    border: 1px solid var(--ant-color-border);
-    border-radius: var(--ant-border-radius);
-    text-align: center;
-    padding: var(--ant-padding-sm);
-    cursor: pointer;
+    .item {
+      width: 32%;
+      margin-bottom: calc((100% - 3 * 32%) / 3);
+      height: 60px;
+      &:not(:nth-child(3n)) {
+        margin-right: calc((100% - 3 * 32%) / 3);
+      }
+
+      background-position: center;
+      background-size: cover;
+      border-radius: 4px;
+    }
   }
 }

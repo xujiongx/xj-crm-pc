@@ -54,7 +54,6 @@ class VideoPlayer {
   };
 
   handleTimeUpdate = () => {
-    console.log('👟currentTime', this.videoElement.currentTime);
     this.currentTime = this.videoElement.currentTime;
   };
 
@@ -78,7 +77,6 @@ class VideoPlayer {
   };
 
   seek(time) {
-    console.log('🧜‍♂️time', time, this.duration);
     time = Math.max(time, 0);
     // time = Math.min(time, this.duration);
     this.videoElement.currentTime = time;

@@ -1,3 +1,21 @@
-.item{
-  width: 150px;
+.videos {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-top: 20px;
+
+    .item {
+      width: 48%;
+      margin-bottom: calc((100% - 2 * 48%) / 2);
+      height: 60px;
+      &:not(:nth-child(2n)) {
+        margin-right: calc((100% - 2 * 48%) / 2);
+      }
+
+      background-position: center;
+      background-size: cover;
+      border-radius: 4px;
+    }
+  }
 }

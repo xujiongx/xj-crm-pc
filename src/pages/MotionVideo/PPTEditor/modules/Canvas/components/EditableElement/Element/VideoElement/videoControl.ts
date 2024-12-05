@@ -27,7 +27,7 @@ class VideoPlayerControl {
     } else {
       const videoElement = document.querySelector(`#video-${id}`);
       item = new VideoPlayer(videoElement, {
-        autoplay: false,
+        autoplay: true,
         loop: false,
       });
       this.cacheMap[id] = item;
@@ -37,7 +37,6 @@ class VideoPlayerControl {
     }
 
     const timeListener = (data: { time: number; engine }) => {
-      console.log('👗data', data);
       const { time } = data;
       item.seek(time - startTime);
     };
@@ -65,6 +64,10 @@ class VideoPlayerControl {
       //   delete this.listenerMap[id];
       // }
     }
+  }
+  clean() {
+    this.listenerMap = {};
+    this.cacheMap = {};
   }
 }
 

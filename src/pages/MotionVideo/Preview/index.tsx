@@ -2,9 +2,9 @@ import { Button, InputNumber } from 'antd';
 import { useEffect, useRef } from 'react';
 import { ANIMATION_CLASS_PREFIX } from '../PPTEditor/config';
 import Canvas from '../PPTEditor/modules/Canvas';
+import videoPlayerControl from '../PPTEditor/modules/Canvas/components/EditableElement/Element/VideoElement/videoControl';
 import Timeline from '../PPTEditor/modules/TimeLine';
 import { useMainStore, useSlidesStore } from '../PPTEditor/store';
-
 const Page = () => {
   const slidesData = localStorage.getItem('slides');
 
@@ -46,7 +46,7 @@ const Page = () => {
     return new Promise<void>((resolve) => {
       const turningMode = useSlidesStore.getState().currentSlide().turningMode;
       // const animationName = `${ANIMATION_CLASS_PREFIX}${turningMode}`;
-      const animationName = `${ANIMATION_CLASS_PREFIX}${'fadeOutDown'}`;
+      const animationName = `${ANIMATION_CLASS_PREFIX}${'fadeOutUp'}`;
       const elRef = document.querySelector(`#viewport-wrapper`);
       console.log('👩‍💼', elRef);
       if (!elRef) return;
@@ -94,6 +94,7 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
+    videoPlayerControl.clean();
     useSlidesStore.getState().updateSlideIndex(0);
     setTimeout(() => {
       handleStart();

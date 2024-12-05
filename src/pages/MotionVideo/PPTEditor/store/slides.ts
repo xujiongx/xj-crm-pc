@@ -180,7 +180,6 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
   addElement(element: PPTElement | PPTElement[]) {
     set((state) => {
       const elements = Array.isArray(element) ? element : [element];
-console.log('🤒', elements);
       const animations = elements.map((el) => {
         return {
           id: nanoid(10),

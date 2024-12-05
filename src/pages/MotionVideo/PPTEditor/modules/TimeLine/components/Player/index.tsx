@@ -74,7 +74,7 @@ const TimelinePlayer: FC<{
       setTime(time);
       const autoScrollFrom = 500;
       const left = time * (scaleWidth / scale) + startLeft - autoScrollFrom;
-      timelineState.current.setScrollLeft(left);
+      timelineState.current?.setScrollLeft(left);
     });
 
     return () => {

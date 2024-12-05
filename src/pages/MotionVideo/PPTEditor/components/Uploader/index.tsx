@@ -1,12 +1,10 @@
-import { Button, Space, Upload, message } from 'antd';
+import { Upload, message } from 'antd';
 import DisabledContext from 'antd/es/config-provider/DisabledContext';
 import { RcFile } from 'antd/es/upload';
 import React from 'react';
 
+import { getToken, stringifySignatureWithUrl } from '@/utils';
 import styles from './index.less';
-import { getToken, stringifySignatureWithUrl } from '@/utils'
-import IconFont from '@/components/IconFont'
-import { UploadOutlined } from '@ant-design/icons'
 
 export const ImageAcceptType = ['jpg', 'jpeg', 'png'];
 export const VideoAcceptType = ['mp4'];
@@ -42,6 +40,7 @@ interface UploaderProps {
   maxCount: number;
   disabled?: boolean;
   onUpload?: (url: string) => void;
+  children: React.ReactNode;
 }
 
 const AcceptType = {
@@ -55,13 +54,14 @@ const Uploader = ({
   maxCount,
   onUpload,
   disabled: customDisabled,
+  children,
 }: UploaderProps) => {
   const disabled = React.useContext(DisabledContext);
   const mergedDisabled = (customDisabled ?? disabled) || maxCount <= number;
- const uploadConfig = {
-   headers: { 'X-Access-Token': getToken()!, mode: 'sign_test' },
-   action: stringifySignatureWithUrl('/scp/exam/file/common/upload'),
- };
+  const uploadConfig = {
+    headers: { 'X-Access-Token': getToken()!, mode: 'sign_test' },
+    action: stringifySignatureWithUrl('/scp/exam/file/common/upload'),
+  };
 
   return (
     <Upload
@@ -84,10 +84,7 @@ const Uploader = ({
         }
       }}
     >
-      <Button>
-        <UploadOutlined />
-        <span>拖放或点击上传</span>
-      </Button>
+      {children}
     </Upload>
   );
 };

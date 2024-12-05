@@ -3,12 +3,15 @@ import { OperateBorderLines, OperateResizeHandlers } from '../interface';
 const useOperate = (width: number, height: number) => {
   return {
     borderLines: [
-      { type: OperateBorderLines.T, style: { width: width } },
-      { type: OperateBorderLines.B, style: { top: height, width: width } },
-      { type: OperateBorderLines.L, style: { height: height } },
+      { type: OperateBorderLines.T, style: { width: width + 'px' } },
+      {
+        type: OperateBorderLines.B,
+        style: { top: height + 'px', width: width + 'px' },
+      },
+      { type: OperateBorderLines.L, style: { height: height + 'px' } },
       {
         type: OperateBorderLines.R,
-        style: { left: width, height: height },
+        style: { left: width + 'px', height: height + 'px' },
       },
     ],
     resizeHandlers: [

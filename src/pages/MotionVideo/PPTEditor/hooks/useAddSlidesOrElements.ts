@@ -95,8 +95,6 @@ const addSlidesOrElements = () => {
         animate.id = nanoid(10);
       }
 
-      console.log('😧', slide);
-
       return {
         ...slide,
         id: slideIdMap[slide.id],

@@ -1,6 +1,7 @@
 import config from '@/config';
 import md5 from 'crypto-js/md5';
 import qs, { parse } from 'qs';
+import queryString from 'query-string';
 
 export function getToken() {
   return localStorage.getItem('token') || '';
@@ -96,4 +97,9 @@ export const stringifySignatureWithUrl = (
   return `${config.crmPrefix}${data.path}?${qs.stringify(
     signature({ ...data.params, ...params }, data.path, token),
   )}`;
+};
+
+export const getUrlParams = <T>() => {
+  const { query } = queryString.parseUrl(location.href);
+  return query as unknown as T;
 };

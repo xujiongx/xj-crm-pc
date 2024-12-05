@@ -46,6 +46,7 @@ type Actions = {
   setAvailableFonts: (availableFonts: typeof SYS_FONTS) => void;
   setCreatingElement: (element: CreatingElement | null) => void;
   setEditorareaFocus: (isFocus: boolean) => void;
+  setViewportRatio: (isFocus: number) => void;
   setHiddenElementIdList: (hiddenElementIdList: string[]) => void;
   activeElementList: () => PPTElement[];
   handleElement: () => PPTElement | null;
@@ -56,6 +57,7 @@ const useMainStore = create<State & Actions>((set, get) => ({
   canvasDragged: false,
   canvasPercentage: 90,
   viewportRatio: 0.5625,
+  // viewportRatio: 16 / 9,
   isScaling: false,
   activeElementIds: [],
   activeElementId: '',
@@ -117,6 +119,12 @@ const useMainStore = create<State & Actions>((set, get) => ({
     set(() => ({ editorAreaFocus: isFocus })),
   setHiddenElementIdList: (hiddenElementIdList: string[]) =>
     set(() => ({ hiddenElementIdList: hiddenElementIdList })),
+
+  setViewportRatio: (viewportRatio) => {
+    set(() => ({
+      viewportRatio,
+    }));
+  },
 }));
 
 export default useMainStore;

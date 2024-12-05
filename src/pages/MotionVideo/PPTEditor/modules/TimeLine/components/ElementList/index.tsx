@@ -21,7 +21,7 @@ const ElementList = (props: any) => {
   const { select } = useSelectElement(currentSlide()?.elements, drag);
 
   const handleSelectElement = (e, item) => {
-    select(e, item);
+    select(e, item, false);
   };
 
   const { toggleHideElement, showAllElements, hideAllElements } =

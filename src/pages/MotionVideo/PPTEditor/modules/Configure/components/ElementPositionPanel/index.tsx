@@ -35,8 +35,6 @@ const ElementPositionPanel = () => {
     add();
   };
 
-  console.log('💁handleElement', handleElement);
-
   return (
     <div className={styles['element-position-panel']}>
       <div className={styles['title']}>层级：</div>

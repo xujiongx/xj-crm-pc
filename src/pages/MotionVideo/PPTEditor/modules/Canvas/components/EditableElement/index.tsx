@@ -1,8 +1,8 @@
-import VideoElement from '@/pages/MotionVideo/PPTEditor/modules/Canvas/components/EditableElement/Element/VideoElement';
 import {
   ElementTypes,
   PPTElement,
 } from '@/pages/MotionVideo/PPTEditor/interface';
+import VideoElement from '@/pages/MotionVideo/PPTEditor/modules/Canvas/components/EditableElement/Element/VideoElement';
 import {
   useMainStore,
   useSlidesStore,
@@ -59,7 +59,8 @@ const EditableElement = ({
       style={{
         zIndex,
         visibility: show ? 'visible' : 'hidden',
-        display: isHidden ? 'none' : '',
+        opacity: isHidden ? '0' : '1',
+        pointerEvents: isHidden ? 'none' : 'auto',
       }}
     >
       <Component element={element as never} onSelect={onSelect} />

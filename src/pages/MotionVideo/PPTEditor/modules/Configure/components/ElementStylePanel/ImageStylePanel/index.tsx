@@ -18,13 +18,11 @@ const ImageStylePanel = () => {
   const handleElementId = useMainStore((state) => state.activeElementId);
 
   const updateImage = (props: Partial<PPTImageElement>) => {
-    console.log('👍', props)
     if (!handleElement) return;
     useSlidesStore.getState().updateElement({ id: handleElementId, props });
     add();
   };
 
-  console.log('👙', handleElement);
   return (
     <div className="image-style-panel">
       <div
