@@ -14,7 +14,7 @@ export default () => {
       );
     } else mainStore.setHiddenElementIdList([...hiddenElementIdList, id]);
 
-    if (activeElementIdList.includes(id)) mainStore.setActiveElementIds([]);
+    // if (activeElementIdList.includes(id)) mainStore.setActiveElementIds([]);
   };
 
   const showAllElements = () => {

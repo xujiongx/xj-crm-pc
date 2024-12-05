@@ -1,18 +1,16 @@
-import { TimelineState } from '@/components/react-timeline-edit';
 import { useSlidesStore } from '@/pages/MotionVideo/PPTEditor/store';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
-import { Select, Switch } from 'antd';
-import React, { FC, useEffect, useState } from 'react';
-import { scale, scaleWidth, startLeft } from '../../const';
+import { Select, Slider } from 'antd';
+import { useEffect, useState } from 'react';
+import { scaleWidth, startLeft } from '../../const';
 import styles from './index.less';
 
 const { Option } = Select;
 export const Rates = [0.2, 0.5, 1.0, 1.5, 2.0];
 
-const TimelinePlayer: FC<{
-  timelineState: React.MutableRefObject<TimelineState>;
-  autoScrollWhenPlay: React.MutableRefObject<boolean>;
-}> = ({ timelineState, autoScrollWhenPlay }) => {
+const TimelinePlayer = (props) => {
+  const { timelineState, scale, autoScrollWhenPlay, handleScaleChange } = props;
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [time, setTime] = useState(0);
@@ -67,7 +65,6 @@ const TimelinePlayer: FC<{
       // setTimeout(() => {
       //   timelineState.current.play({ autoEnd: true });
       // }, 0);
-
       // setIsEnd(true);
     });
     engine.listener.on('setTimeByTick', ({ time }) => {
@@ -83,6 +80,17 @@ const TimelinePlayer: FC<{
       engine.listener.offAll();
     };
   }, []);
+
+  useEffect(() => {
+    if (!timelineState.current) return;
+    const engine = timelineState.current;
+    engine.listener.on('setTimeByTick', ({ time }) => {
+      setTime(time);
+      const autoScrollFrom = 500;
+      const left = time * (scaleWidth / scale) + startLeft - autoScrollFrom;
+      timelineState.current?.setScrollLeft(left);
+    });
+  }, [scale]);
 
   // 开始或暂停
   const handlePlayOrPause = () => {
@@ -128,9 +136,24 @@ const TimelinePlayer: FC<{
 
   return (
     <div className={styles['timeline-player']}>
-      <div>
+      {/* <div>
         字幕
         <Switch />
+      </div> */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        时间轴比例：
+        <Slider
+          defaultValue={1}
+          min={1}
+          max={5}
+          style={{ width: '100px' }}
+          onChange={(v) => handleScaleChange(v)}
+        />
       </div>
       <div className={styles['play-control']} onClick={handlePlayOrPause}>
         {isPlaying ? <PauseOutlined /> : <CaretRightOutlined />}
@@ -144,7 +167,7 @@ const TimelinePlayer: FC<{
         重新开始
       </Button> */}
       <div className={styles['time']}>{timeRender(time)}</div>
-      <div className={styles['rate-control']}>
+      {/* <div className={styles['rate-control']}>
         <Select
           size={'small'}
           defaultValue={1}
@@ -155,7 +178,7 @@ const TimelinePlayer: FC<{
             <Option key={rate} value={rate}>{`${rate.toFixed(1)}倍速`}</Option>
           ))}
         </Select>
-      </div>
+      </div> */}
     </div>
   );
 };

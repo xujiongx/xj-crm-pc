@@ -3,6 +3,11 @@
     background-color: #f7f7f7;
     height: 32px;
     border-right: 1px solid #e8e8e8;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 30px;
   }
 
   :global {
@@ -22,13 +27,15 @@
 
   &-item {
     height: 32px;
-    padding: 2px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1px solid #f2f2f2;
 
+    .icon {
+      margin-right: 4px;
+    }
     &.text {
       color: #fff;
       height: 28px;

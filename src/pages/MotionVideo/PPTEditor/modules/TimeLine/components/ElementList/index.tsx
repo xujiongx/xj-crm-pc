@@ -1,4 +1,3 @@
-import IconFont from '@/components/IconFont';
 import useDeleteElements from '@/pages/MotionVideo/PPTEditor/hooks/useDeleteElements';
 import useDragElement from '@/pages/MotionVideo/PPTEditor/hooks/useDragElement';
 import useHideElement from '@/pages/MotionVideo/PPTEditor/hooks/useHideElement';
@@ -7,9 +6,32 @@ import {
   useMainStore,
   useSlidesStore,
 } from '@/pages/MotionVideo/PPTEditor/store';
-import { Space } from 'antd';
+import {
+  DeleteOutlined,
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  FileImageOutlined,
+  FileTextOutlined,
+  VideoCameraOutlined,
+} from '@ant-design/icons';
+import { Popconfirm } from 'antd';
 import clsx from 'clsx';
 import styles from './index.less';
+
+const NAME_MAP = {
+  video: {
+    icon: <VideoCameraOutlined />,
+    name: '视频',
+  },
+  image: {
+    icon: <FileImageOutlined />,
+    name: '图片',
+  },
+  text: {
+    icon: <FileTextOutlined />,
+    name: '文字',
+  },
+};
 
 const ElementList = (props: any) => {
   const { listStyle, domRef, timelineState, data } = props;
@@ -40,20 +62,30 @@ const ElementList = (props: any) => {
     deleteElement();
   };
 
+  console.log('👩‍❤️‍👩', data);
+
   return (
     <div className={styles['container']}>
       <div className={styles['operate']}>
-        <Space align="center">
-          <IconFont
-            type="icon-user"
-            onClick={() => {
-              toggleHideElement(handleElementId);
-            }}
-          />
-          {isHidden ? '显示' : '隐藏'}
-          <IconFont type="icon-user" onClick={() => handleDeleteElement()} />
-          删除
-        </Space>
+        <div
+          onClick={() => {
+            toggleHideElement(handleElementId);
+          }}
+          className={clsx({
+            [styles['active']]: isHidden,
+          })}
+        >
+          {!isHidden ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+        </div>
+        <div>
+          <Popconfirm
+            title="删除元素"
+            description="确定删除当前选中元素吗？"
+            onConfirm={() => handleDeleteElement()}
+          >
+            <DeleteOutlined />
+          </Popconfirm>
+        </div>
       </div>
       <div
         ref={domRef}
@@ -75,16 +107,17 @@ const ElementList = (props: any) => {
               key={item.id}
               onClick={(e) => handleSelectElement(e, item)}
             >
+              <div className={styles['icon']}>{NAME_MAP[item.name].icon}</div>
               <div className={styles['text']}>
-                {`row-${item.name}`}
+                {NAME_MAP[item.name].name}
                 <span>
-                  <IconFont
+                  {/* <IconFont
                     type="icon-user"
                     onClick={() => {
                       toggleHideElement(item.id);
                     }}
-                  />
-                  {hiddenElementIdList.includes(item.id) ? '显示' : '隐藏'}
+                  /> */}
+                  {/* {hiddenElementIdList.includes(item.id) ? '显示' : '隐藏'} */}
                 </span>
               </div>
             </div>

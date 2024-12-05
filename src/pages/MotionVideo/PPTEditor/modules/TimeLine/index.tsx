@@ -11,7 +11,7 @@ import emitter, { EmitterEvents } from '../../utils/emitter';
 import ActionRender from './components/ActionRender';
 import ElementList from './components/ElementList';
 import TimelinePlayer from './components/Player';
-import { mockEffect, scale, scaleWidth, startLeft } from './const';
+import { mockEffect, scaleWidth, startLeft } from './const';
 import { useTileLine } from './hooks';
 import './index.less';
 import styles from './index.less';
@@ -86,7 +86,7 @@ const TimelineEditor = forwardRef((props, ref) => {
     emitter.on(EmitterEvents.SET_TIMELINE_TIME, (time) => {
       if (timelineState.current) {
         timelineState.current.setTime(time);
-         timelineState.current.setScrollLeft(time);
+        timelineState.current.setScrollLeft(time);
       }
     });
 
@@ -95,11 +95,17 @@ const TimelineEditor = forwardRef((props, ref) => {
     };
   }, []);
 
+  const [scale, setScale] = useState(1);
+
   return (
     <div style={{ ...style }}>
       <TimelinePlayer
         timelineState={timelineState}
         autoScrollWhenPlay={false}
+        scale={scale}
+        handleScaleChange={(v) => {
+          setScale(v);
+        }}
       />
       <div className={styles['timeline-editor-container']}>
         <ElementList
