@@ -21,10 +21,12 @@ const ElementAnimationPanel = () => {
           trigger="click"
           placement="bottomRight"
         >
-          <Button type="primary">添加动画</Button>
+          <Button style={{ width: '100%' }} type="primary">
+            添加动画
+          </Button>
         </Popover>
       ) : (
-        <div>请选择元素</div>
+        <div style={{ textAlign: 'center' }}>请选择元素</div>
       )}
       <ElementAnimationList
         list={curElementAnimations}

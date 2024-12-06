@@ -12,6 +12,7 @@ import {
   EyeOutlined,
   FileImageOutlined,
   FileTextOutlined,
+  FontSizeOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Popconfirm } from 'antd';
@@ -28,7 +29,7 @@ const NAME_MAP = {
     name: '图片',
   },
   text: {
-    icon: <FileTextOutlined />,
+    icon: <FontSizeOutlined />,
     name: '文字',
   },
 };

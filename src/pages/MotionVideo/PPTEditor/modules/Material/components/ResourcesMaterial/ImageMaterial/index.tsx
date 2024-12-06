@@ -1,52 +1,55 @@
 import Uploader from '@/pages/MotionVideo/PPTEditor/components/Uploader';
 import useCreateElement from '@/pages/MotionVideo/PPTEditor/hooks/useCreateElement';
+import { uid } from '@aicc/shared';
 import { UploadOutlined } from '@ant-design/icons';
+import { useRequest } from 'ahooks';
 import { Button } from 'antd';
 import styles from './index.less';
 
-const imageList = [
-  {
-    id: '1',
-    url: 'https://aicc-test.qnzsai.com/minio/customer/setting/354049_1710742538286.jpg',
-  },
-  {
-    id: '2',
-    url: 'https://aicc-test.qnzsai.com/minio/customer/setting/354049_1710742538286.jpg',
-  },
-  {
-    id: '3',
-    url: '/minio/train/cause/2024/12/5/测试_1733379914942.png',
-  },
-  {
-    id: '4',
-    url: '/minio/train/cause/2024/12/5/测试_1733379914942.png',
-  },
-  {
-    id: '5',
-    url: '/minio/train/cause/2024/12/5/测试_1733379914942.png',
-  },
-];
+const imageList = localStorage.getItem('imageList')
+  ? JSON.parse(localStorage.getItem('imageList') || '[]')
+  : [];
+
+const fetchImageList = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        code: 0,
+        data: imageList,
+      });
+    }, 1000);
+  });
+};
 
 const ImageMaterial = () => {
   const { createImageElement } = useCreateElement();
 
-  const onAdd = () => {
-    createImageElement(
-      'https://aicc-test.qnzsai.com/minio/customer/setting/354049_1710742538286.jpg',
-    );
-  };
+  const { loading, data } = useRequest(
+    async () => {
+      const res = await fetchImageList();
+      return res.data;
+    },
+    {
+      cacheKey: `fetchImageList`,
+    },
+  );
 
   return (
     <div className={styles.images}>
-      {/* <Button block icon={<UploadOutlined />} onClick={() => onAdd()}>
-        上传图片
-      </Button> */}
       <Uploader
         type="image"
         number={1}
         maxCount={10}
         onUpload={(v) => {
           console.log('👲', v);
+          const newList = [
+            ...imageList,
+            {
+              id: uid(),
+              url: v,
+            },
+          ];
+          localStorage.setItem('imageList', JSON.stringify(newList));
         }}
       >
         <Button block icon={<UploadOutlined />}>
@@ -54,7 +57,7 @@ const ImageMaterial = () => {
         </Button>
       </Uploader>
       <div className={styles.list}>
-        {imageList.map((item) => (
+        {data?.map((item) => (
           <div
             key={item.id}
             className={styles.item}
