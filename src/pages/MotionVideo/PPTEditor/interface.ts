@@ -1,3 +1,5 @@
+import { ImageElementClip, ImageElementFilters } from "./types/slides"
+
 export const enum ShapePathFormulasKeys {
   ROUND_RECT = 'roundRect',
   ROUND_RECT_DIAGONAL = 'roundRectDiagonal',
@@ -90,7 +92,7 @@ interface PPTBaseElement {
 /** 元素边框 */
 export interface PPTElementOutline {
   /** 边框样式（实线或虚线） */
-  style?: 'dashed' | 'solid';
+  style?: 'dashed' | 'solid' | 'dotted';
   /** 边框宽度 */
   width?: number;
   /** 边框颜色 */
@@ -142,13 +144,14 @@ export interface PPTImageElement extends PPTBaseElement {
   fixedRatio: boolean;
   src: string;
   outline?: PPTElementOutline;
-  // filters?: ImageElementFilters;
-  // clip?: ImageElementClip;
+  filters?: ImageElementFilters;
+  clip?: ImageElementClip;
   flipH?: boolean;
   flipV?: boolean;
   shadow?: PPTElementShadow;
   radius?: number;
   colorMask?: string;
+  opacity?: number;
 }
 
 /**
@@ -538,6 +541,8 @@ export interface SlideTheme {
   themeColor: string;
   fontColor: string;
   fontName: string;
+  outline: PPTElementOutline;
+  shadow: PPTElementShadow;
 }
 
 export type AnimationType = 'in' | 'out' | 'attention';

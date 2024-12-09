@@ -24,7 +24,7 @@ const fetchImageList = () => {
 const ImageMaterial = () => {
   const { createImageElement } = useCreateElement();
 
-  const { loading, data } = useRequest(
+  const { loading, data = [] } = useRequest(
     async () => {
       const res = await fetchImageList();
       return res.data;
@@ -41,7 +41,6 @@ const ImageMaterial = () => {
         number={1}
         maxCount={10}
         onUpload={(v) => {
-          console.log('👲', v);
           const newList = [
             ...imageList,
             {

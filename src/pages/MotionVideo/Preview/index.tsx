@@ -1,3 +1,4 @@
+import { useKeyPress } from 'ahooks';
 import { Button, InputNumber } from 'antd';
 import { useEffect, useRef } from 'react';
 import { ANIMATION_CLASS_PREFIX } from '../PPTEditor/config';
@@ -96,10 +97,14 @@ const Page = () => {
   useEffect(() => {
     videoPlayerControl.clean();
     useSlidesStore.getState().updateSlideIndex(0);
-    setTimeout(() => {
-      handleStart();
-    }, 1000);
+    // setTimeout(() => {
+    //   handleStart();
+    // }, 1000);
   }, []);
+
+  useKeyPress('shift', () => {
+    handleStart();
+  });
 
   return (
     <div>

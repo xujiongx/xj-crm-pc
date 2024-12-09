@@ -1,6 +1,4 @@
-// import config from '@aicc/config';
-// import { getToken, stringifySignature } from '@aicc/shared';
-import { getToken, stringifySignatureWithUrl } from '@/utils';
+import { getToken, stringifySignatureWithUrl } from '@aicc/shared';
 import { CloseOutlined, UploadOutlined } from '@ant-design/icons';
 import { useControllableValue } from 'ahooks';
 import { Upload, message } from 'antd';

@@ -44,7 +44,6 @@ const Select: React.FC<SelectProps> = ({ value, options, disabled = false, onCha
   }, [updateWidth]);
 
   const handleSelect = (option: SelectOption) => {
-    console.log(option, 'option')
     if (!option.disabled) {
       onChange(option.value);
     }

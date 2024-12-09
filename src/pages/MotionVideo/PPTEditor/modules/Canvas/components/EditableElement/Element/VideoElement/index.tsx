@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import 'video-react/dist/video-react.css';
 import { PPTVideoElement } from '../../../../../../interface';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';

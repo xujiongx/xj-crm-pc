@@ -42,7 +42,6 @@ const Header = ({ className }: { className: string }) => {
           });
           const videoURL = URL.createObjectURL(blob);
           // videoPlayer.src = videoURL;
-          console.log('👯videoURL', videoURL);
           window.open(videoURL);
         };
 

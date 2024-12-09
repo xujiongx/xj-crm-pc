@@ -1,6 +1,11 @@
-import type { LinePoolItem } from '../config/lines';
-import type { ShapePoolItem } from '../config/shapes';
-// import type { ImageClipDataRange, PPTElementOutline, PPTElementShadow, ShapeGradient } from './slides'
+import type { LinePoolItem } from '@/configs/lines';
+import type { ShapePoolItem } from '@/configs/shapes';
+import type {
+  Gradient,
+  ImageClipDataRange,
+  PPTElementOutline,
+  PPTElementShadow,
+} from './slides';
 
 export enum ElementOrderCommands {
   UP = 'up',
@@ -63,43 +68,46 @@ export interface MultiSelectRange {
   maxY: number;
 }
 
-// export interface ImageClipedEmitData {
-//   range: ImageClipDataRange
-//   position: {
-//     left: number
-//     top: number
-//     width: number
-//     height: number
-//   }
-// }
+export interface ImageClipedEmitData {
+  range: ImageClipDataRange;
+  position: {
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+  };
+}
 
 export interface CreateElementSelectionData {
   start: [number, number];
   end: [number, number];
 }
 
-// export interface CreateCustomShapeData {
-//   start: [number, number]
-//   end: [number, number]
-//   path: string
-//   viewBox: [number, number]
-//   fill?: string
-//   outline?: PPTElementOutline
-// }
+export interface CreateCustomShapeData {
+  start: [number, number];
+  end: [number, number];
+  path: string;
+  viewBox: [number, number];
+  fill?: string;
+  outline?: PPTElementOutline;
+}
 
 export interface CreatingTextElement {
   type: 'text';
   vertical?: boolean;
 }
-// export interface CreatingShapeElement {
-//   type: 'shape'
-//   data: ShapePoolItem
-// }
-// export interface CreatingLineElement {
-//   type: 'line'
-//   data: LinePoolItem
-// }
-// export type CreatingElement = CreatingTextElement | CreatingShapeElement | CreatingLineElement
+export interface CreatingShapeElement {
+  type: 'shape';
+  data: ShapePoolItem;
+}
+export interface CreatingLineElement {
+  type: 'line';
+  data: LinePoolItem;
+}
+export type CreatingElement =
+  | CreatingTextElement
+  | CreatingShapeElement
+  | CreatingLineElement;
 
 export type TextFormatPainterKeys =
   | 'bold'
@@ -125,28 +133,11 @@ export interface TextFormatPainter {
   align?: 'left' | 'right' | 'center';
 }
 
-// export interface ShapeFormatPainter {
-//   keep: boolean
-//   fill?: string
-//   gradient?: ShapeGradient
-//   outline?: PPTElementOutline
-//   opacity?: number
-//   shadow?: PPTElementShadow
-// }
-
-export interface CreatingTextElement {
-  type: 'text';
-  vertical?: boolean;
+export interface ShapeFormatPainter {
+  keep: boolean;
+  fill?: string;
+  gradient?: Gradient;
+  outline?: PPTElementOutline;
+  opacity?: number;
+  shadow?: PPTElementShadow;
 }
-export interface CreatingShapeElement {
-  type: 'shape';
-  data: ShapePoolItem;
-}
-export interface CreatingLineElement {
-  type: 'line';
-  data: LinePoolItem;
-}
-export type CreatingElement =
-  | CreatingTextElement
-  | CreatingShapeElement
-  | CreatingLineElement;

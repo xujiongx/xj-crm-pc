@@ -51,7 +51,6 @@ const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
     hanldefocusFn,
   } = slideInfo;
 
-  console.log('🥳', slide);
   return (
     <div
       style={{
@@ -81,7 +80,6 @@ const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
         }
         contextMenuClickFn={contextMenuClickFn}
         defaultAction={() => {
-          console.log('当前 index', index);
           hanldefocusFn(index);
         }}
       ></ContextMenu>
@@ -92,7 +90,6 @@ const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
 const SortableSingleSlide = SortableElement(SingleSlide);
 
 const SlideList = (props: SlideListProps) => {
-  console.log('🙋', props);
   return (
     <div>
       {props.slides.map((slide: SlideItem, index: number) => (
@@ -156,7 +153,6 @@ const SceneMaterial = () => {
     // 将当前页复制一份到下一页
     copy: function () {
       const slide = JSON.parse(JSON.stringify(currentSlide()));
-      console.log('🙇‍♂️', slide);
       addSlidesFromData([slide]);
     },
     delete: function () {
@@ -181,8 +177,6 @@ const SceneMaterial = () => {
     setSlides(_slides);
     updateSlideIndex(newIndex);
   };
-
-  console.log('🤳', slideIndex, slides);
 
   return (
     <div className={styles['slide-wrapper']}>

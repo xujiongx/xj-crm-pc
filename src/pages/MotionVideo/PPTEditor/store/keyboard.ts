@@ -10,6 +10,7 @@ type Actions = {
   setCtrlKeyState: (active: boolean) => void;
   setShiftKeyState: (active: boolean) => void;
   setSpaceKeyState: (active: boolean) => void;
+  ctrlOrShiftKeyActive: () => boolean;
 };
 
 const useKeyboardStore = create<State & Actions>((set, get) => ({
@@ -22,6 +23,9 @@ const useKeyboardStore = create<State & Actions>((set, get) => ({
   setCtrlKeyState: (active: boolean) => set(() => ({ ctrlKeyState: active })),
   setShiftKeyState: (active: boolean) => set(() => ({ shiftKeyState: active })),
   setSpaceKeyState: (active: boolean) => set(() => ({ spaceKeyState: active })),
+  ctrlOrShiftKeyActive: () => {
+    return get().ctrlKeyState || get().shiftKeyState;
+  },
 }));
 
 export default useKeyboardStore;

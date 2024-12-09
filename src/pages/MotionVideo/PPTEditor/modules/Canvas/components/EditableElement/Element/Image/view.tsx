@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useMemo } from 'react';
 import { PPTImageElement } from '../../../../../../interface';
 import { computeShadowStyle } from '../utils';
@@ -24,7 +25,10 @@ const ImageView = ({ element }: ImageViewProps) => {
 
   return (
     <div
-      className={styles['image-element']}
+      className={clsx({
+        [styles['editable-element-image']]: true,
+        [styles['lock']]: element.lock,
+      })}
       style={{
         top: element.top,
         left: element.left,

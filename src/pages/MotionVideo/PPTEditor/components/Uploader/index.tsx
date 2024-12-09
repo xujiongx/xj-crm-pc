@@ -2,8 +2,7 @@ import { Upload, message } from 'antd';
 import DisabledContext from 'antd/es/config-provider/DisabledContext';
 import { RcFile } from 'antd/es/upload';
 import React from 'react';
-
-import { getToken, stringifySignatureWithUrl } from '@/utils';
+import { getToken, stringifySignatureWithUrl } from '@aicc/shared';
 import styles from './index.less';
 
 export const ImageAcceptType = ['jpg', 'jpeg', 'png'];

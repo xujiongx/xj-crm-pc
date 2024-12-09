@@ -22,7 +22,6 @@ const TitleDivider = ({
   tooltip,
 }: TitleDividerProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  console.log('😰',getPrefixCls('title-divider') )
   const prefixCls = getPrefixCls('title-divider');
 
   return (

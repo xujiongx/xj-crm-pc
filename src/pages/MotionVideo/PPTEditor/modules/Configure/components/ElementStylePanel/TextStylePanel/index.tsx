@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { ColorPicker } from 'antd';
-import {
-  ColumnHeightOutlined,
-  VerticalAlignTopOutlined,
-  ColumnWidthOutlined
-} from '@ant-design/icons';
-import Divider from '../../Divider/index'
-import RichTextBase from '../../RichTextBase/index'
-import Select from '../../Select';
+import { PPTTextElement } from '@/pages/MotionVideo/PPTEditor/interface';
 import useMainStore from '@/pages/MotionVideo/PPTEditor/store/main';
 import useSlidesStore from '@/pages/MotionVideo/PPTEditor/store/slides';
-import { PPTTextElement } from '@/pages/MotionVideo/PPTEditor/interface';
 import useHistorySnapshot from '@/pages/MotionVideo/PPTEditor/store/snapshot';
+import emitter, {
+  EmitterEvents,
+  type RichTextAction,
+} from '@/pages/MotionVideo/PPTEditor/utils/emitter';
+import {
+  ColumnHeightOutlined,
+  ColumnWidthOutlined,
+  VerticalAlignTopOutlined,
+} from '@ant-design/icons';
+import { ColorPicker } from 'antd';
+import { useEffect, useState } from 'react';
 import ActionIcon from '../../../../Canvas/components/ActionIcon';
+import ElementOpacity from '../../common/ElementOpacity';
+import ElementOutline from '../../common/ElementOutline';
+import ElementShadow from '../../common/ElementShadow';
+import Divider from '../../Divider/index';
+import RichTextBase from '../../RichTextBase/index';
+import Select from '../../Select';
 import './index.less';
-import emitter, { EmitterEvents, type RichTextAction } from '@/pages/MotionVideo/PPTEditor/utils/emitter';
-
 
 const TextStylePanel = () => {
   const handleElementId = useMainStore((store) => store.activeElementId);
@@ -23,7 +28,6 @@ const TextStylePanel = () => {
   const slidesUpdateElement = useSlidesStore((store) => store.updateElement);
 
   const addHistorySnapshot = useHistorySnapshot((store) => store.add);
-
 
   const [fill, setFill] = useState('#000');
   const [lineHeight, setLineHeight] = useState(1.5);
@@ -88,12 +92,15 @@ const TextStylePanel = () => {
       setFill(handleElement.fill || '#fff');
       setLineHeight(handleElement.lineHeight || 1.5);
       setWordSpace(handleElement.wordSpace || 0);
-      setParagraphSpace(handleElement.paragraphSpace === undefined ? 5 : handleElement.paragraphSpace);
+      setParagraphSpace(
+        handleElement.paragraphSpace === undefined
+          ? 5
+          : handleElement.paragraphSpace,
+      );
       // emitter.emit(EmitterEvents.SYNC_RICH_TEXT_ATTRS_TO_STORE);
     };
 
     updateValues();
-
   }, [handleElement]);
 
   const updateElement = (props: Partial<PPTTextElement>) => {
@@ -107,7 +114,10 @@ const TextStylePanel = () => {
 
   // 发送富文本设置命令（批量）
   const emitBatchRichTextCommand = (action: RichTextAction[]) => {
-    emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, { action, target: handleElementId });
+    emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, {
+      action,
+      target: handleElementId,
+    });
   };
 
   return (
@@ -135,13 +145,12 @@ const TextStylePanel = () => {
           style={{ width: '60%' }}
           value={lineHeight}
           onChange={(value) => updateElement({ lineHeight: value as number })}
-          options={lineHeightOptions.map(item => ({
-            label: item + '倍', value: item
+          options={lineHeightOptions.map((item) => ({
+            label: item + '倍',
+            value: item,
           }))}
-
         >
-          <ActionIcon
-            icon={<ColumnHeightOutlined />} />
+          <ActionIcon icon={<ColumnHeightOutlined />} />
         </Select>
       </div>
       <div className="row">
@@ -149,16 +158,16 @@ const TextStylePanel = () => {
         <Select
           style={{ width: '60%' }}
           value={paragraphSpace}
-          onChange={(value) => updateElement({ paragraphSpace: value as number })}
-          options={paragraphSpaceOptions.map(item => ({
-            label: item + 'px', value: item
+          onChange={(value) =>
+            updateElement({ paragraphSpace: value as number })
+          }
+          options={paragraphSpaceOptions.map((item) => ({
+            label: item + 'px',
+            value: item,
           }))}
-
         >
-          <ActionIcon
-            icon={<VerticalAlignTopOutlined />} />
+          <ActionIcon icon={<VerticalAlignTopOutlined />} />
         </Select>
-
       </div>
       <div className="row">
         <div style={{ width: '40%' }}>字间距：</div>
@@ -166,22 +175,28 @@ const TextStylePanel = () => {
           style={{ width: '60%' }}
           value={wordSpace}
           onChange={(value) => updateElement({ wordSpace: value as number })}
-          options={wordSpaceOptions.map(item => ({
-            label: item + 'px', value: item
+          options={wordSpaceOptions.map((item) => ({
+            label: item + 'px',
+            value: item,
           }))}
-
         >
-          <ActionIcon
-            icon={<ColumnWidthOutlined />} />
+          <ActionIcon icon={<ColumnWidthOutlined />} />
         </Select>
-
       </div>
       <div className="row">
         <div style={{ width: '40%' }}>文本框填充：</div>
-        <ColorPicker value={fill} onChange={(value) => updateElement({ fill: value.toRgbString() })} />
+        <ColorPicker
+          value={fill}
+          onChange={(value) => updateElement({ fill: value.toRgbString() })}
+        />
       </div>
 
       <Divider />
+      <ElementOutline />
+      <Divider />
+      <ElementShadow />
+      <Divider />
+      <ElementOpacity />
     </div>
   );
 };

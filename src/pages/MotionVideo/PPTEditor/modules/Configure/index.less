@@ -5,6 +5,12 @@
   flex-direction: column;
   user-select: none;
 
+  :global {
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
 }
 
 :global {
@@ -19,5 +25,5 @@
       font-size: 13px;
       overflow: overlay;
     }
-  }  
+  }
 }

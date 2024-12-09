@@ -8,6 +8,7 @@ import useMainStore from '../../../../../../store/main';
 import useSlidesStore from '../../../../../../store/slides';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
+import ElementOutline from '../../common/ElementOutline'
 
 interface TextElementProps {
   element: PPTTextElement;
@@ -93,7 +94,7 @@ const TextElement = ({ element, onSelect }: TextElementProps) => {
         resizeObserver.unobserve(elementRef.current);
       }
     };
-  }, [elementRef]);
+  }, []);
 
   const handleSelectElement = (e: MouseEvent | TouchEvent, canMove = true) => {
     if (element.lock) return
@@ -118,8 +119,12 @@ const TextElement = ({ element, onSelect }: TextElementProps) => {
         <div
           className={styles['element-content']}
           ref={elementRef}
-          onMouseDown={(event) => handleSelectElement(event as unknown as MouseEvent)}
-          onTouchStart={event => handleSelectElement(event as unknown as MouseEvent)}
+          onMouseDown={(event) =>
+            handleSelectElement(event as unknown as MouseEvent)
+          }
+          onTouchStart={(event) =>
+            handleSelectElement(event as unknown as MouseEvent)
+          }
           style={{
             width: element.vertical ? 'auto' : element.width + 'px',
             height: element.vertical ? element.height + 'px' : 'auto',
@@ -133,6 +138,11 @@ const TextElement = ({ element, onSelect }: TextElementProps) => {
             writingMode: element.vertical ? 'vertical-rl' : 'horizontal-tb',
           }}
         >
+          <ElementOutline
+            width={element.width}
+            height={element.height}
+            outline={element.outline}
+          />
           <ProsemirrorEditor
             elementId={element.id}
             defaultColor={element.defaultColor as string}
@@ -140,9 +150,17 @@ const TextElement = ({ element, onSelect }: TextElementProps) => {
             editable={!element.lock}
             value={element.content}
             autoFocus={true}
-            style={{ '--paragraphSpace': `${element.paragraphSpace === undefined ? 5 : element.paragraphSpace}px`, }}
+            style={{
+              '--paragraphSpace': `${
+                element.paragraphSpace === undefined
+                  ? 5
+                  : element.paragraphSpace
+              }px`,
+            }}
             hanldeUpdate={(value: string) => updateContent(value)}
-            onMouseDown={$event => handleSelectElement($event as unknown as MouseEvent, false)}
+            onMouseDown={($event) =>
+              handleSelectElement($event as unknown as MouseEvent, false)
+            }
           />
           {/* <div className={styles['text']}>{element.content}</div> */}
           <div className={clsx(styles['drag-handler'], styles['top'])}></div>

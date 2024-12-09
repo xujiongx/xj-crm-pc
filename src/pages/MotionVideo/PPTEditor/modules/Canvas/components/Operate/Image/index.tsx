@@ -1,5 +1,9 @@
+import clsx from 'clsx';
 import useOperate from '../../../../../hooks/useOperate';
-import { OperateResizeHandlers, PPTImageElement } from '../../../../../interface';
+import {
+  OperateResizeHandlers,
+  PPTImageElement,
+} from '../../../../../interface';
 import useMainStore from '../../../../../store/main';
 import BorderLine from '../component/BorderLine';
 import Resize from '../component/Resize';
@@ -27,14 +31,25 @@ const ImageElementOperate = ({
   onScale,
 }: ImageElementOperateProps) => {
   const canvasScale = useMainStore((store) => store.canvasScale);
+  const clipingImageElementId = useMainStore(
+    (store) => store.clipingImageElementId,
+  );
 
   const scaleWidth = element.width * canvasScale;
   const scaleHeight = element.height * canvasScale;
 
   const { resizeHandlers, borderLines } = useOperate(scaleWidth, scaleHeight);
 
+  console.log('👓', clipingImageElementId);
+
+
   return (
-    <div className={styles['image-element-operate']}>
+    <div
+      className={clsx({
+        [styles['image-element-operate']]: true,
+        [styles['cliping']]: !!clipingImageElementId,
+      })}
+    >
       {borderLines.map((line) => (
         <BorderLine
           className={styles['operate-border-line']}

@@ -79,7 +79,6 @@ const VideoMaterial = () => {
         number={1}
         maxCount={10}
         onUpload={(v) => {
-          console.log('👲', v);
           const newList = [
             ...videoList,
             {

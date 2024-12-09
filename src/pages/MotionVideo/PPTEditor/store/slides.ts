@@ -1,9 +1,14 @@
+import { omit } from 'lodash';
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
 import { PPTAnimation, PPTElement, SlideItem, SlideTheme } from '../interface';
 import { runAnimation } from '../utils/animation';
 import useMainStore from './main';
 import useSnapshotStore from './snapshot';
+interface RemovePropData {
+  id: string;
+  propName: string | string[];
+}
 
 interface FormatedAnimation {
   animations: PPTAnimation[];
@@ -40,13 +45,25 @@ type Actions = {
   addAnimation: (data: any) => void;
   deleteAnimation: (id: string) => void;
   updateAnimation: (id: string, data: any) => void;
+  removeElementProps: (data: RemovePropData) => void;
 };
 
-const defaultTheme = {
+const defaultTheme: SlideTheme = {
   themeColor: '#5b9bd5',
   fontColor: '#333',
   fontName: 'Microsoft Yahei',
   backgroundColor: '#fff',
+  shadow: {
+    h: 3,
+    v: 3,
+    blur: 2,
+    color: '#808080',
+  },
+  outline: {
+    width: 2,
+    color: '#525252',
+    style: 'solid',
+  },
 };
 
 const useSlidesStore = create<State & Actions>((set, get) => ({
@@ -288,6 +305,20 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
       });
     get().updateSlide({ animations });
     useSnapshotStore.getState().add();
+  },
+
+  removeElementProps: (data: RemovePropData) => {
+    const { id, propName } = data;
+    const propsNames = typeof propName === 'string' ? [propName] : propName;
+
+    const slideIndex = get().slideIndex;
+    const slide = get().slides[slideIndex];
+    const elements = slide.elements.map((el) => {
+      return el.id === id ? omit(el, propsNames) : el;
+    });
+    const slides = get().slides;
+    slides[slideIndex].elements = elements as PPTElement[];
+    set(() => ({ slides }));
   },
 }));
 
