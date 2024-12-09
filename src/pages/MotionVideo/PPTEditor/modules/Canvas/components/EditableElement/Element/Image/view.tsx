@@ -2,7 +2,10 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 import { PPTImageElement } from '../../../../../../interface';
 import { computeShadowStyle } from '../utils';
+import ImageOutline from './ImgaeOutline';
 import styles from './index.less';
+import { filters2Style } from './utils';
+import useClipImage from './useClipImage'
 
 interface ImageViewProps {
   element: PPTImageElement;
@@ -22,6 +25,8 @@ const ImageView = ({ element }: ImageViewProps) => {
     () => computeShadowStyle(element.shadow),
     [element.shadow],
   );
+
+  const { clipShape, imgPosition } = useClipImage(element);
 
   return (
     <div
@@ -48,18 +53,41 @@ const ImageView = ({ element }: ImageViewProps) => {
           }}
         >
           <div className={styles['image-content']}>
-            <img
-              src={element.src}
-              alt=""
+            <div
+              className={styles['element-content']}
               style={{
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
+                filter: shadowStyle ? `drop-shadow(${shadowStyle})` : '',
+                transform: flipStyle,
               }}
-              draggable={false}
-              onDragStart={(e) => e.preventDefault()}
-            />
+            >
+              <ImageOutline element={element} />
+              <div
+                className={styles['image-content']}
+                style={{
+                  clipPath: clipShape.style,
+                }}
+              >
+                <img
+                  src={element.src}
+                  alt=""
+                  style={{
+                    top: imgPosition.top,
+                    left: imgPosition.left,
+                    width: imgPosition.width,
+                    height: imgPosition.height,
+                    filter: filters2Style(element.filters || {}),
+                  }}
+                  draggable={false}
+                  onDragStart={(e) => e.preventDefault()}
+                />
+                {element.colorMask && (
+                  <div
+                    className={styles['color-mask']}
+                    style={{ backgroundColor: element.colorMask }}
+                  ></div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

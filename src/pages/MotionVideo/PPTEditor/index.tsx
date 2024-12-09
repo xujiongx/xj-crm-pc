@@ -9,6 +9,8 @@ import Header from './modules/Header';
 import Material from './modules/Material';
 import TimeLine from './modules/TimeLine';
 import { useMainStore, useSlidesStore } from './store';
+import videoPlayerControl from './modules/Canvas/components/EditableElement/Element/VideoElement/videoControl';
+
 
 const MotionVideoEditor = () => {
   const { type: viewportRatio } = getUrlParams<{ type: string }>();
@@ -33,6 +35,7 @@ const MotionVideoEditor = () => {
   }, [slidesData, hiddenElementIdList]);
 
   useEffect(() => {
+    videoPlayerControl.clean();
     useSlidesStore.getState().updateSlideIndex(0);
   }, []);
 

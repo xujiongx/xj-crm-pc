@@ -218,7 +218,7 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
             effect: 'show',
             start: 1,
             end: element.duration + 1,
-            name: '一直展示',
+            name: '视频',
             type: 'video' as const,
           };
         });

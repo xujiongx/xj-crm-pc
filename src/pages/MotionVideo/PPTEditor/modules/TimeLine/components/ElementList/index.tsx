@@ -1,22 +1,17 @@
 import useDeleteElements from '@/pages/MotionVideo/PPTEditor/hooks/useDeleteElements';
-import useDragElement from '@/pages/MotionVideo/PPTEditor/hooks/useDragElement';
 import useHideElement from '@/pages/MotionVideo/PPTEditor/hooks/useHideElement';
-import useSelectElement from '@/pages/MotionVideo/PPTEditor/hooks/useSelectElement';
-import {
-  useMainStore,
-  useSlidesStore,
-} from '@/pages/MotionVideo/PPTEditor/store';
+import { useMainStore } from '@/pages/MotionVideo/PPTEditor/store';
 import {
   DeleteOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
   FileImageOutlined,
-  FileTextOutlined,
   FontSizeOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Popconfirm } from 'antd';
 import clsx from 'clsx';
+import { useElement } from '../../hooks';
 import styles from './index.less';
 
 const NAME_MAP = {
@@ -37,15 +32,7 @@ const NAME_MAP = {
 const ElementList = (props: any) => {
   const { listStyle, domRef, timelineState, data } = props;
 
-  const currentSlide = useSlidesStore((state) => state.currentSlide);
-
-  const { drag } = useDragElement(currentSlide()?.elements);
-
-  const { select } = useSelectElement(currentSlide()?.elements, drag);
-
-  const handleSelectElement = (e, item) => {
-    select(e, item, false);
-  };
+  const { handleSelectElement } = useElement();
 
   const { toggleHideElement, showAllElements, hideAllElements } =
     useHideElement();
@@ -107,18 +94,7 @@ const ElementList = (props: any) => {
               onClick={(e) => handleSelectElement(e, item)}
             >
               <div className={styles['icon']}>{NAME_MAP[item.name].icon}</div>
-              <div className={styles['text']}>
-                {NAME_MAP[item.name].name}
-                <span>
-                  {/* <IconFont
-                    type="icon-user"
-                    onClick={() => {
-                      toggleHideElement(item.id);
-                    }}
-                  /> */}
-                  {/* {hiddenElementIdList.includes(item.id) ? '显示' : '隐藏'} */}
-                </span>
-              </div>
+              <div className={styles['text']}>{NAME_MAP[item.name].name}</div>
             </div>
           );
         })}

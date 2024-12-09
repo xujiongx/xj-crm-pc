@@ -12,7 +12,7 @@ import ActionRender from './components/ActionRender';
 import ElementList from './components/ElementList';
 import TimelinePlayer from './components/Player';
 import { mockEffect, scaleWidth, startLeft } from './const';
-import { useTileLine } from './hooks';
+import { useElement, useTileLine } from './hooks';
 import './index.less';
 import styles from './index.less';
 
@@ -29,6 +29,8 @@ const TimelineEditor = forwardRef((props, ref) => {
   const handleElementIds = useMainStore((state) => state.activeElementIds);
 
   const { updateAnimation } = useTileLine();
+
+  const { handleSelectElement } = useElement();
 
   useEffect(() => {
     if (!currentSlide?.elements.length) {
@@ -126,6 +128,14 @@ const TimelineEditor = forwardRef((props, ref) => {
           autoScroll={true}
           gridSnap={true}
           dragLine={true}
+          onClickRow={(e, { row, time }) => {
+            console.log('👳‍♀️', row, time);
+            // // 设置时间
+            // emitter.emit(EmitterEvents.SET_TIMELINE_TIME, time);
+
+            // 选择行
+            handleSelectElement(e, row);
+          }}
           ref={timelineState}
           onChange={(value) => {}}
           editorData={data}

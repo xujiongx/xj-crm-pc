@@ -6,20 +6,24 @@ import styles from './index.less';
 const ElementAnimationList = (props) => {
   const { list, deleteAnimation, updateAnimation, manualRunAnimation } = props;
 
+  const isVideoAnimation = (item) => {
+    return item.type === 'video';
+  };
+
   return (
     <div className={styles['list']}>
       {list.map((item) => (
         <div key={item.id} className={styles['item']}>
           <div className={styles['top']}>
+            <div>效果：{item.name}</div>
             <div>
-              效果：{item.name}-{item.effect}
-            </div>
-            <div>
-              <PlayCircleOutlined
-                onClick={() => {
-                  manualRunAnimation(item.id);
-                }}
-              />
+              {!isVideoAnimation(item) && (
+                <PlayCircleOutlined
+                  onClick={() => {
+                    manualRunAnimation(item.id);
+                  }}
+                />
+              )}
               <DeleteOutlined
                 style={{ marginLeft: '8px' }}
                 onClick={() => deleteAnimation(item.id)}
@@ -49,30 +53,24 @@ const ElementAnimationList = (props) => {
             </div>
           </div>
 
-          <Popover
-            content={
-              <AddAnimationPop
-                handleAddAnimation={(data) => {
-                  updateAnimation(item.id, data);
-                }}
-                tab={item.type}
-              />
-            }
-            trigger="click"
-            placement="bottomRight"
-          >
-            <Button style={{ width: '100%', marginTop: '6px' }}>
-              更换动画
-            </Button>
-          </Popover>
-          {/* <Button onClick={() => deleteAnimation(item.id)}>删除动画</Button>
-          <Button
-            onClick={() => {
-              manualRunAnimation(item.id);
-            }}
-          >
-            播放动画
-          </Button> */}
+          {!isVideoAnimation(item) && (
+            <Popover
+              content={
+                <AddAnimationPop
+                  handleAddAnimation={(data) => {
+                    updateAnimation(item.id, data);
+                  }}
+                  tab={item.type}
+                />
+              }
+              trigger="click"
+              placement="bottomRight"
+            >
+              <Button style={{ width: '100%', marginTop: '6px' }}>
+                更换动画
+              </Button>
+            </Popover>
+          )}
         </div>
       ))}
     </div>

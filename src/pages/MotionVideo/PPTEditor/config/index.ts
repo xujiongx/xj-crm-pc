@@ -8,7 +8,15 @@ export const ENTER_ANIMATIONS = [
   {
     type: 'show',
     name: '展示',
-    children: [{ name: '一直展示', value: 'show' }],
+    children: [
+      {
+      name: '一直展示', value: 'show'
+    },
+      {
+      name: '直接展示', value: 'showDown'
+    },
+
+    ],
   },
   {
     type: 'bounce',

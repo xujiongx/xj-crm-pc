@@ -1,4 +1,5 @@
 import { PPTTextElement } from '../../../../../../interface';
+import ElementOutline from '../../common/ElementOutline'
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
 
@@ -36,6 +37,11 @@ const TextView = ({ element }: TextViewProps) => {
             writingMode: element.vertical ? 'vertical-rl' : 'horizontal-tb',
           }}
         >
+          <ElementOutline
+            width={element.width}
+            height={element.height}
+            outline={element.outline}
+          />
           <div
             className={styles['text']}
             dangerouslySetInnerHTML={{ __html: element.content }}

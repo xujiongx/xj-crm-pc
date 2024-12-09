@@ -108,9 +108,6 @@ const ImageElement = ({ element, onSelect }: ImageElementProps) => {
     addHistorySnapshot();
   };
 
-  console.log('🏃‍♂️', element)
-
-
   return (
     <div
       className={clsx({
@@ -152,8 +149,6 @@ const ImageElement = ({ element, onSelect }: ImageElementProps) => {
               transform: flipStyle,
             }}
           >
-            {/* 图片裁剪会导致边框发生变化 */}
-            {/* <ImageOutline elementInfo="elementInfo" /> */}
             <ImageOutline element={element} />
             <div
               className={styles['image-content']}
