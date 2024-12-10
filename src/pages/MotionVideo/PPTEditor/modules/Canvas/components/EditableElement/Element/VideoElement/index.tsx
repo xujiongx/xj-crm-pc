@@ -1,7 +1,9 @@
-import { useMemo } from 'react';
+import useMainStore from '@/pages/MotionVideo/PPTEditor/store/main';
+import { useEffect, useMemo } from 'react';
 import { PPTVideoElement } from '../../../../../../interface';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
+import videoControl from './videoControl';
 
 interface ElementProps {
   element: PPTVideoElement;
@@ -32,6 +34,20 @@ const VideoElement = ({ element, onSelect }: ElementProps) => {
     () => computeShadowStyle(element.shadow),
     [element.shadow],
   );
+
+  const hiddenElementIdList = useMainStore(
+    (store) => store.hiddenElementIdList,
+  );
+  const isHidden = hiddenElementIdList.includes(element.id);
+
+  useEffect(() => {
+    // 隐藏的时候不注册视频，显示的时候初始化
+    if (isHidden) {
+      videoControl.cleanById(element.id);
+    } else {
+      videoControl.init(element.id);
+    }
+  }, [isHidden, element.id]);
 
   return (
     <div

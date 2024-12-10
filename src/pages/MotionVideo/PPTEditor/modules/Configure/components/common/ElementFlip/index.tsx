@@ -4,8 +4,7 @@ import {
   PPTImageElement,
 } from '@/pages/MotionVideo/PPTEditor/interface';
 import { useSlidesStore } from '@/pages/MotionVideo/PPTEditor/store';
-import { BoldOutlined } from '@ant-design/icons';
-import ActionIcon from '../../../../Canvas/components/ActionIcon';
+import { FlipHorizontally, FlipVertically } from '@icon-park/react';
 import CheckboxButton from '../../CheckboxButton';
 import SelectGroup from '../../SelectGroup';
 import styles from './index.less';
@@ -32,16 +31,16 @@ const ElementFlip = () => {
           checked={handleElement.flipH}
           onClick={() => updateFlip({ flipH: !handleElement.flipH })}
         >
-          <ActionIcon icon={<BoldOutlined />} />
-          水平翻转
+          <FlipVertically />
+          垂直翻转
         </CheckboxButton>
         <CheckboxButton
           style={{ flex: 1, BorderRadius: '0' }}
           checked={handleElement.flipV}
           onClick={() => updateFlip({ flipV: !handleElement.flipV })}
         >
-          <ActionIcon icon={<BoldOutlined />} />
-          垂直翻转
+          <FlipHorizontally />
+          水平翻转
         </CheckboxButton>
       </SelectGroup>
     </div>

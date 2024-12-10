@@ -9,7 +9,17 @@ import {
   ElementAlignCommands,
   ElementOrderCommands,
 } from '@/pages/MotionVideo/PPTEditor/types/edit';
-import { ColumnHeightOutlined } from '@ant-design/icons';
+import {
+  AlignBottom,
+  AlignLeft,
+  AlignRight,
+  AlignTop,
+  AlignVertically,
+  BringToFront,
+  BringToFrontOne,
+  SendToBack,
+  SentToBack,
+} from '@icon-park/react';
 import { Button, InputNumber } from 'antd';
 import ActionIcon from '../../../Canvas/components/ActionIcon';
 import ButtonGroup from '../ButtonGroup';
@@ -43,7 +53,7 @@ const ElementPositionPanel = () => {
           style={{ flex: '1' }}
           onClick={() => orderElement(handleElement!, ElementOrderCommands.TOP)}
         >
-          <ColumnHeightOutlined className="btn-icon" /> 置顶
+          <SendToBack className={styles['btn-icon']} /> 置顶
         </Button>
         <Button
           style={{ flex: '1' }}
@@ -51,7 +61,7 @@ const ElementPositionPanel = () => {
             orderElement(handleElement!, ElementOrderCommands.BOTTOM)
           }
         >
-          <ColumnHeightOutlined className="btn-icon" /> 置底
+          <BringToFrontOne className={styles['btn-icon']} /> 置底
         </Button>
       </ButtonGroup>
       <ButtonGroup className="row">
@@ -59,7 +69,7 @@ const ElementPositionPanel = () => {
           style={{ flex: '1' }}
           onClick={() => orderElement(handleElement!, ElementOrderCommands.UP)}
         >
-          <ColumnHeightOutlined className="btn-icon" /> 上移
+          <BringToFront className={styles['btn-icon']} /> 上移
         </Button>
         <Button
           style={{ flex: '1' }}
@@ -67,7 +77,7 @@ const ElementPositionPanel = () => {
             orderElement(handleElement!, ElementOrderCommands.DOWN)
           }
         >
-          <ColumnHeightOutlined className="btn-icon" /> 下移
+          <SentToBack className={styles['btn-icon']} /> 下移
         </Button>
       </ButtonGroup>
 
@@ -79,19 +89,19 @@ const ElementPositionPanel = () => {
           style={{ flex: '1' }}
           onClick={() => alignElementToCanvas(ElementAlignCommands.LEFT)}
         >
-          <ActionIcon tooltip="左对齐" icon={<ColumnHeightOutlined />} />
+          <ActionIcon tooltip="左对齐" icon={<AlignLeft />} />
         </Button>
         <Button
           style={{ flex: '1' }}
           onClick={() => alignElementToCanvas(ElementAlignCommands.HORIZONTAL)}
         >
-          <ActionIcon tooltip="水平居中" icon={<ColumnHeightOutlined />} />
+          <ActionIcon tooltip="水平居中" icon={<AlignVertically />} />
         </Button>
         <Button
           style={{ flex: '1' }}
           onClick={() => alignElementToCanvas(ElementAlignCommands.RIGHT)}
         >
-          <ActionIcon tooltip="右对齐" icon={<ColumnHeightOutlined />} />
+          <ActionIcon tooltip="右对齐" icon={<AlignRight />} />
         </Button>
       </ButtonGroup>
       <ButtonGroup className="row">
@@ -99,19 +109,19 @@ const ElementPositionPanel = () => {
           style={{ flex: '1' }}
           onClick={() => alignElementToCanvas(ElementAlignCommands.TOP)}
         >
-          <ActionIcon tooltip="上对齐" icon={<ColumnHeightOutlined />} />
+          <ActionIcon tooltip="上对齐" icon={<AlignTop />} />
         </Button>
         <Button
           style={{ flex: '1' }}
           onClick={() => alignElementToCanvas(ElementAlignCommands.VERTICAL)}
         >
-          <ActionIcon tooltip="垂直居中" icon={<ColumnHeightOutlined />} />
+          <ActionIcon tooltip="垂直居中" icon={<AlignVertically />} />
         </Button>
         <Button
           style={{ flex: '1' }}
           onClick={() => alignElementToCanvas(ElementAlignCommands.BOTTOM)}
         >
-          <ActionIcon tooltip="下对齐" icon={<ColumnHeightOutlined />} />
+          <ActionIcon tooltip="下对齐" icon={<AlignBottom />} />
         </Button>
       </ButtonGroup>
       <Divider />

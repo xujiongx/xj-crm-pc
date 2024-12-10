@@ -11,6 +11,16 @@ class VideoPlayerControl {
     }
   > = {};
 
+  init(id: string) {
+    const videoElement = document.querySelector(`#video-${id}`);
+    if (!videoElement) return;
+    const item = new VideoPlayer(videoElement, {
+      autoplay: true,
+      loop: false,
+    });
+    this.cacheMap[id] = item;
+  }
+
   start(data: {
     id: string;
     engine: TimelineEngine;
@@ -19,22 +29,11 @@ class VideoPlayerControl {
   }) {
     const { id, startTime, time, engine } = data;
     let item: any;
-    if (this.cacheMap[id]) {
-      item = this.cacheMap[id];
-      item.speed(engine.getPlayRate());
-      item.seek(time - startTime);
-      item.play();
-    } else {
-      const videoElement = document.querySelector(`#video-${id}`);
-      item = new VideoPlayer(videoElement, {
-        autoplay: true,
-        loop: false,
-      });
-      this.cacheMap[id] = item;
-      item.play();
-      item.speed(engine.getPlayRate());
-      item.seek(time - startTime);
-    }
+    if (!this.cacheMap[id]) return;
+    item = this.cacheMap[id];
+    item.speed(engine.getPlayRate());
+    item.seek(time - startTime);
+    item.play();
 
     const timeListener = (data: { time: number; engine }) => {
       const { time } = data;
@@ -52,22 +51,19 @@ class VideoPlayerControl {
   }
 
   stop(data: { id: string; engine: TimelineEngine }) {
-    const { id, engine } = data;
+    const { id } = data;
     if (this.cacheMap[id]) {
       const item = this.cacheMap[id];
       item.pause();
-      // if (this.listenerMap[id]) {
-      //   this.listenerMap[id].time &&
-      //     engine.off('afterSetTime', this.listenerMap[id].time);
-      //   this.listenerMap[id].rate &&
-      //     engine.off('afterSetPlayRate', this.listenerMap[id].rate);
-      //   delete this.listenerMap[id];
-      // }
     }
   }
   clean() {
     this.listenerMap = {};
     this.cacheMap = {};
+  }
+  cleanById(id: string) {
+    delete this.listenerMap[id];
+    delete this.cacheMap[id];
   }
 }
 

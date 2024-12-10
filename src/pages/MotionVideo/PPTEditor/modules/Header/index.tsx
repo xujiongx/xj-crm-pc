@@ -13,11 +13,12 @@ const Header = ({ className }: { className: string }) => {
   const { enterScreeningFromStart } = useScreening();
 
   const handleSave = () => {
-    localStorage.setItem('slides', JSON.stringify(slides));
-    localStorage.setItem(
-      'hiddenElementIdList',
-      JSON.stringify(hiddenElementIdList),
-    );
+    const PPTEditorData = {
+      slides,
+      hiddenElementIdList,
+    };
+
+    localStorage.setItem('PPTEditorData', JSON.stringify(PPTEditorData));
   };
 
   const handleExport = () => {};

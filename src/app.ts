@@ -6,6 +6,7 @@
 import { defineApp } from '@umijs/max';
 import './global.less';
 import 'animate.css';
+import '@icon-park/react/styles/index.less';
 
 export default defineApp({
   layout: () => {

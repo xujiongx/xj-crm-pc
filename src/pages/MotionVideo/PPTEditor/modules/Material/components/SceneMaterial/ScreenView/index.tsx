@@ -25,7 +25,12 @@ const ScreenView = ({ slide, scale, ratio }: ViewProps) => {
     >
       <div className={styles['background']} style={{ ...backgroundStyle }} />
       {slide.elements.map((element, index) => (
-        <ScreenElement key={element.id} element={element} zIndex={index + 1} />
+        <ScreenElement
+          slide={slide}
+          key={element.id}
+          element={element}
+          zIndex={index + 1}
+        />
       ))}
     </div>
   );

@@ -7,15 +7,19 @@ import videoPlayerControl from '../PPTEditor/modules/Canvas/components/EditableE
 import Timeline from '../PPTEditor/modules/TimeLine';
 import { useMainStore, useSlidesStore } from '../PPTEditor/store';
 const Page = () => {
-  const slidesData = localStorage.getItem('slides');
+  const { slides: slidesData, hiddenElementIdList } = JSON.parse(
+    localStorage.getItem('PPTEditorData') || '{}',
+  );
 
   const ref = useRef(null);
-
   useEffect(() => {
     if (slidesData) {
-      useSlidesStore.getState().setSlides(JSON.parse(slidesData));
+      useSlidesStore.getState().setSlides(slidesData);
     }
-  }, [slidesData]);
+    if (hiddenElementIdList) {
+      useMainStore.getState().setHiddenElementIdList(hiddenElementIdList);
+    }
+  }, []);
 
   const handleStart = () => {
     ref.current?.onPlay();

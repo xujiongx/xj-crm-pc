@@ -42,6 +42,7 @@ const EditableElement = ({
     (item) => item.elId === element.id,
   );
 
+  // 入场动画为一直显示，默认渲染就为true
   const show =
     curElementAnimations[0]?.type === 'in' &&
     curElementAnimations[0]?.effect === 'show';
