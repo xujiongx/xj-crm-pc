@@ -22,7 +22,7 @@ const TimelineEditor = forwardRef((props, ref) => {
   const { style } = props;
   const [data, setData] = useState([]);
   const domRef = useRef<HTMLDivElement>();
-  const timelineState = useRef<TimelineState>();
+  const timelineState = useRef<TimelineState>(null);
 
   const currentSlide = useSlidesStore.getState().currentSlide();
   const animations = useSlidesStore.getState().currentSlideAnimations();

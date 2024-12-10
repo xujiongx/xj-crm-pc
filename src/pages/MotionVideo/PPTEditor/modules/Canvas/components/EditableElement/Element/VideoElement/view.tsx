@@ -1,13 +1,15 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { PPTVideoElement } from '../../../../../../interface';
 import { computeShadowStyle } from '../utils';
 import styles from './index.less';
-import { PPTVideoElement } from '../../../../../../interface'
+import videoControl from './videoControl';
 
 interface ElementProps {
   element: PPTVideoElement;
+  isHidden?: boolean;
 }
 
-const VideoView = ({ element }: ElementProps) => {
+const VideoView = ({ element, isHidden }: ElementProps) => {
   const flipStyle = useMemo(() => {
     let style = '';
     if (element.flipH && element.flipV)
@@ -21,6 +23,15 @@ const VideoView = ({ element }: ElementProps) => {
     () => computeShadowStyle(element.shadow),
     [element.shadow],
   );
+
+  useEffect(() => {
+    // 隐藏的时候不注册视频，显示的时候初始化
+    if (isHidden) {
+      videoControl.cleanById(element.id);
+    } else {
+      videoControl.init(element.id);
+    }
+  }, [isHidden, element.id]);
 
   return (
     <div
@@ -45,6 +56,7 @@ const VideoView = ({ element }: ElementProps) => {
         >
           <div className={styles['image-content']}>
             <video
+              id={`video-${element.id}`}
               src={element.src}
               style={{
                 top: 0,

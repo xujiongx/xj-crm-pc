@@ -42,13 +42,6 @@ export default (element: PPTImageElement) => {
     const left = start[0] / widthScale;
     const top = start[1] / heightScale;
 
-    console.log('🤜imgPosition', {
-      left,
-      top,
-      widthScale,
-      heightScale,
-    });
-
     return {
       left: -left + '%',
       top: -top + '%',

@@ -12,7 +12,8 @@ class VideoPlayerControl {
   > = {};
 
   init(id: string) {
-    const videoElement = document.querySelector(`#video-${id}`);
+    const target = document.querySelector(`#element-${id}`);
+    const videoElement = target?.querySelector('video');
     if (!videoElement) return;
     const item = new VideoPlayer(videoElement, {
       autoplay: true,

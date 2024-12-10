@@ -1,10 +1,5 @@
-import {
-  ExpandOutlined,
-  MinusOutlined,
-  PlusOutlined,
-  RedoOutlined,
-  UndoOutlined,
-} from '@ant-design/icons';
+import { ExpandOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { Back, Next } from '@icon-park/react';
 import { Space } from 'antd';
 import clsx from 'clsx';
 import useHistorySnapshot from '../../hooks/useHistorySnapshot';
@@ -25,13 +20,13 @@ const CanvasTool = ({ className }: { className: string }) => {
       <Space>
         <ActionIcon
           disabled={!getCanUndo()}
-          icon={<UndoOutlined />}
+          icon={<Back />}
           tooltip="撤销"
           onClick={undo}
         />
         <ActionIcon
           disabled={!getCanRedo()}
-          icon={<RedoOutlined />}
+          icon={<Next />}
           tooltip="重做"
           onClick={redo}
         />

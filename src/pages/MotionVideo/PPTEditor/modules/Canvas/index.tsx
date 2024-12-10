@@ -1,6 +1,5 @@
 import { MenuProps } from 'antd';
 import { useRef } from 'react';
-import ContextMenu from './components/ContextMenu';
 import useClipboard from '../../hooks/useClipboard';
 import useDragElement from '../../hooks/useDragElement';
 import useRotateElement from '../../hooks/useRotateElement';
@@ -12,6 +11,7 @@ import useKeyboardStore from '../../store/keyboard';
 import useMainStore from '../../store/main';
 import useSlidesStore from '../../store/slides';
 import { removeAllRanges } from '../../utils/selection';
+import ContextMenu from './components/ContextMenu';
 import DragMask from './components/DragMask';
 import EditableElement from './components/EditableElement';
 import Operate from './components/Operate';
@@ -154,8 +154,8 @@ const Canvas = (props) => {
                 onRotate={rotate}
               />
             ))}
-            <ViewportBackground />
           </div>
+          <ViewportBackground />
           <div
             ref={viewportRef}
             className={styles.viewport}
