@@ -1,0 +1,350 @@
+import {
+  PPTAnimation,
+  PPTElement,
+  SlideItem,
+  SlideTheme,
+} from '@/pages/MotionVideo/interface';
+import emitter, { EmitterEvents } from '@/pages/MotionVideo/utils/emitter';
+import { omit } from 'lodash';
+import { nanoid } from 'nanoid';
+import { create, StoreApi, UseBoundStore } from 'zustand';
+import useMainStore from './main';
+import useSnapshotStore from './snapshot';
+interface RemovePropData {
+  id: string;
+  propName: string | string[];
+}
+
+interface FormatedAnimation {
+  animations: PPTAnimation[];
+  autoNext: boolean;
+}
+
+type State = {
+  theme: SlideTheme;
+  slides: SlideItem[];
+  slideIndex: number;
+};
+
+interface UpdateElementData {
+  id: string | string[];
+  props: Partial<PPTElement>;
+  slideId?: string;
+}
+
+type Actions = {
+  currentSlide: () => SlideItem;
+  currentSlideAnimations: () => PPTAnimation[];
+  formatedAnimations: () => FormatedAnimation[];
+  activeElements: () => PPTElement[];
+  setSlide: (slide: SlideItem) => void;
+  setSlides: (slides: SlideItem[]) => void;
+  updateSlideIndex: (index: number) => void;
+  addSlide: (slide: SlideItem | SlideItem[]) => void;
+  updateSlide: (props: Partial<SlideItem>) => void;
+  deleteSlide: (slideId: string | string[]) => void;
+  addElement: (
+    element: PPTElement | PPTElement[],
+    addElementsAnimations?: PPTAnimation[],
+  ) => void;
+  deleteElement: (elementId: string | string[]) => void;
+  updateElement: (data: UpdateElementData) => void;
+  setTheme: (themeProps: Partial<SlideTheme>) => void;
+  addAnimation: (data: any) => void;
+  deleteAnimation: (id: string) => void;
+  updateAnimation: (id: string, data: any) => void;
+  removeElementProps: (data: RemovePropData) => void;
+  clean: () => void;
+};
+
+export type SlidesStoreType = UseBoundStore<StoreApi<State & Actions>>;
+
+const defaultTheme: SlideTheme = {
+  themeColor: '#5b9bd5',
+  fontColor: '#333',
+  fontName: 'Microsoft Yahei',
+  backgroundColor: '#fff',
+  shadow: {
+    h: 3,
+    v: 3,
+    blur: 2,
+    color: '#808080',
+  },
+  outline: {
+    width: 2,
+    color: '#525252',
+    style: 'solid',
+  },
+};
+
+const DEFAULT_SLIDER_DATA = {
+  /** 幻灯片页面数据 */
+  slides: [],
+  /** 当前页面索引 */
+  slideIndex: -1,
+
+  theme: defaultTheme,
+};
+
+const useSlidesStore = create<State & Actions>((set, get) => ({
+  ...DEFAULT_SLIDER_DATA,
+  clean: () => {
+    set(() => DEFAULT_SLIDER_DATA);
+  },
+  currentSlide: () => {
+    const { slides, slideIndex } = get();
+    return slides[slideIndex];
+  },
+  getcurrentSlide: get()?.currentSlide(),
+
+  currentSlideAnimations: () => {
+    const currentSlide = get().currentSlide();
+    if (!currentSlide?.animations) return [];
+
+    const els = currentSlide.elements;
+    const elIds = els.map((el) => el.id);
+    return currentSlide.animations.filter((animation) =>
+      elIds.includes(animation.elId),
+    );
+  },
+  formatedAnimations: () => {
+    const currentSlide = get().currentSlide();
+    if (!currentSlide?.animations) return [];
+
+    const els = currentSlide.elements;
+    const elIds = els.map((el) => el.id);
+    const animations = currentSlide.animations.filter((animation) =>
+      elIds.includes(animation.elId),
+    );
+
+    const formatedAnimations: FormatedAnimation[] = [];
+    for (const animation of animations) {
+      if (animation.trigger === 'click' || !formatedAnimations.length) {
+        formatedAnimations.push({ animations: [animation], autoNext: false });
+      } else if (animation.trigger === 'meantime') {
+        const last = formatedAnimations[formatedAnimations.length - 1];
+        last.animations = last.animations.filter(
+          (item) => item.elId !== animation.elId,
+        );
+        last.animations.push(animation);
+        formatedAnimations[formatedAnimations.length - 1] = last;
+      } else if (animation.trigger === 'auto') {
+        const last = formatedAnimations[formatedAnimations.length - 1];
+        last.autoNext = true;
+        formatedAnimations[formatedAnimations.length - 1] = last;
+        formatedAnimations.push({ animations: [animation], autoNext: false });
+      }
+    }
+    return formatedAnimations;
+  },
+
+  // 活跃幻灯片的活跃元素
+  activeElements: (): PPTElement[] => {
+    let currentSlide = get().currentSlide;
+    return (
+      currentSlide()?.elements?.filter((el) =>
+        useMainStore.getState().activeElementIds.includes(el.id),
+      ) || []
+    );
+  },
+
+  setTheme: (themeProps: Partial<SlideTheme>) => {
+    set((state) => ({ theme: { ...state.theme, ...themeProps } }));
+  },
+
+  setSlide: (slide: SlideItem) =>
+    set((strore) => {
+      const slides = [...strore.slides];
+      slides[strore.slideIndex] = slide;
+      const currentSlide = () => slides[strore.slideIndex];
+      return { slides, currentSlide };
+    }),
+
+  setSlides: (slides: SlideItem[]) => set(() => ({ slides: [...slides] })),
+
+  updateSlideIndex: (index: number) => {
+    emitter.emit(EmitterEvents.SET_TIMELINE_TIME, 0);
+    set((store) => {
+      const currentSlide = () => store.slides[index];
+      return { slideIndex: index, currentSlide };
+    });
+  },
+
+  addSlide(slide: SlideItem | SlideItem[]) {
+    set((state) => {
+      const slides = Array.isArray(slide) ? slide : [slide];
+      const newSlides = [...state.slides];
+      const addIndex = state.slideIndex;
+      newSlides.splice(addIndex + 1, 0, ...slides);
+      const currentSlide = () => newSlides[addIndex];
+      return {
+        slides: newSlides,
+        slideIndex: addIndex,
+        currentSlide,
+      };
+    });
+  },
+
+  updateSlide(props: Partial<SlideItem>) {
+    set((state) => {
+      const index = state.slideIndex;
+      const slides = state.slides;
+      slides[index] = { ...slides[index], ...props };
+      const currentSlide = () => state.slides[index];
+      return { slides, currentSlide };
+    });
+  },
+
+  deleteSlide(slideId: string | string[]) {
+    set((state) => {
+      const slidesId = Array.isArray(slideId) ? slideId : [slideId];
+      const deleteSlidesIndex = [];
+      for (let i = 0; i < slidesId.length; i++) {
+        const index = state.slides.findIndex((item) => item.id === slidesId[i]);
+        deleteSlidesIndex.push(index);
+      }
+      let newIndex = Math.min(...deleteSlidesIndex);
+      const maxIndex = state.slides.length - slidesId.length - 1;
+      if (newIndex > maxIndex) newIndex = maxIndex;
+      state.slideIndex = newIndex;
+      state.slides = state.slides.filter((item) => !slidesId.includes(item.id));
+      state.currentSlide = () => state.slides[state.slideIndex];
+      return state;
+    });
+  },
+
+  addElement(element: PPTElement | PPTElement[], animations?: PPTAnimation[]) {
+    set((state) => {
+      const elements = Array.isArray(element) ? element : [element];
+
+      let addAnimations: PPTAnimation[] = [];
+      if (animations) {
+        addAnimations = animations;
+      } else {
+        const elAnimations = elements.map((el) => {
+          return {
+            id: nanoid(10),
+            elId: el.id,
+            effect: 'show',
+            start: 0,
+            end: 1,
+            name: '一直展示',
+            type: 'in' as const,
+          };
+        });
+
+        const videoAnimations = elements
+          .filter((el) => el.type === 'video')
+          .map((el) => {
+            return {
+              id: nanoid(10),
+              elId: el.id,
+              effect: 'show',
+              start: 1,
+              end: element.duration + 1,
+              name: '视频',
+              type: 'video' as const,
+            };
+          });
+        addAnimations = [...elAnimations, ...videoAnimations];
+      }
+
+      const slides = state.slides;
+      const slideIndex = state.slideIndex;
+      const currentElements = slides[slideIndex].elements;
+      const currentAnimations = slides[slideIndex].animations || [];
+      slides[slideIndex] = {
+        ...slides[slideIndex],
+        elements: [...currentElements, ...elements],
+        animations: [...currentAnimations, ...addAnimations],
+      };
+      return { slides };
+    });
+  },
+
+  deleteElement(elementId: string | string[]) {
+    set((state) => {
+      const elementIdList = Array.isArray(elementId) ? elementId : [elementId];
+      const slides = state.slides;
+      const slideIndex = state.slideIndex;
+      const currentSlideEls = slides[slideIndex].elements;
+      const newEls = currentSlideEls.filter(
+        (item) => !elementIdList.includes(item.id),
+      );
+      slides[slideIndex] = {
+        ...slides[slideIndex],
+        elements: newEls,
+      };
+      return { slides };
+    });
+  },
+
+  /** 更新元素的属性
+   * 如果同时更新多个属性，会触发多次update
+   */
+  updateElement(data: UpdateElementData) {
+    const { id, props, slideId } = data;
+    const elIdList = typeof id === 'string' ? [id] : id;
+    const slides = get().slides;
+    const slideIndex = slideId
+      ? slides.findIndex((item) => item.id === slideId)
+      : get().slideIndex;
+    const slide = slides[slideIndex];
+    const elements = slide.elements?.map((el) => {
+      return elIdList.includes(el.id) ? { ...el, ...props } : el;
+    });
+    slides[slideIndex].elements = elements as PPTElement[];
+    set(() => ({ slides }));
+  },
+
+  addAnimation: (data: any) => {
+    const handleElementId = useMainStore.getState().activeElementId;
+
+    const animations: PPTAnimation[] = JSON.parse(
+      JSON.stringify(get().currentSlideAnimations()),
+    );
+    animations.push({
+      id: nanoid(10),
+      elId: handleElementId,
+      ...data,
+    });
+    get().updateSlide({ animations });
+    useSnapshotStore.getState().add();
+  },
+
+  deleteAnimation: (id: string) => {
+    const animations = get()
+      .currentSlideAnimations()
+      .filter((item) => item.id !== id);
+    get().updateSlide({ animations });
+
+    useSnapshotStore.getState().add();
+  },
+
+  updateAnimation: (id: string, data: any) => {
+    const animations = get()
+      .currentSlideAnimations()
+      .map((item) => {
+        if (item.id === id) return { ...item, ...data };
+        return item;
+      });
+    get().updateSlide({ animations });
+    useSnapshotStore.getState().add();
+  },
+
+  removeElementProps: (data: RemovePropData) => {
+    const { id, propName } = data;
+    const propsNames = typeof propName === 'string' ? [propName] : propName;
+
+    const slideIndex = get().slideIndex;
+    const slide = get().slides[slideIndex];
+    const elements = slide.elements.map((el) => {
+      return el.id === id ? omit(el, propsNames) : el;
+    });
+    const slides = get().slides;
+    slides[slideIndex].elements = elements as PPTElement[];
+    set(() => ({ slides }));
+  },
+}));
+
+export default useSlidesStore;

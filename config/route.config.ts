@@ -45,12 +45,12 @@ export default [
   },
   {
     name: 'MG动画编辑器',
-    path: '/mgEditor',
-    component: './MotionVideo/Editor',
+    path: '/motion-video/list',
+    component: './MotionVideo',
   },
   {
-    name: 'MG动画编辑器预览',
-    path: '/edit-preview',
-    component: './MotionVideo/Preview',
+    name: 'MG动画编辑器',
+    path: '/motion-video/editor',
+    component: './MotionVideo/modules/Editor',
   },
 ];

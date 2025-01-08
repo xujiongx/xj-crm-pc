@@ -1,0 +1,21 @@
+@import '~@/themes/index.less';
+
+.edit {
+  display: flex;
+  align-items: center;
+  max-width: 150px;
+  .edit-icon {
+    transition: all 0.2 ease-in-out;
+    display: none;
+  }
+
+  .edit-text {
+    .ellipsis-oneline();
+  }
+
+  &:hover {
+    .edit-icon {
+      display: inline;
+    }
+  }
+}

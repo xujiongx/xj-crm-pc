@@ -1,0 +1,107 @@
+@import '~@/themes/index.less';
+
+@prefix: ~'aicc-interaction-node-match';
+
+.@{prefix} {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  &-info {
+    width: 100%;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    flex-wrap: wrap;
+    gap: 8px;
+    text-align: left;
+    &-item {
+      font-size: 12px;
+      line-height: 20px;
+      display: inline-flex;
+      &-content {
+        flex: 1;
+      }
+      label {
+        font-size: 12px;
+        padding: 0 8px;
+        font-weight: 500;
+        color: #7f3936;
+        background-color: #fcc3a3;
+        border-radius: 4px 0px 0px 4px;
+      }
+      span {
+        display: inline-block;
+        height: 100%;
+        padding: 0 8px;
+        color: #8d5250;
+        background-color: #fff1e9;
+        border-radius: 0px 4px 4px 0px;
+      }
+    }
+    &-gray {
+      label {
+        color: #48486c;
+        background-color: #c2c5d7;
+      }
+      span {
+        color: #5e5f80;
+        background-color: #f0f4ff;
+      }
+    }
+  }
+  &-content {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        display: inline-flex;
+        align-items: flex-start;
+        .@{prefix}-regular {
+          flex: 1;
+          display: flex;
+          font-size: 12px;
+          color: @text-color;
+          span {
+            flex: 1;
+          }
+          i {
+            font-style: normal;
+          }
+          strong {
+            margin-left: 10px;
+          }
+        }
+        .@{ant-prefix} {
+          &-tag {
+            color: #06b3d5;
+            background-color: #e7fdfe;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+  .@{ant-prefix} {
+    &-typography {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 12px;
+    }
+  }
+  &-corpus {
+    color: #f25e0b !important;
+    background-color: #fef0eb !important;
+  }
+}

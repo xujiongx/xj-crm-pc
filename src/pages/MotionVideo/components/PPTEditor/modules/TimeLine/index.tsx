@@ -1,0 +1,165 @@
+import { Timeline, TimelineState } from '@/components/react-timeline-edit';
+import emitter, { EmitterEvents } from '@/pages/MotionVideo/utils/emitter';
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import { useMainStore, useSlidesStore } from '../../store';
+import { ToolbarStates } from '../Configure/enum';
+import ActionRender from './components/ActionRender';
+import ElementList from './components/ElementList';
+import TimelinePlayer from './components/Player';
+import { mockEffect, scaleWidth, startLeft } from './const';
+import { useElement, useTimeLine } from './hooks';
+import './index.less';
+import styles from './index.less';
+import { formatActions, handleResetElement } from './utils';
+
+const height = 250;
+
+const TimelineEditor = forwardRef((props, ref) => {
+  const domRef = useRef<HTMLDivElement>();
+  const timelineState = useRef<TimelineState>(null);
+
+  const currentSlide = useSlidesStore(
+    (state) => state.slides[state.slideIndex],
+  );
+  const handleElementIds = useMainStore((state) => state.activeElementIds);
+  const activeActionId = useMainStore((state) => state.activeActionId);
+  const { updateAnimation } = useTimeLine();
+  const { handleSelectElement } = useElement();
+
+  const setActiveActionId = useMainStore((state) => state.setActiveActionId);
+  const setActiveConfigTab = useMainStore((store) => store.setActiveConfigTab);
+  const [data, setData] = useState([]);
+  const [scale, setScale] = useState(1);
+
+  const [scrollTop, setScrollTop] = useState(0);
+
+  useEffect(() => {
+    if (!currentSlide?.elements.length) {
+      setData([]);
+      return;
+    }
+    const rows = formatActions({
+      elements: currentSlide.elements,
+      animations: currentSlide.animations || [],
+      selectedIds: handleElementIds,
+    });
+    setData(rows);
+  }, [JSON.stringify(currentSlide), handleElementIds]);
+
+  // 对外暴露出timelineState
+  useImperativeHandle(ref, () => ({
+    timelineState: timelineState.current,
+    onPlay: () => {
+      timelineState.current?.play({ autoEnd: true });
+    },
+  }));
+
+  useEffect(() => {
+    // 添加全局的时间设置事件，供外部组件使用
+    emitter.on(EmitterEvents.SET_TIMELINE_TIME, (time) => {
+      if (timelineState.current) {
+        timelineState.current.setTime(time);
+        timelineState.current.setScrollLeft(time);
+      }
+    });
+
+    return () => {
+      emitter.off(EmitterEvents.SET_TIMELINE_TIME);
+    };
+  }, []);
+
+  return (
+    <div className={styles['timeline-wrapper']}>
+      <TimelinePlayer
+        timelineState={timelineState}
+        autoScrollWhenPlay={false}
+        scale={scale}
+        handleScaleChange={(v) => {
+          setScale(v);
+          timelineState.current?.setScrollLeft(0);
+        }}
+      />
+      <div className={styles['timeline-editor-container']}>
+        <ElementList
+          listStyle={{
+            height: `${height}px`,
+          }}
+          domRef={domRef}
+          timelineState={timelineState}
+          data={data}
+          scrollTop={scrollTop}
+          setScrollTop={setScrollTop}
+        />
+        <Timeline
+          ref={timelineState}
+          style={{
+            height: `${height + 32}px`,
+          }}
+          scale={scale}
+          scaleWidth={scaleWidth}
+          startLeft={startLeft}
+          autoScroll={true}
+          gridSnap={true}
+          dragLine={true}
+          onClickTimeArea={() => {
+            // 还原状态
+            handleResetElement(
+              currentSlide.elements,
+              currentSlide.animations || [],
+            );
+            return true;
+          }}
+          onClickRow={(e, { row }) => {
+            handleSelectElement(e, row);
+          }}
+          onChange={() => {
+            return false;
+          }}
+          onClickAction={(e, { action }) => {
+            if (action.lock) return;
+            setActiveActionId(action.id);
+            setTimeout(() => {
+              setActiveConfigTab(ToolbarStates.EL_ANIMATION);
+            }, 10);
+          }}
+          editorData={data}
+          effects={mockEffect}
+          onScroll={({ scrollTop }) => {
+            setScrollTop(scrollTop);
+          }}
+          onActionMoveEnd={(params) => {
+            const data = params.action.data;
+            updateAnimation(data.id, {
+              data,
+              start: params.action.start,
+              end: params.action.end,
+            });
+          }}
+          onActionResizeEnd={(params) => {
+            const data = params.action.data;
+            updateAnimation(data.id, {
+              data,
+              start: params.action.start,
+              end: params.action.end,
+            });
+          }}
+          getActionRender={(action, row) => (
+            <ActionRender
+              action={action}
+              row={row}
+              activeAction={activeActionId}
+            />
+          )}
+        />
+      </div>
+    </div>
+  );
+});
+
+export default TimelineEditor;

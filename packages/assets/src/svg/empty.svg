@@ -1,0 +1,11 @@
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="30" cy="30" r="30" fill="#EBEFF5"/>
+<rect opacity="0.01" x="12.4999" y="12" width="36" height="36" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.4999 42V18H45.4999V42H15.4999Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M19.9998 27.75H40.9998V29.25H19.9998V27.75Z" fill="#C1CCDD"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M19.9998 33H34.9998V34.5H19.9998V33Z" fill="#C1CCDD"/>
+<rect x="15.4999" y="18" width="30" height="5.25" fill="#C1CCDD"/>
+<rect opacity="0.01" x="36.4999" y="33" width="15" height="15" fill="white"/>
+<ellipse cx="43.9999" cy="40.5" rx="5.25" ry="5.25" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M43.9999 34.5C40.6864 34.5 37.9999 37.1865 37.9999 40.5C37.9999 43.8135 40.6864 46.5 43.9999 46.5C47.3134 46.5 49.9999 43.8135 49.9999 40.5C49.9999 37.1865 47.3134 34.5 43.9999 34.5ZM43.2499 43.5H44.7499V42H43.2499V43.5ZM44.7499 41.25H43.2499V37.5H44.7499V41.25Z" fill="#006EFF"/>
+</svg>

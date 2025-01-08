@@ -1,0 +1,35 @@
+@import '~qnzs-ui/es/style/themes/default.less';
+
+@prefix: ~'call-record';
+
+.@{prefix} {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  &-audio-wrapper {
+    padding: calc(@padding-md / 2);
+    border: 1px solid @border-color-base;
+  }
+  &-dialogs {
+    display: flex;
+    flex-direction: column;
+    gap: @padding-md;
+    flex: 1;
+    overflow: auto;
+    padding: @padding-md;
+    background-color: #f5f9ff;
+  }
+  &-tag {
+    cursor: pointer;
+    margin: 0;
+    border-radius: 0;
+    padding: 2px 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: @primary-color;
+    background-color: #e5f0ff;
+    border: 1px solid @primary-color;
+    white-space: wrap;
+  }
+}

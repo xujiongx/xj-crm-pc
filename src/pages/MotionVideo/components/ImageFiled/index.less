@@ -1,0 +1,22 @@
+.origin-image {
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  position: relative;
+
+  &:hover {
+    .delete {
+      display: block;
+    }
+  }
+
+  .delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+  }
+}

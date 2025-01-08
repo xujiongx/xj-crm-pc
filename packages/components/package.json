@@ -1,0 +1,42 @@
+{
+  "name": "@aicc/components",
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": [
+    "*.less"
+  ],
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "files": [
+    "/es"
+  ],
+  "scripts": {
+    "build": "father build",
+    "dev": "father dev"
+  },
+  "dependencies": {
+    "@aicc/assets": "workspace:*",
+    "@aicc/config": "workspace:*",
+    "@aicc/context": "workspace:*",
+    "@aicc/hooks": "workspace:*",
+    "@aicc/shared": "workspace:*",
+    "@aicc/types": "workspace:*",
+    "@breezystack/lamejs": "1.2.7",
+    "@microsoft/fetch-event-source": "2.0.1",
+    "github-markdown-css": "5.7.0",
+    "highlight.js": "11.10.0",
+    "mammoth": "1.8.0",
+    "markdown-it": "14.1.0",
+    "pdfjs-dist": "3.11.174",
+    "pinyin-pro": "^3.26.0",
+    "react-pdf": "7.7.3",
+    "slate": "^0.110.2",
+    "slate-history": "^0.110.3",
+    "slate-react": "^0.111.0",
+    "viewerjs": "1.11.6"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "14.1.2"
+  }
+}

@@ -1,0 +1,37 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+@prefix: ~'aicc-interaction';
+
+.@{prefix} {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  &-panel {
+    flex: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--ant-color-bg-layout);
+    border-radius: var(--ant-border-radius);
+    padding: 20px;
+    overflow: hidden;
+    .@{prefix}-messages {
+      flex: 1;
+      margin: 0 -20px;
+      padding: 0 20px;
+      overflow: auto;
+      margin-bottom: 10px;
+      &-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+    .@{prefix}-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+    }
+  }
+}

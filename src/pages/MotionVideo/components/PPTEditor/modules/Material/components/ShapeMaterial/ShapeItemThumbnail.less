@@ -1,0 +1,22 @@
+.shape-item-thumbnail {
+  position: relative;
+  cursor: pointer;
+}
+.shape-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover .shape-path {
+    &:not(.outlined) {
+      stroke: var(--ant-color-primary);
+    }
+    &.outlined {
+      fill: var(--ant-color-primary);
+    }
+  }
+
+  svg:not(:root) {
+    overflow: visible;
+  }
+}

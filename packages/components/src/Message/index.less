@@ -1,0 +1,37 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+.message {
+  &-askPre {
+    display: block;
+    border-radius: 2px;
+    padding: 10px;
+    max-width: 400px;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    p {
+      margin: 0;
+    }
+  }
+  &-highlight {
+    background-color: #ffea01;
+  }
+  &-text {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    &[data-role='seat'] {
+      text-align: left;
+    }
+    &-translate {
+      padding-top: 5px;
+      border-top: 1px dashed var(--ant-color-border);
+    }
+  }
+  &-reference {
+    padding: 10px;
+    padding-top: 0;
+  }
+}

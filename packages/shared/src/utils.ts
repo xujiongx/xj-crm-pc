@@ -1,3 +1,7 @@
+import { SessionMessageType } from '@aicc/types';
+import DOMPurify from 'dompurify';
+import { transToHtml } from './emoji';
+
 export const isDev = () => process.env.NODE_ENV === 'development';
 
 export const isNil = (val: any) => val === null || val === undefined;
@@ -89,6 +93,59 @@ export function renderWeChatMessage(data: Record<string, string>) {
     </div>
   `;
   return html;
+}
+
+export function renderContent(html: string) {
+  if (!html) return '';
+  /** 附件正则 */
+  const appendixRegex = /<a *?appendix=".*?".*?>/;
+  if (appendixRegex.test(html)) {
+    const attrRegex = /(\S+)\s*=\s*(['"])(.*?)\2/g;
+    const attrs: { [K in string]: string } = {};
+    let match: RegExpExecArray | null = null;
+    while ((match = attrRegex.exec(html))) {
+      attrs[match[1]] = match[3];
+    }
+    if (attrs['file-suffix'].includes('video')) {
+      return `<video controls src="${attrs['href']}" playsinline="true" style="width: 100%" type="${attrs['file-suffix']}" />`;
+    } else {
+      return `<div class="appendix-wrap">
+        <a href="${attrs['href']}" file-suffix="${
+          attrs['file-suffix']
+        }" download></a>
+        <div class="appendix-info">
+          <span>${attrs['file-name']}</span>
+          <span>大小：${attrs['size'] || '--'}</span>
+        </div>
+      </div>`;
+    }
+  }
+  return `${transToHtml(html)}`;
+}
+
+/**
+ * 过滤不需要显示的消息
+ * @param message 消息体
+ * @returns
+ */
+export function filterSessionItem(message: SessionMessageType) {
+  if (
+    ['[exit]', '[partExit]', 'silenceExit'].includes(message.content || '') ||
+    message.isWithdraw ||
+    [
+      'cancelAccess',
+      'access',
+      'setinfo',
+      'leaveMsg',
+      'accessTimeOut',
+      'queue',
+      'cancelQueue',
+      'transfer',
+    ].includes(message.ActionType || '')
+  ) {
+    return null;
+  }
+  return message;
 }
 
 export function isFormData(values: any) {
@@ -202,7 +259,10 @@ export const decimalToHex = (decimalColor: number) => {
   const g = (decimalColor >> 8) & 0xff;
   const b = decimalColor & 0xff;
 
-  return `#${r.toString(16).padStart(2, '0')}${g
-    .toString(16)
-    .padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+};
+
+/** 创建安全的 HTML 渲染 */
+export const createSafetyHTML = (html: string) => {
+  return { __html: DOMPurify.sanitize(html) };
 };

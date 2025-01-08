@@ -1,0 +1,88 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+.@{ant-prefix}-call-alarm {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  // .@{ant-prefix}-title-divider {
+  //   background-color: transparent;
+  //   font-weight: bold;
+  //   padding-left: 0;
+  //   margin-bottom: 5px;
+  //   &-title {
+  //     &::before { content: unset; }
+  //   }
+  // }
+  &-item {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-right: 15px;
+  }
+  &-text {
+    flex: 1;
+    color: var(--alarm-color, var(--ant-color-warning));
+    strong {
+      color: @text-color;
+    }
+  }
+  &-level {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    &::before {
+      counter-reset: level var(--alarm-level);
+      content: counter(level);
+      display: inline-block;
+      min-width: 16px;
+      padding: 0 4px;
+      height: 16px;
+      border-radius: 8px;
+      background-color: var(--alarm-color, var(--ant-color-warning));
+      margin-right: 13px;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+  .@{ant-prefix}-list {
+    flex: 1;
+    overflow: auto;
+    &-item {
+      padding-left: 10px;
+      padding-right: 10px;
+      &-action {
+        margin-left: 0;
+        li {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  &-notify {
+    .@{ant-prefix}-call-alarm-level {
+      font-weight: bold;
+      margin-bottom: 12px;
+      &::before {
+        height: 20px;
+        min-width: 20px;
+        line-height: 20px;
+        margin-right: 8px;
+        border-radius: 10px;
+      }
+    }
+    &-item {
+      display: flex;
+      label {
+        width: 85px;
+        color: #666;
+      }
+      span {
+        flex: 1;
+        color: @text-color;
+      }
+    }
+  }
+}

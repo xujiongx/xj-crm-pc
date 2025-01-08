@@ -1,0 +1,14 @@
+{
+  "name": "@aicc/types",
+  "version": "0.0.1",
+  "description": "@aicc/types",
+  "main": "index.js",
+  "types": "index",
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ],
+  "dependencies": {
+    "mitt": "^3.0.1"
+  }
+}

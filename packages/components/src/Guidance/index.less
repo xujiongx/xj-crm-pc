@@ -1,0 +1,26 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+.aicc-guidance {
+  &-action {
+    @size: 44px;
+    position: fixed;
+    bottom: 102px;
+    right: 20px;
+    width: @size;
+    height: @size;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--ant-color-primary);
+    color: #fff;
+    font-size: 20px;
+    z-index: 998;
+    box-shadow: 0px 4px 16px var(--ant-color-primary-bg);
+  }
+
+  &-hide {
+    display: none;
+  }
+}

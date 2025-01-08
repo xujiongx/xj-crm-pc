@@ -1,0 +1,38 @@
+.videos {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-top: 20px;
+
+    .item {
+      position: relative;
+      width: 48%;
+      margin-bottom: calc((100% - 2 * 48%) / 2);
+      height: 60px;
+      &:not(:nth-child(2n)) {
+        margin-right: calc((100% - 2 * 48%) / 2);
+      }
+
+      background-position: center;
+      background-size: cover;
+      border-radius: 4px;
+
+      &:hover {
+        .operate {
+          display: block;
+        }
+      }
+
+      .operate {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 0 4px;
+        display: none;
+      }
+    }
+  }
+}

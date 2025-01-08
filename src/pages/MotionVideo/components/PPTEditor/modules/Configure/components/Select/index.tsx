@@ -1,0 +1,119 @@
+import IconFont from '@/components/IconFont';
+import { Popover } from 'antd';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import './index.less';
+
+interface SelectOption {
+  label: string;
+  value: string | number;
+  disabled?: boolean;
+}
+
+interface SelectProps {
+  value: string | number;
+  options: SelectOption[];
+  disabled?: boolean;
+  onChange: (value: string | number) => void;
+  className?: string;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+  isHasLabelFamily?: boolean;
+}
+
+const Select: React.FC<SelectProps> = ({
+  value,
+  options,
+  disabled = false,
+  onChange,
+  className,
+  children,
+  style,
+  isHasLabelFamily = false,
+}) => {
+  const [width, setWidth] = useState(0);
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  const showLabel = (
+    <span
+      style={{
+        fontFamily: (isHasLabelFamily
+          ? options.find((item) => item.value === value)?.value
+          : '') as any,
+      }}
+    >
+      {options.find((item) => item.value === value)?.label || value}
+    </span>
+  );
+
+  const updateWidth = useCallback(() => {
+    if (selectRef.current) {
+      setWidth(selectRef.current.clientWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(updateWidth);
+    if (selectRef.current) {
+      resizeObserver.observe(selectRef.current);
+    }
+    return () => {
+      if (selectRef.current) {
+        resizeObserver.unobserve(selectRef.current);
+      }
+    };
+  }, [updateWidth]);
+
+  const handleSelect = (option: SelectOption) => {
+    if (!option.disabled) {
+      onChange(option.value);
+    }
+  };
+
+  return (
+    <div className={`select-wrap ${className}`} style={style}>
+      {disabled ? (
+        <div className="select disabled" ref={selectRef}>
+          <div className="selector">{showLabel}</div>
+          <div className="icon">
+            {children || <IconFont type="icon-speed" size={14} />}
+          </div>
+        </div>
+      ) : (
+        <div className="select-wrap">
+          <Popover
+            trigger="click"
+            placement="bottom"
+            overlayClassName="select-wrap-popover"
+            content={
+              <div className="options" style={{ width: width + 2 }}>
+                {options.map((option) => (
+                  <div
+                    className={`tippyOption-item ${
+                      option.disabled ? 'disabled' : ''
+                    } ${option.value === value ? 'selected' : ''}`}
+                    key={option.value}
+                    onClick={() => handleSelect(option)}
+                    style={{
+                      fontFamily: (isHasLabelFamily ? option.value : '') as any,
+                    }}
+                  >
+                    {option.label}
+                  </div>
+                ))}
+              </div>
+            }
+          >
+            <div className="select" ref={selectRef}>
+              <div className="selector">{showLabel}</div>
+              <div className="icon">
+                {children || <IconFont type="icon-speed" size={14} />}
+              </div>
+            </div>
+          </Popover>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Select;

@@ -1,0 +1,114 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+.call-guide {
+  &-title {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-left: 12px;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 24px;
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 4px;
+      height: 16px;
+      margin-top: -8px;
+      background-color: var(--ant-color-primary);
+      border-radius: 1px;
+      content: '';
+    }
+  }
+  &-ellipsis {
+    height: 32px;
+    overflow: hidden;
+  }
+  &-checkes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+  }
+  &-tags {
+    margin-bottom: 36px;
+    .@{ant-prefix}-tag {
+      background-color: #f7f7f7;
+      font-size: 14px;
+      line-height: 19px;
+      color: #999;
+      padding: 6px 14px 5px;
+      border-radius: 16px;
+      margin: 0;
+      &-checkable {
+        &-checked {
+          background-color: var(--ant-color-primary-bg);
+          color: var(--ant-color-primary);
+          border-color: var(--ant-color-primary);
+        }
+      }
+    }
+  }
+  &-guide {
+    padding-left: 10px;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style: none;
+        color: #999;
+        font-size: 14px;
+        line-height: 22px;
+        white-space: pre-wrap;
+      }
+    }
+    .@{ant-prefix}-timeline {
+      &-item {
+        margin-bottom: 10px;
+        &-tail {
+          height: calc(100% - 40px);
+          top: 30px;
+        }
+        &-content {
+          margin-left: 35px;
+        }
+      }
+    }
+  }
+  &-dot {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    line-height: 18px;
+    background-color: #e2e2e2;
+    border-radius: 50%;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: rgba(226, 226, 227, 0.4);
+      z-index: -1;
+    }
+    &-finish {
+      color: #fff;
+      background-color: #1aaa59;
+      &::after {
+        background-color: rgba(79, 196, 24, 0.2);
+      }
+    }
+    &-undone {
+      color: #fff;
+      background-color: #f74545;
+      &::after {
+        background-color: rgba(255, 73, 73, 0.2);
+      }
+    }
+  }
+}

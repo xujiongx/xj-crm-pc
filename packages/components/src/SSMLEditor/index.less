@@ -1,0 +1,57 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+@ssml-prefix: ~'ssml-editor';
+
+.@{ssml-prefix} {
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+  border: 1px solid var(--ant-color-border);
+  border-radius: var(--ant-border-radius);
+  &-toolbar {
+    padding: calc(@padding-sm / 2) @padding-sm;
+    border-bottom: 1px solid var(--ant-color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .@{ant-prefix}-btn {
+      height: 100%;
+      &:not([disabled]):hover {
+        background-color: transparent;
+        // border-color: transparent;
+      }
+    }
+  }
+  &-panel {
+    padding: @padding-sm;
+    flex: 1;
+    overflow: auto;
+    overflow-x: hidden;
+    div[role='textbox'] {
+      outline: unset !important;
+    }
+    p {
+      margin: 0 !important;
+      outline: unset !important;
+    }
+    .@{ssml-prefix} {
+      &-mark {
+        margin-left: 4px;
+        background-color: #c0c6cc;
+        padding: 1px 3px;
+        border-radius: 10px;
+        user-select: none;
+      }
+      &-phoneme {
+        padding: 2px;
+        border-radius: var(--ant-border-radius);
+        background-color: rgba(2, 158, 40, 0.6);
+      }
+      &-say-as {
+        padding: 2px;
+        border-radius: var(--ant-border-radius);
+        background-color: rgba(14, 245, 95, 0.6);
+      }
+    }
+  }
+}

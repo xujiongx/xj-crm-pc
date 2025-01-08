@@ -1,0 +1,38 @@
+.images {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-top: 20px;
+
+    .item {
+      position: relative;
+      width: 32%;
+      margin-bottom: calc((100% - 3 * 32%) / 3);
+      height: 60px;
+      &:not(:nth-child(3n)) {
+        margin-right: calc((100% - 3 * 32%) / 3);
+      }
+
+      background-position: center;
+      background-size: cover;
+      border-radius: 4px;
+
+      &:hover {
+        .operate {
+          display: block;
+        }
+      }
+
+      .operate {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 0 4px;
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.ellipsis-oneline() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-multiline(@line: 2) {
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  -webkit-box-orient: vertical;
+}
+
+.flex-grid-layout() {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.flex-grid-layout-children(@col, @colWidth) {
+  width: @colWidth;
+  margin-bottom: calc((100 - @col * @colWidth) / (@col - 1));
+
+  &:not(:nth-child(@{col}n)) {
+    margin-right: calc((100 - @col * @colWidth) / (@col - 1));
+  }
+}
+
+.overflow-overlay() {
+  overflow: auto;
+  overflow: overlay;
+}
+
+.absolute-0() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

@@ -1,0 +1,47 @@
+@import '~@/themes/index.less';
+
+.shape-style-panel {
+  user-select: none;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.font-size-btn {
+  padding: 0;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.shape-pool-config {
+  width: 235px;
+  height: 150px;
+  overflow: auto;
+  padding: 12px;
+  padding-right: 10px;
+  border: 1px solid @borderColor;
+  margin-bottom: 20px;
+}
+
+.shape-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin-top: 10px;
+}
+
+.shape-item {
+  .flex-grid-layout-children(6, 14%);
+
+  height: 0;
+  padding-bottom: 14%;
+  flex-shrink: 0;
+}

@@ -4,14 +4,6 @@ import { uid } from './uid';
 import { urlParams } from './url';
 
 /**
- * 获取token
- * @returns 存储的token值，如果不存在则返回undefined
- */
-export function getToken() {
-  return localStorage.getItem('token') || '';
-}
-
-/**
  * 请求签名中间件
  * 为请求添加签名认证相关的参数和头部信息
  * @param ctx - Umi请求的上下文环境
@@ -42,6 +34,14 @@ export const signatureMiddleware = (ctx: Context, skipTokenSign = false) => {
   ctx.req.options.params = params;
   ctx.req.options.data = data;
 };
+
+/**
+ * 获取token
+ * @returns 存储的token值，如果不存在则返回undefined
+ */
+export function getToken() {
+  return localStorage.getItem('token') || '';
+}
 
 /**
  * 设置token

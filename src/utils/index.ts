@@ -102,4 +102,14 @@ export const stringifySignatureWithUrl = (
 export const getUrlParams = <T>() => {
   const { query } = queryString.parseUrl(location.href);
   return query as unknown as T;
+}
+
+export const convertSecondsToTime = (seconds: number) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+  return `${formattedMinutes}:${formattedSeconds}`;
 };

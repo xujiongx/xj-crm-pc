@@ -1,0 +1,26 @@
+.branch {
+  margin: 0;
+  padding: 0 10px;
+  li {
+    list-style: none;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--ant-color-primary);
+    margin-bottom: 10px;
+  }
+}
+
+.block,
+.inline-block {
+  li {
+    padding: 10px;
+    background-color: rgba(32, 118, 197, 0.05);
+    text-align: center;
+  }
+}
+
+.inline-block {
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 5px));
+  grid-column-gap: 10px;
+}

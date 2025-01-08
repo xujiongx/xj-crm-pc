@@ -1,0 +1,31 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+.@{ant-prefix}-title-divider {
+  background-color: fade(#000, 2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ant-padding-xs) var(--ant-padding);
+  border-radius: var(--ant-border-radius);
+  margin-bottom: var(--ant-padding-md);
+  position: relative;
+
+  &-title {
+    color: var(--ant-color-text);
+    font-weight: var(--ant-font-weight-strong);
+    position: relative;
+    padding-left: 12px;
+    font-size: var(--ant-font-size);
+
+    &::before {
+      content: ' ';
+      width: 3px;
+      height: var(--ant-font-size);
+      position: absolute;
+      background-color: var(--ant-color-primary);
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+  }
+}

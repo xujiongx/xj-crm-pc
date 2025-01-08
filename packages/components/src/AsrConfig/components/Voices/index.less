@@ -1,0 +1,27 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+@prefix: ~'aicc-speech';
+
+// slider 样式
+.@{prefix}-slider {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  .@{ant-prefix}-slider {
+    flex: 1;
+    &-track {
+      background-color: var(--ant-color-primary) !important;
+    }
+    &-handle {
+      border: 3px solid var(--ant-color-primary);
+    }
+    &-step {
+      display: none;
+    }
+    &-mark {
+      &-text {
+        color: fade(#000, 40);
+      }
+    }
+  }
+}

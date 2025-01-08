@@ -1,0 +1,62 @@
+@import (reference) '~qnzs-ui/es/style/themes/default.less';
+
+@prefix: ~'aicc-asr-model';
+
+.@{prefix}-form {
+  padding: @card-padding-base;
+  padding-top: 0;
+  background-color: #fff;
+  border-radius: 0 0 @card-radius @card-radius;
+  .@{ant-prefix}-form {
+    &-item {
+      &-label {
+        label {
+          color: rgba(0, 0, 0, 0.8);
+        }
+      }
+      .@{ant-prefix}-select {
+        width: 150px;
+      }
+    }
+  }
+  .@{prefix}-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: baseline;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    .@{ant-prefix}-form {
+      &-item {
+        margin: 0;
+      }
+    }
+  }
+  .@{prefix}-audition {
+    width: 90%;
+    max-width: 902px;
+    padding: 16px var(--ant-padding-md);
+    background-color: #f8fafd;
+    border-radius: var(--ant-border-radius);
+    margin-bottom: var(--ant-padding-md);
+    .@{prefix}-records {
+      margin: 0;
+      margin-top: var(--ant-padding-md);
+      padding: var(--ant-padding-md);
+      border: 1px solid var(--ant-color-border);
+      border-radius: var(--ant-border-radius);
+      background-color: #fff;
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        list-style: none;
+        margin-bottom: var(--ant-padding-md);
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

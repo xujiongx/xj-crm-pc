@@ -1,0 +1,66 @@
+.timeline-player {
+  height: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  justify-content: space-between;
+
+  .timeline-rate {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin-left: 12px;
+  }
+
+  .play-control {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--ant-color-primary);
+    color: var(--ant-color-primary);
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    .time {
+      font-size: 12px;
+      width: 70px;
+    }
+  }
+
+  .rate-control {
+    justify-self: flex-end;
+
+    .ant-select {
+      width: 90px !important;
+
+      .ant-select-selector {
+        border: none;
+        box-shadow: none !important;
+        background-color: transparent;
+        color: #ddd;
+
+        .ant-select-selection-item {
+          font-size: 12px;
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+      &-arrow {
+        color: #ddd;
+      }
+    }
+  }
+}
+
+.hidden {
+  padding: 0 8px;
+  border-left: 1px solid #ccc;
+}
