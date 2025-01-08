@@ -28,7 +28,6 @@ export const Timeline = React.forwardRef<TimelineState, TimelineEditor>(
   (props, ref) => {
     const checkedProps = checkProps(props);
     const { style } = props;
-
     let {
       effects,
       editorData: data,
@@ -231,7 +230,9 @@ export const Timeline = React.forwardRef<TimelineState, TimelineEditor>(
                 deltaScrollLeft={autoScroll && handleDeltaScrollLeft}
                 onScroll={(params) => {
                   onScroll(params);
-                  onScrollVertical && onScrollVertical(params);
+                  if (onScrollVertical) {
+                    onScrollVertical(params);
+                  }
                 }}
               />
               {!hideCursor && (

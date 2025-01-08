@@ -6,7 +6,6 @@
     "dev": "max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
-    "prepare": "husky",
     "reinstall": "pnpm i && pnpm clear && rm -rf node_modules && pnpm i",
     "setup": "max setup",
     "start": "npm run dev"

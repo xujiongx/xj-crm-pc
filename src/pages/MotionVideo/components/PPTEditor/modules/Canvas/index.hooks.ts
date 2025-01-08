@@ -204,7 +204,7 @@ export const useHandleClick = (props: UseHandleClickProps) => {
     (state) => state.slides[state.slideIndex],
   );
 
-  const elements = currentSlide?.elements;
+  const elements = currentSlide?.elements || [];
   const {
     updateMouseSelection,
     mouseSelection,

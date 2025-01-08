@@ -26,6 +26,10 @@ export interface TimelineAction {
   minStart?: number;
   /** 动作最大结束时间限制 */
   maxEnd?: number;
+  /** 锁定 */
+  lock?: boolean;
+  /** 业务数据 */
+  data?: any;
 }
 
 /**
