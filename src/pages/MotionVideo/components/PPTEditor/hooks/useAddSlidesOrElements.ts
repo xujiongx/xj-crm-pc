@@ -11,7 +11,7 @@ import slidesStore from '../store/slides';
 import useHistorySnapshot from './useHistorySnapshot';
 
 const useAddSlidesOrElements = () => {
-  const currentSlide = slidesStore((state) => state.currentSlide());
+  const currentSlide = slidesStore((state) => state.currentSlide)();
   const addElement = slidesStore((state) => state.addElement);
   const addSlide = slidesStore((state) => state.addSlide);
   const { addHistorySnapshot } = useHistorySnapshot();

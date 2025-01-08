@@ -7,7 +7,7 @@ export default () => {
   const setActiveElementIds = useMainStore(
     (store) => store.setActiveElementIds,
   );
-  const elements = useSlidesStore((store) => store.currentSlide()?.elements);
+  const elements = useSlidesStore((store) => store.currentSlide)()?.elements;
   const updateSlide = useSlidesStore((store) => store.updateSlide);
   const { addHistorySnapshot } = useHistorySnapshot();
 

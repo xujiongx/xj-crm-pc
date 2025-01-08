@@ -55,7 +55,7 @@ const ElementList = (props: any) => {
 
   const { toggleHideElement } = useHideElement();
 
-  const handleElement = useMainStore((store) => store.handleElement());
+  const handleElement = useMainStore((store) => store.handleElement)();
 
   const hiddenElementIdList = useMainStore(
     (store) => store.hiddenElementIdList,

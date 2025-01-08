@@ -95,8 +95,6 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
     const { slides, slideIndex } = get();
     return slides[slideIndex];
   },
-  getcurrentSlide: get()?.currentSlide(),
-
   currentSlideAnimations: () => {
     const currentSlide = get().currentSlide();
     if (!currentSlide?.animations) return [];

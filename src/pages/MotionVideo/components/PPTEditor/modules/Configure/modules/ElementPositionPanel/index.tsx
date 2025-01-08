@@ -32,7 +32,7 @@ const ElementPositionPanel = () => {
   const { addHistorySnapshot } = useHistorySnapshot();
   const activeElementIds = useMainStore((state) => state.activeElementIds);
 
-  const handleElement = useMainStore((store) => store.handleElement());
+  const handleElement = useMainStore((store) => store.handleElement)();
 
   // const handleElement =
   //   useSlidesStore((state) =>

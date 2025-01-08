@@ -17,7 +17,7 @@ const useRotateElement = (
   viewportRef: React.RefObject<HTMLDivElement>,
   canvasScale: number,
 ) => {
-  const { updateSlide } = useSlidesStore();
+  const updateSlide = useSlidesStore((store) => store.updateSlide);
   const { addHistorySnapshot } = useHistorySnapshot();
 
   const rotate = (

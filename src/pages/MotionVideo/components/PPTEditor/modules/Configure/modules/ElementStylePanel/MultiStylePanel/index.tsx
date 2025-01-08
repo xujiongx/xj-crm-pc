@@ -67,7 +67,7 @@ const MultiStylePanel = () => {
   };
 
   const [fill, setFill] = useState('#fff');
-  const activeElementList = useMainStore((store) => store.activeElementList());
+  const activeElementList = useMainStore((store) => store.activeElementList)();
 
   // 批量修改填充色（表格元素为单元格填充、音频元素为图标颜色）
   const updateFill = (value: string) => {

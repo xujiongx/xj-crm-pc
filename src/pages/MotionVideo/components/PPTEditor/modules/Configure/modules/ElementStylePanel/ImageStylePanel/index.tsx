@@ -136,7 +136,7 @@ const ImageStylePanel = () => {
   };
 
   const updateSlide = useSlidesStore((store) => store.updateSlide);
-  const currentSlide = useSlidesStore((store) => store.currentSlide());
+  const currentSlide = useSlidesStore((store) => store.currentSlide)();
 
   // 将图片设置为背景
   const setBackgroundImage = () => {

@@ -12,7 +12,7 @@ export default () => {
   );
 
   const activeElementIdList = useMainStore.getState().activeElementIds;
-  const { activeElementList } = useMainStore.getState();
+  const activeElementList = useMainStore.getState().activeElementList();
 
   const viewportRatio = useMainStore((store) => store.viewportRatio);
 
@@ -27,7 +27,7 @@ export default () => {
   const alignElementToCanvas = (command: ElementAlignCommands) => {
     const viewportWidth = viewportSize;
     const viewportHeight = viewportSize * viewportRatio;
-    const { minX, maxX, minY, maxY } = getElementListRange(activeElementList());
+    const { minX, maxX, minY, maxY } = getElementListRange(activeElementList);
 
     const newElementList: PPTElement[] = JSON.parse(
       JSON.stringify(currentSlide.elements),

@@ -24,9 +24,9 @@ export const useMenu = () => {
   const setShowRuler = useMainStore((store) => store.setShowRuler);
 
   // 从 useMainStore 中获取处理元素的函数
-  const handleElement = useMainStore((store) => store.handleElement());
+  const handleElement = useMainStore((store) => store.handleElement)();
   // 从 useSlidesStore 中获取当前激活元素的数组
-  const activeElements = useSlidesStore((state) => state.activeElements());
+  const activeElements = useSlidesStore((state) => state.activeElements)();
   const setGridLineSize = useMainStore((store) => store.setGridLineSize);
 
   // 从 useClipboard 中获取复制、粘贴、剪切和删除元素的相关操作函数

@@ -42,7 +42,7 @@ const ShapeElement = ({
   const removeElementProps = useSlidesStore(
     (store) => store.removeElementProps,
   );
-  const handleElementId = useMainStore((store) => store.handleElement()?.id);
+  const handleElementId = useMainStore((store) => store.activeElementId);
   const shapeFormatPainter = useMainStore((store) => store.shapeFormatPainter);
   const setShapeFormatPainter = useMainStore(
     (store) => store.setShapeFormatPainter,
@@ -170,7 +170,9 @@ const ShapeElement = ({
               </defs>
             )}
             <g
-              transform={`scale(${element.width / element.viewBox[0]}, ${element.height / element.viewBox[1]}) translate(0,0) matrix(1,0,0,1,0,0)`}
+              transform={`scale(${element.width / element.viewBox[0]}, ${
+                element.height / element.viewBox[1]
+              }) translate(0,0) matrix(1,0,0,1,0,0)`}
             >
               <path
                 className={styles['shape-path']}

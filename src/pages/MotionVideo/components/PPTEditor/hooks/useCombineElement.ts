@@ -7,7 +7,7 @@ export default () => {
   const { addHistorySnapshot } = useHistorySnapshot();
 
   const activeElementIdList = useMainStore((store) => store.activeElementIds);
-  const activeElementList = useMainStore((store) => store.activeElementList());
+  const activeElementList = useMainStore((store) => store.activeElementList)();
   const handleElementId = useMainStore((store) => store.activeElementId);
   const setActiveElementIdList = useMainStore(
     (store) => store.setActiveElementIds,

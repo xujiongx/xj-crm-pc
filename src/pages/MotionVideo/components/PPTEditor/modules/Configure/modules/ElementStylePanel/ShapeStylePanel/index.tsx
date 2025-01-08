@@ -43,7 +43,7 @@ import Select from '../../../components/Select';
 import './index.less';
 
 const ShapeStylePanel = () => {
-  const handleElement = useMainStore((state: any) => state.handleElement()); // 根据实际Redux store结构调整
+  const handleElement = useMainStore((state: any) => state.handleElement)(); // 根据实际Redux store结构调整
   const handleElementId = useMainStore((state: any) => state.activeElementId); // 根据实际Redux store结构调整
   const shapeFormatPainter = useMainStore(
     (state: any) => state.shapeFormatPainter,

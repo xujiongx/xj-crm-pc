@@ -15,7 +15,7 @@ const useClipboard = () => {
   const { addElementsFromData } = useAddSlidesOrElements();
   const { deleteElement } = useDeleteElements();
   const { createTextElement } = useCreateElement();
-  const activeElements = useSlidesStore((state) => state.activeElements());
+  const activeElements = useSlidesStore((state) => state.activeElements)();
   const setEditorareaFocus = useMainStore((state) => state.setEditorareaFocus);
 
   /**

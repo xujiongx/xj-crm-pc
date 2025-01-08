@@ -26,9 +26,9 @@ const HotkeyHandler = () => {
   } = useClipboard();
   const { lockElement } = useLockElement();
 
-  const activeElementList = useMainStore((store) => store.activeElementList());
+  const activeElementList = useMainStore((store) => store.activeElementList)();
   const thumbnailsFocus = useMainStore((store) => store.thumbnailsFocus);
-  const handleElement = useMainStore((store) => store.handleElement());
+  const handleElement = useMainStore((store) => store.handleElement)();
   const disableHotkeys = useMainStore((store) => store.disableHotkeys);
   const editorAreaFocus = useMainStore((store) => store.editorAreaFocus);
   const setActiveElementIds = useMainStore(

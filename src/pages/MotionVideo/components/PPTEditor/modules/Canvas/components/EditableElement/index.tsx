@@ -27,9 +27,9 @@ const EditableElement = ({
 }: EditableElementProps) => {
   const Component = ElementTypeMap[element.type];
 
-  const currentSlideAnimations = useSlidesStore((store) =>
-    store.currentSlideAnimations(),
-  );
+  const currentSlideAnimations = useSlidesStore(
+    (store) => store.currentSlideAnimations,
+  )();
 
   const curElementAnimations = currentSlideAnimations.filter(
     (item) => item.elId === element.id,

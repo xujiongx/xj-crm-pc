@@ -37,13 +37,11 @@ const Canvas = () => {
     (store) => store.setActiveGroupElementId,
   );
   const activeElementId = useMainStore((store) => store.activeElementId);
-  const currentSlide = useSlidesStore(
+  const elements = useSlidesStore(
     (state) => state.slides[state.slideIndex],
-  );
+  )?.elements;
 
   const showRuler = useMainStore((store) => store.showRuler);
-
-  const elements = currentSlide?.elements;
 
   // const { viewportStyles } = useViewportSize(canvasRef);
 

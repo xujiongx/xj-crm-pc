@@ -119,8 +119,8 @@ const useScaleElement = (
   lines: (item: AlignmentLineProps[]) => void,
   canvasScale: number,
 ) => {
-  const { updateSlide } = useSlidesStore();
-  const { setScalingState } = useMainStore();
+  const updateSlide = useSlidesStore((store) => store.updateSlide);
+  const setScalingState = useMainStore((store) => store.setScalingState);
   const viewportRatio = useMainStore((store) => store.viewportRatio);
   const activeElementIds = useMainStore((store) => store.activeElementIds);
   const { addHistorySnapshot } = useHistorySnapshot();
