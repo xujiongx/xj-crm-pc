@@ -39,7 +39,7 @@ const LineView = ({ element }: LineViewProps) => {
 
   return (
     <div
-      className="base-element-line"
+      className="editable-element-shape"
       style={{ top: `${element.top}px`, left: `${element.left}px` }}
     >
       <div

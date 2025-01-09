@@ -1,6 +1,6 @@
+import { SlideItem } from '@/pages/MotionVideo/interface';
 import useBackgroundStyle from '../../../../../hooks/useBackgroundStyle';
 import { VIEWPORT_SIZE } from '../../../../../hooks/useViewportSize';
-import { SlideItem } from '../../../../../interface';
 import ScreenElement from './components/ScreenElement';
 import styles from './index.less';
 
@@ -8,9 +8,15 @@ interface ViewProps {
   slide: SlideItem;
   scale: number;
   ratio: number;
+  hiddenElementIdList?: string[];
 }
 
-const ScreenView = ({ slide, scale, ratio }: ViewProps) => {
+const ScreenView = ({
+  slide,
+  scale,
+  ratio,
+  hiddenElementIdList = [],
+}: ViewProps) => {
   const { backgroundStyle } = useBackgroundStyle(slide.background);
   return (
     <div
@@ -29,6 +35,10 @@ const ScreenView = ({ slide, scale, ratio }: ViewProps) => {
           key={element.id}
           element={element}
           zIndex={index + 1}
+          animations={
+            slide.animations?.filter((item) => item.elId === element.id) || []
+          }
+          isHidden={hiddenElementIdList.includes(element.id)}
         />
       ))}
     </div>

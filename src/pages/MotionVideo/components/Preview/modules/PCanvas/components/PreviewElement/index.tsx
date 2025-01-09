@@ -1,7 +1,16 @@
 import { ElementViewTypeMap } from '@/pages/MotionVideo/elements/Element/view';
+import { PPTElement, SlideItem } from '@/pages/MotionVideo/interface';
 import styles from './index.less';
 
-const PreviewElement = (props) => {
+interface ViewElement {
+  zIndex: number;
+  element: PPTElement;
+  slide: SlideItem;
+  animations: any[];
+  isHidden: boolean;
+}
+
+const PreviewElement = (props: ViewElement) => {
   const { element, zIndex, animations, isHidden } = props;
 
   const Component = ElementViewTypeMap[element.type];

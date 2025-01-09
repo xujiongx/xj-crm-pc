@@ -1,40 +1,34 @@
-import { useMainStore } from '@/pages/MotionVideo/components/PPTEditor/store';
 import { ElementViewTypeMap } from '@/pages/MotionVideo/elements/Element/view';
-import { PPTElement, SlideItem } from '@/pages/MotionVideo/interface';
+import {
+  PPTAnimation,
+  PPTElement,
+  SlideItem,
+} from '@/pages/MotionVideo/interface';
+import styles from './index.less';
 
 interface ViewElement {
   zIndex: number;
   element: PPTElement;
   slide: SlideItem;
+  animations: PPTAnimation[];
+  isHidden: boolean;
 }
 
-const ScreenElement = ({ element, zIndex, slide }: ViewElement) => {
+const ScreenElement = (props: ViewElement) => {
+  const { element, zIndex, animations, isHidden } = props;
+
   const Component = ElementViewTypeMap[element.type];
 
-  const currentSlideAnimations = slide.animations || [];
-
-  const curElementAnimations = currentSlideAnimations.filter(
-    (item) => item.elId === element.id,
-  );
-  const show =
-    curElementAnimations[0]?.type === 'in' &&
-    curElementAnimations[0]?.effect === 'show';
-
-  const hiddenElementIdList = useMainStore(
-    (store) => store.hiddenElementIdList,
-  );
-
-  const isHidden = hiddenElementIdList.includes(element.id);
-
-  if (!Component) return null;
+  const show = animations[0]?.type === 'in' && animations[0]?.effect === 'show';
 
   return (
     <div
+      className={styles.element}
       id={`view-element-${element.id}`}
       style={{
         zIndex,
-        visibility: show ? 'visible' : 'hidden',
-        opacity: isHidden ? '0' : '1',
+        // visibility: show ? 'visible' : 'hidden',// 为什么会影响到线条的箭头,换成透明度方案
+        opacity: show && !isHidden ? '1' : '0',
         pointerEvents: isHidden ? 'none' : 'auto',
       }}
     >

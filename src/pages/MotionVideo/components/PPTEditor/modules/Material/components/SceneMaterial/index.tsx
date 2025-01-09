@@ -45,7 +45,9 @@ interface SlideListProps extends SlideInfo {
 const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
   let { slide, width, viewportRatio, slideIndex, index, updateSlideIndex } =
     slideInfo;
-
+  const hiddenElementIdList = useMainStore(
+    (store) => store.hiddenElementIdList,
+  );
   return (
     <div
       style={{
@@ -63,6 +65,7 @@ const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
         scale={width / VIEWPORT_SIZE}
         ratio={viewportRatio}
         slide={slide}
+        hiddenElementIdList={hiddenElementIdList}
       />
       {/* <ContextMenu
         MenuItem={CONTEXTMENU_Ele}
@@ -115,7 +118,7 @@ const SortableSingleSlide = SortableElement(
         {index !== slides.length - 1 && (
           <div
             className={styles['transfer']}
-            onClick={(e) => {
+            onClick={() => {
               updateSlideIndex(index!);
               // 如果选中元素则取消选中
               useMainStore.getState().setActiveElementIds([]);

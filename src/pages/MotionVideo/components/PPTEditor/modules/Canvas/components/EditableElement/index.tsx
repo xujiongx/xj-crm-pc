@@ -60,7 +60,7 @@ const EditableElement = ({
     if (elRef) {
       elRef.style.visibility = show ? 'visible' : 'hidden';
     }
-  }, []);
+  }, [show]);
 
   return (
     <div
