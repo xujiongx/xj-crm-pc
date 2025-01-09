@@ -39,6 +39,7 @@ export const enum ElementTypes {
   VIDEO = 'video',
   SHAPE = 'shape',
   LINE = 'line',
+  AUDIO = 'audio',
 }
 
 export const enum OperateBorderLines {
@@ -463,6 +464,8 @@ export interface PPTAudioElement extends PPTBaseElement {
   autoplay: boolean;
   src: string;
   ext?: string;
+  duration?: number;
+  volume?: number;
 }
 
 export type PPTElement =
@@ -556,7 +559,7 @@ export interface SlideTheme {
   shadow: PPTElementShadow;
 }
 
-export type AnimationType = 'in' | 'out' | 'attention' | 'video';
+export type AnimationType = 'in' | 'out' | 'attention' | 'video' | 'audio';
 
 /**
  * 图片翻转、形状翻转

@@ -242,9 +242,28 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
               end: element.duration + 1,
               name: '视频',
               type: 'video' as const,
+              src: el.src,
             };
           });
-        addAnimations = [...elAnimations, ...videoAnimations];
+        const audioAnimations = elements
+          .filter((el) => el.type === 'audio')
+          .map((el) => {
+            return {
+              id: nanoid(10),
+              elId: el.id,
+              effect: 'show',
+              start: 1,
+              end: element.duration + 1,
+              name: '音频',
+              type: 'audio' as const,
+              src: el.src,
+            };
+          });
+        addAnimations = [
+          ...elAnimations,
+          ...videoAnimations,
+          ...audioAnimations,
+        ];
       }
 
       const slides = state.slides;

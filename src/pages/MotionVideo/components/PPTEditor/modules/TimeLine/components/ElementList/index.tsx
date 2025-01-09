@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import {
   AddText,
+  AudioFile,
   Connection,
   GraphicDesign,
   Lock,
@@ -49,6 +50,10 @@ const NAME_MAP: Record<
   line: {
     icon: <Connection />,
     name: '线条',
+  },
+  audio: {
+    icon: <AudioFile />,
+    name: '音频',
   },
 };
 

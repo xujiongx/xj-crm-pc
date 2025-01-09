@@ -7,11 +7,12 @@ import VideoView from './VideoElement/view';
 
 export const ElementViewTypeMap: Record<
   string,
-  ({ element }: any) => JSX.Element
+  ({ element }: any) => JSX.Element | null
 > = {
   [ElementTypes.TEXT]: TextView,
   [ElementTypes.IMAGE]: ImageView,
   [ElementTypes.VIDEO]: VideoView,
   [ElementTypes.SHAPE]: ShapeView,
   [ElementTypes.LINE]: LineElement,
+  [ElementTypes.AUDIO]: () => null,
 };

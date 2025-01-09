@@ -2,6 +2,7 @@ import {
   useMainStore,
   useSlidesStore,
 } from '@/pages/MotionVideo/components/PPTEditor/store';
+import AudioStylePanel from './AudioStylePanel';
 import ImageStylePanel from './ImageStylePanel';
 import LineStylePanel from './LineStylePanel';
 import ShapeStylePanel from './ShapeStylePanel';
@@ -21,6 +22,7 @@ const ElementStylePanel = () => {
     video: <VideoStylePanel />,
     shape: <ShapeStylePanel />,
     line: <LineStylePanel />,
+    audio: <AudioStylePanel />,
   };
 
   if (!handleElement) return null;

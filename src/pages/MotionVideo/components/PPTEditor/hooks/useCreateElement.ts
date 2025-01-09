@@ -232,12 +232,51 @@ const useCreateElement = () => {
     createElement(newElement);
   };
 
+  /**
+   * 创建音频元素
+   * @param src 音频地址
+   */
+  const createAudioElement = (src: string) => {
+    // // 通过url链接获取视频时长
+    const getDurationByUrl = async (videoUrl) => {
+      return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        video.src = videoUrl;
+        video.addEventListener('loadedmetadata', () => {
+          resolve(video);
+        });
+        video.addEventListener('error', () => {
+          reject(new Error('Failed to load video'));
+        });
+      });
+    };
+
+    getDurationByUrl(src).then((video: any) => {
+      createElement({
+        type: 'audio',
+        id: nanoid(10),
+        width: 50,
+        height: 50,
+        rotate: 0,
+        left: 0,
+        top: 0,
+        loop: false,
+        autoplay: false,
+        fixedRatio: true,
+        color: theme.themeColor,
+        src,
+        duration: video.duration,
+      });
+    });
+  };
+
   return {
     createTextElement,
     createImageElement,
     createVideoElement,
     createShapeElement,
     createLineElement,
+    createAudioElement,
   };
 };
 

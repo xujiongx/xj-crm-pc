@@ -69,6 +69,8 @@ const Operate = ({
     return null;
   }
 
+  if (!Component) return null;
+
   return (
     <div
       className={clsx({

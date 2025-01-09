@@ -1,5 +1,6 @@
 import { Tabs } from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
+import AudioMaterial from './AudioMaterial';
 import ImageMaterial from './ImageMaterial';
 import VideoMaterial from './VideoMaterial';
 
@@ -14,6 +15,11 @@ const Resources = () => {
       key: '2',
       label: '视频',
       children: <VideoMaterial />,
+    },
+    {
+      key: '3',
+      label: '音频',
+      children: <AudioMaterial />,
     },
   ];
 

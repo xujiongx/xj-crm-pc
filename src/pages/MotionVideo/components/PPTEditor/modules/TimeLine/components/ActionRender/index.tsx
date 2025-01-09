@@ -7,7 +7,7 @@ const ANIMATION_MAP: Record<string, string> = {
 };
 
 const ActionRender = (props) => {
-  const { action, row } = props;
+  const { action } = props;
   const activeActionId = useMainStore((state) => state.activeActionId);
 
   const isActive = action.id === activeActionId;
@@ -41,6 +41,22 @@ const ActionRender = (props) => {
         }}
       >
         视频
+      </div>
+    );
+  }
+  if (action.effectId === 'audio') {
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          lineHeight: '20px',
+          color: '#fff',
+          padding: '0 10px',
+          overflow: 'hidden',
+          backgroundColor: isActive ? '#568DFE' : '',
+        }}
+      >
+        音频
       </div>
     );
   }

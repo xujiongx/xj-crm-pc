@@ -7,11 +7,12 @@ import VideoElement from './VideoElement';
 
 export const ElementTypeMap: Record<
   string,
-  ({ element, onSelect, store }: any) => JSX.Element
+  ({ element, onSelect, store }: any) => JSX.Element | null
 > = {
   [ElementTypes.TEXT]: TextElement,
   [ElementTypes.IMAGE]: ImageElement,
   [ElementTypes.VIDEO]: VideoElement,
   [ElementTypes.SHAPE]: ShapeElement,
   [ElementTypes.LINE]: LineElement,
+  [ElementTypes.AUDIO]: () => null,
 };

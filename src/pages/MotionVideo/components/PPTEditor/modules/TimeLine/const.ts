@@ -2,6 +2,7 @@ import {
   TimelineAction,
   TimelineEffect,
 } from '@/components/react-timeline-edit';
+import audioControl from '@/pages/MotionVideo/elements/Element/Audio/audioControl';
 import videoPlayerControl from '@/pages/MotionVideo/elements/Element/VideoElement/videoControl';
 import { runAnimation, setElementVisibility } from './utils';
 
@@ -10,7 +11,7 @@ export const startLeft = 10;
 
 export interface CustomTimelineAction extends TimelineAction {
   data: {
-    id?: string;
+    id: string;
     src: string;
     name: string;
     text?: string;
@@ -19,6 +20,7 @@ export interface CustomTimelineAction extends TimelineAction {
     effect: string;
     end: number;
     start: number;
+    volume: number;
   };
 }
 
@@ -29,7 +31,7 @@ export interface CustomTimelineAction extends TimelineAction {
  */
 export const mockEffect: Record<string, TimelineEffect> = {
   animate: {
-    id: 'run',
+    id: 'animate',
     name: '动画',
     source: {
       start: ({ action }) => {
@@ -75,7 +77,7 @@ export const mockEffect: Record<string, TimelineEffect> = {
     },
   },
   video: {
-    id: 'play',
+    id: 'video',
     name: '视频',
     source: {
       start: ({ action, engine, isPlaying, time }) => {
@@ -115,6 +117,47 @@ export const mockEffect: Record<string, TimelineEffect> = {
           id: data.elId,
           engine: engine,
         });
+      },
+    },
+  },
+  audio: {
+    id: 'audio',
+    name: '音频',
+    source: {
+      start: ({ action, engine, isPlaying, time }) => {
+        if (isPlaying) {
+          const { id, src, volume } = (action as CustomTimelineAction).data;
+          audioControl.start({
+            id,
+            src,
+            startTime: action.start,
+            engine,
+            time,
+            volume,
+          });
+        }
+      },
+      enter: ({ action, engine, isPlaying, time }) => {
+        if (isPlaying) {
+          const { id, src, volume } = (action as CustomTimelineAction).data;
+          console.log('👿', action, src);
+          audioControl.start({
+            id,
+            src,
+            startTime: action.start,
+            engine,
+            time,
+            volume,
+          });
+        }
+      },
+      leave: ({ action, engine }) => {
+        const { id } = (action as CustomTimelineAction).data;
+        audioControl.stop({ id, engine });
+      },
+      stop: ({ action, engine }) => {
+        const { id } = (action as CustomTimelineAction).data;
+        audioControl.stop({ id, engine });
       },
     },
   },

@@ -9,6 +9,7 @@ const TYPE_NAME_MAP: Record<string, string> = {
   attention: '强调',
   out: '退场',
   video: '视频',
+  audio: '音频',
 };
 
 const ElementAnimationList = (props) => {
