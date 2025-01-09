@@ -1,5 +1,5 @@
 // export const DEV_HOST = 'aicc.qnzsai.com';
-export const DEV_HOST = 'aicc-test.qnzsai.com';
+export const DEV_HOST = 'aicc-dev.qnzsai.com';
 //
 export const DEV_URI = `http${
   DEV_HOST.includes('192') ? '' : 's'

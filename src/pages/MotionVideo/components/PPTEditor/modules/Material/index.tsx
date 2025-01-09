@@ -3,9 +3,10 @@ import {
   FontSizeOutlined,
   FundProjectionScreenOutlined,
 } from '@ant-design/icons';
-import { GraphicDesign } from '@icon-park/react';
+import { Connection, GraphicDesign } from '@icon-park/react';
 import clsx from 'clsx';
 import React, { useState } from 'react';
+import LineMaterial from './components/LineMaterial';
 import Resources from './components/ResourcesMaterial';
 import SceneMaterial from './components/SceneMaterial/index';
 import ShapeMaterial from './components/ShapeMaterial';
@@ -44,6 +45,12 @@ const Material = ({ className }: { className: string }) => {
       label: '形状',
       icon: <GraphicDesign />,
       component: <ShapeMaterial />,
+    },
+    {
+      key: 'line',
+      label: '线条',
+      icon: <Connection />,
+      component: <LineMaterial />,
     },
     {
       key: 'material',

@@ -38,6 +38,7 @@ export const enum ElementTypes {
   IMAGE = 'image',
   VIDEO = 'video',
   SHAPE = 'shape',
+  LINE = 'line',
 }
 
 export const enum OperateBorderLines {
@@ -259,7 +260,7 @@ export type LinePoint = '' | 'arrow' | 'dot';
  *
  * end: 终点位置（[x, y]）
  *
- * style: 线条样式（实线、虚线）
+ * style: 线条样式（实线、虚线、点线）
  *
  * color: 线条颜色
  *
@@ -268,6 +269,8 @@ export type LinePoint = '' | 'arrow' | 'dot';
  * shadow?: 阴影
  *
  * broken?: 折线控制点位置（[x, y]）
+ *
+ * broken2?: 双折线控制点位置（[x, y]）
  *
  * curve?: 二次曲线控制点位置（[x, y]）
  *
@@ -278,15 +281,15 @@ export interface PPTLineElement
   type: 'line';
   start: [number, number];
   end: [number, number];
-  style: 'solid' | 'dashed';
+  style: LineStyleType;
   color: string;
   points: [LinePoint, LinePoint];
   shadow?: PPTElementShadow;
   broken?: [number, number];
+  broken2?: [number, number];
   curve?: [number, number];
   cubic?: [[number, number], [number, number]];
 }
-
 /**
  * 表格单元格样式
  *
@@ -566,3 +569,5 @@ export interface ImageOrShapeFlip {
   flipH?: boolean;
   flipV?: boolean;
 }
+
+export type LineStyleType = 'solid' | 'dashed' | 'dotted';

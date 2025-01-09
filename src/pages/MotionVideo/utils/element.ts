@@ -1,5 +1,5 @@
+import { nanoid } from 'nanoid';
 import { AlignLine, PPTElement, SlideItem } from '../interface';
-import { nanoid } from 'nanoid'
 
 interface RotatedElementData {
   left: number;
@@ -9,11 +9,9 @@ interface RotatedElementData {
   rotate: number;
 }
 
-
 interface IdMap {
-  [id: string]: string
+  [id: string]: string;
 }
-
 
 /**
  * 将一组对齐吸附线进行去重：同位置的的多条对齐吸附线仅留下一条，取该位置所有对齐吸附线的最大值和最小值为新的范围
@@ -71,53 +69,60 @@ export const getRectRotatedRange = (element: RotatedElementData) => {
   };
 };
 
-
 /**
  * 计算元素在画布中的位置范围
  * @param element 元素信息
  */
 export const getElementRange = (element: PPTElement) => {
-  let minX, maxX, minY, maxY
-  if ('rotate' in element && element.rotate) {
-    const { left, top, width, height, rotate } = element
-    const { xRange, yRange } = getRectRotatedRange({ left, top, width, height, rotate })
-    minX = xRange[0]
-    maxX = xRange[1]
-    minY = yRange[0]
-    maxY = yRange[1]
+  let minX, maxX, minY, maxY;
+  if (element.type === 'line') {
+    minX = element.left;
+    maxX = element.left + Math.max(element.start[0], element.end[0]);
+    minY = element.top;
+    maxY = element.top + Math.max(element.start[1], element.end[1]);
+  } else if ('rotate' in element && element.rotate) {
+    const { left, top, width, height, rotate } = element;
+    const { xRange, yRange } = getRectRotatedRange({
+      left,
+      top,
+      width,
+      height,
+      rotate,
+    });
+    minX = xRange[0];
+    maxX = xRange[1];
+    minY = yRange[0];
+    maxY = yRange[1];
+  } else {
+    minX = element.left;
+    maxX = element.left + element.width;
+    minY = element.top;
+    maxY = element.top + element.height;
   }
-  else {
-    minX = element.left
-    maxX = element.left + element.width
-    minY = element.top
-    maxY = element.top + element.height
-  }
-  return { minX, maxX, minY, maxY }
-}
-
+  return { minX, maxX, minY, maxY };
+};
 
 /**
-   * 以元素列表为基础，为每一个元素生成新的ID，并关联到旧ID形成一个字典
-   * 主要用于复制元素时，维持数据中各处元素ID原有的关系
-   * 例如：原本两个组合的元素拥有相同的groupId，复制后依然会拥有另一个相同的groupId
-   * @param elements 元素列表数据
-   */
+ * 以元素列表为基础，为每一个元素生成新的ID，并关联到旧ID形成一个字典
+ * 主要用于复制元素时，维持数据中各处元素ID原有的关系
+ * 例如：原本两个组合的元素拥有相同的groupId，复制后依然会拥有另一个相同的groupId
+ * @param elements 元素列表数据
+ */
 export const createElementIdMap = (elements: PPTElement[]) => {
-  const groupIdMap: IdMap = {}
-  const elIdMap: IdMap = {}
+  const groupIdMap: IdMap = {};
+  const elIdMap: IdMap = {};
   for (const element of elements) {
-    const groupId = element.groupId
+    const groupId = element.groupId;
     if (groupId && !groupIdMap[groupId]) {
-      groupIdMap[groupId] = nanoid(10)
+      groupIdMap[groupId] = nanoid(10);
     }
-    elIdMap[element.id] = nanoid(10)
+    elIdMap[element.id] = nanoid(10);
   }
   return {
     groupIdMap,
     elIdMap,
-  }
-}
-
+  };
+};
 
 /**
  * 以页面列表为基础，为每一个页面生成新的ID，并关联到旧ID形成一个字典
@@ -125,35 +130,35 @@ export const createElementIdMap = (elements: PPTElement[]) => {
  * @param slides 页面列表
  */
 export const createSlideIdMap = (slides: SlideItem[]) => {
-  const slideIdMap: IdMap = {}
+  const slideIdMap: IdMap = {};
   for (const slide of slides) {
-    slideIdMap[slide.id] = nanoid(10)
+    slideIdMap[slide.id] = nanoid(10);
   }
-  return slideIdMap
-}
+  return slideIdMap;
+};
 
 /**
  * 计算一组元素在画布中的位置范围
  * @param elementList 一组元素信息
  */
 export const getElementListRange = (elementList: PPTElement[]) => {
-  const leftValues: number[] = []
-  const topValues: number[] = []
-  const rightValues: number[] = []
-  const bottomValues: number[] = []
+  const leftValues: number[] = [];
+  const topValues: number[] = [];
+  const rightValues: number[] = [];
+  const bottomValues: number[] = [];
 
-  elementList.forEach(element => {
-    const { minX, maxX, minY, maxY } = getElementRange(element)
-    leftValues.push(minX)
-    topValues.push(minY)
-    rightValues.push(maxX)
-    bottomValues.push(maxY)
-  })
+  elementList.forEach((element) => {
+    const { minX, maxX, minY, maxY } = getElementRange(element);
+    leftValues.push(minX);
+    topValues.push(minY);
+    rightValues.push(maxX);
+    bottomValues.push(maxY);
+  });
 
-  const minX = Math.min(...leftValues)
-  const maxX = Math.max(...rightValues)
-  const minY = Math.min(...topValues)
-  const maxY = Math.max(...bottomValues)
+  const minX = Math.min(...leftValues);
+  const maxX = Math.max(...rightValues);
+  const minY = Math.min(...topValues);
+  const maxY = Math.max(...bottomValues);
 
-  return { minX, maxX, minY, maxY }
-}
+  return { minX, maxX, minY, maxY };
+};

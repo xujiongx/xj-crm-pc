@@ -16,6 +16,7 @@ import Operate from './components/Operate';
 import Ruler from './components/Ruler';
 import ShapeCreateCanvas from './components/ShapeCreateCanvas';
 import ViewportBackground from './components/ViewportBackground';
+import useDragLineElement from './hooks/useDragLineElement';
 import useSelectElement from './hooks/useSelectElement';
 import { useHandleClick, useMenu } from './index.hooks';
 import styles from './index.less';
@@ -58,7 +59,7 @@ const Canvas = () => {
     canvasScale,
   );
   const { rotate } = useRotateElement(elements, viewportRef, canvasScale);
-
+  const { dragLineElement } = useDragLineElement(elements);
   const isMultiSelect = activeElementIds.length > 1;
 
   const { menuItems, contextMenuClickFn } = useMenu();
@@ -128,6 +129,7 @@ const Canvas = () => {
                 moveShapeKeypoint={moveShapeKeypoint}
                 isMultiSelect={isMultiSelect}
                 isActiveGroupElement={activeGroupElementId === element.id}
+                dragLineElement={dragLineElement}
               />
             ))}
           </div>

@@ -1,0 +1,51 @@
+@import '~@/themes/index.less';
+
+.line-pool {
+  padding: 12px;
+  overflow: auto;
+}
+
+.category-name {
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 10px;
+  border-left: 4px solid #bbb;
+  background-color: #f1f1f1;
+  padding: 3px 0 3px 8px;
+  color: #555;
+}
+
+.line-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.line-item {
+  flex: 0 0 19%;
+  height: 0;
+  padding-bottom: 19%;
+  position: relative;
+  cursor: pointer;
+}
+
+.line-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+
+  &:hover {
+    color: @themeColor;
+  }
+
+  svg:not(:root) {
+    overflow: visible;
+  }
+}

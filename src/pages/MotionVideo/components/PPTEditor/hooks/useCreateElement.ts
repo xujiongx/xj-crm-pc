@@ -1,20 +1,31 @@
+import { LinePoolItem } from '@/pages/MotionVideo/config/lines';
 import {
   SHAPE_PATH_FORMULAS,
   ShapePoolItem,
 } from '@/pages/MotionVideo/config/shapes';
+import {
+  PPTElement,
+  PPTLineElement,
+  PPTShapeElement,
+} from '@/pages/MotionVideo/interface';
 import { getImageSize } from '@/pages/MotionVideo/utils/image';
 import { uid } from '@aicc/shared';
 import { nanoid } from 'nanoid';
-import { PPTElement } from '../interface';
 import useMainStore from '../store/main';
 import useSlidesStore from '../store/slides';
-import { PPTShapeElement } from '../types/slides';
 import useHistorySnapshot from './useHistorySnapshot';
 import { VIEWPORT_SIZE } from './useViewportSize';
 
+interface LineElementPosition {
+  top: number;
+  left: number;
+  start: [number, number];
+  end: [number, number];
+}
+
 interface CommonElementPosition {
-  top?: number;
-  left?: number;
+  top: number;
+  left: number;
   width: number;
   height: number;
 }
@@ -184,11 +195,49 @@ const useCreateElement = () => {
     createElement(newElement);
   };
 
+  /**
+   * 创建线条元素
+   * @param position 位置大小信息
+   * @param data 线条的路径和样式
+   */
+  const createLineElement = (
+    position: LineElementPosition,
+    data: LinePoolItem,
+  ) => {
+    const { left, top, start, end } = position;
+
+    const newElement: PPTLineElement = {
+      type: 'line',
+      id: nanoid(10),
+      left,
+      top,
+      start,
+      end,
+      points: data.points,
+      color: theme.themeColor,
+      style: data.style,
+      width: 2,
+    };
+    if (data.isBroken)
+      newElement.broken = [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2];
+    if (data.isBroken2)
+      newElement.broken2 = [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2];
+    if (data.isCurve)
+      newElement.curve = [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2];
+    if (data.isCubic)
+      newElement.cubic = [
+        [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2],
+        [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2],
+      ];
+    createElement(newElement);
+  };
+
   return {
     createTextElement,
     createImageElement,
     createVideoElement,
     createShapeElement,
+    createLineElement,
   };
 };
 

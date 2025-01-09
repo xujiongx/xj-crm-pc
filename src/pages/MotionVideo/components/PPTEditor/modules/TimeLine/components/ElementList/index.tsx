@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import {
   AddText,
+  Connection,
   GraphicDesign,
   Lock,
   Pic,
@@ -44,6 +45,10 @@ const NAME_MAP: Record<
   shape: {
     icon: <GraphicDesign />,
     name: '形状',
+  },
+  line: {
+    icon: <Connection />,
+    name: '线条',
   },
 };
 

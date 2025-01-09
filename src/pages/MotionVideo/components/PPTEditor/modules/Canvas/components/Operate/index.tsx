@@ -9,8 +9,10 @@ import { ElementOperateTypeMap } from '@/pages/MotionVideo/elements/Operate';
 import {
   OperateResizeHandlers,
   PPTElement,
+  PPTLineElement,
   PPTShapeElement,
 } from '@/pages/MotionVideo/interface';
+import { OperateLineHandlers } from '@/pages/MotionVideo/types/edit';
 import useHistorySnapshot from '../../../../hooks/useHistorySnapshot';
 import styles from './index.less';
 
@@ -34,6 +36,11 @@ interface OperateProps {
   isActive: boolean;
   isMultiSelect: boolean;
   isActiveGroupElement: boolean;
+  dragLineElement: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    element: PPTLineElement,
+    command: OperateLineHandlers,
+  ) => void;
 }
 
 const Operate = ({
@@ -45,6 +52,7 @@ const Operate = ({
   isMultiSelect,
   isActive,
   isActiveGroupElement,
+  dragLineElement,
 }: OperateProps) => {
   const canvasScale = useMainStore((store) => store.canvasScale);
 
@@ -82,6 +90,7 @@ const Operate = ({
           handlerVisible={isActiveGroupElement || !isMultiSelect}
           onRotate={onRotate}
           onScale={onScale}
+          dragLineElement={dragLineElement}
           moveShapeKeypoint={moveShapeKeypoint}
           store={{
             useMainStore,
