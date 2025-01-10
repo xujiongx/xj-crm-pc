@@ -25,6 +25,11 @@ export const formatActions = (data: {
         if (animate.type === 'video') {
           result.effectId = 'video';
         }
+
+        if (animate.type === 'audio') {
+          result.effectId = 'audio';
+          result.data.volume = item.volume;
+        }
         if (
           animate.type === 'in' ||
           animate.type === 'out' ||
@@ -44,7 +49,6 @@ export const formatActions = (data: {
       lock: item.lock,
     };
   });
-
   return rows;
 };
 

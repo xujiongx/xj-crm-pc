@@ -5,7 +5,7 @@ import styles from './index.less';
 interface ViewElement {
   zIndex: number;
   element: PPTElement;
-  slide: SlideItem;
+  slide?: SlideItem;
   animations: any[];
   isHidden: boolean;
 }

@@ -18,7 +18,7 @@ const VideoMaterial = () => {
         type="video"
         number={1}
         maxCount={10}
-        onUpload={(v) => {
+        onUpload={() => {
           fileListRefresh();
         }}
       >

@@ -10,6 +10,7 @@ import {
 } from '@/pages/MotionVideo/interface';
 import { getImageSize } from '@/pages/MotionVideo/utils/image';
 import { uid } from '@aicc/shared';
+import { message } from 'antd';
 import { nanoid } from 'nanoid';
 import useMainStore from '../store/main';
 import useSlidesStore from '../store/slides';
@@ -240,7 +241,7 @@ const useCreateElement = () => {
     // // 通过url链接获取视频时长
     const getDurationByUrl = async (videoUrl) => {
       return new Promise((resolve, reject) => {
-        const video = document.createElement('video');
+        const video = document.createElement('audio');
         video.src = videoUrl;
         video.addEventListener('loadedmetadata', () => {
           resolve(video);
@@ -252,21 +253,25 @@ const useCreateElement = () => {
     };
 
     getDurationByUrl(src).then((video: any) => {
-      createElement({
-        type: 'audio',
-        id: nanoid(10),
-        width: 50,
-        height: 50,
-        rotate: 0,
-        left: 0,
-        top: 0,
-        loop: false,
-        autoplay: false,
-        fixedRatio: true,
-        color: theme.themeColor,
-        src,
-        duration: video.duration,
-      });
+      if (!isNaN(video.duration) && video.duration !== Infinity) {
+        createElement({
+          type: 'audio',
+          id: nanoid(10),
+          width: 50,
+          height: 50,
+          rotate: 0,
+          left: 0,
+          top: 0,
+          loop: false,
+          autoplay: false,
+          fixedRatio: true,
+          color: theme.themeColor,
+          src,
+          duration: video.duration,
+        });
+      } else {
+        message.error('素材加载失败，请检查素材是否可用');
+      }
     });
   };
 

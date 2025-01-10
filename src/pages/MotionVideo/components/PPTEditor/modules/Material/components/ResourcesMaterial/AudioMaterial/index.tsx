@@ -1,23 +1,70 @@
-import AUDIO_URL from '@/assets/bg.mp3';
-import DEMO_URL from '@/assets/demo.mp3';
+import MUSIC_SRC from '@/assets/mg/music.png';
 import useCreateElement from '@/pages/MotionVideo/components/PPTEditor/hooks/useCreateElement';
-import { Button } from 'antd';
+import Uploader from '@/pages/MotionVideo/components/Uploader';
+import { UploadOutlined } from '@ant-design/icons';
+import { Delete } from '@icon-park/react';
+import { Button, message, Modal, Spin } from 'antd';
+import { useFileOperate } from '../hooks';
+import styles from './index.less';
 
 const AudioMaterial = () => {
+  const { listLoading, fileList, fileListRefresh, deleteFileAsync } =
+    useFileOperate('audio');
+
   const { createAudioElement } = useCreateElement();
-  const handleAddAudio = () => {
-    console.log('新增音频');
-    createAudioElement(AUDIO_URL);
-  };
-  const handleAddAudio2 = () => {
-    console.log('新增音频2');
-    createAudioElement(DEMO_URL);
-  };
+
+  console.log('👩‍🦳', fileList);
 
   return (
-    <div>
-      <Button onClick={() => handleAddAudio()}>新增音频</Button>
-      <Button onClick={() => handleAddAudio2()}>新增音频</Button>
+    <div className={styles.videos}>
+      <Uploader
+        type="audio"
+        number={1}
+        maxCount={10}
+        onUpload={() => {
+          fileListRefresh();
+        }}
+      >
+        <Button block icon={<UploadOutlined />}>
+          上传音频
+        </Button>
+      </Uploader>
+
+      <Spin spinning={listLoading}>
+        <div className={styles.list}>
+          {fileList?.map((item: { id: string; url: string; cover: string }) => (
+            <div
+              className={styles.item}
+              key={item.id}
+              onClick={() => {
+                console.log('👩‍❤️‍💋‍👩', item.url);
+                createAudioElement(item.url);
+              }}
+              style={{
+                backgroundImage: `url(${MUSIC_SRC})`,
+              }}
+            >
+              <div
+                className={styles.operate}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  Modal.confirm({
+                    title: '删除',
+                    content: '确认删除该素材吗？',
+                    onOk: async () => {
+                      const res = await deleteFileAsync(item.id);
+                      message.success(res?.msg);
+                      fileListRefresh();
+                    },
+                  });
+                }}
+              >
+                <Delete />
+              </div>
+            </div>
+          ))}
+        </div>
+      </Spin>
     </div>
   );
 };

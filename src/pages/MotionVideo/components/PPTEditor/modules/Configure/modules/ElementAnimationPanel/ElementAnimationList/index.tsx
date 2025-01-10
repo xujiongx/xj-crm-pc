@@ -16,7 +16,7 @@ const ElementAnimationList = (props) => {
   const { list, deleteAnimation, updateAnimation, manualRunAnimation } = props;
   const activeActionId = useMainStore((state) => state.activeActionId);
   const isVideoAnimation = (item) => {
-    return item.type === 'video';
+    return item.type === 'video' || item.type === 'audio';
   };
   const setActiveActionId = useMainStore((state) => state.setActiveActionId);
   return (

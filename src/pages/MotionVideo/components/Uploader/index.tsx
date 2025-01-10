@@ -6,24 +6,31 @@ import styles from './index.less';
 
 export const ImageAcceptType = ['jpg', 'jpeg', 'png'];
 export const VideoAcceptType = ['mp4'];
+export const AudioAcceptType = ['mpeg', 'mp3', 'wav', 'ogg'];
 
-export const beforUpload = (file: RcFile, type: 'image' | 'video') => {
-  const acceptType = type === 'image' ? ImageAcceptType : VideoAcceptType;
+const acceptTypeMap = {
+  image: ImageAcceptType,
+  video: VideoAcceptType,
+  audio: AudioAcceptType,
+};
+
+export const beforUpload = (
+  file: RcFile,
+  type: 'image' | 'video' | 'audio',
+) => {
+  const acceptType = acceptTypeMap[type];
   const maxSize = type === 'image' ? 5 : 1024;
-  if (
-    !acceptType
-      .map((item) => `${type === 'image' ? 'image' : 'video'}/${item}`)
-      .includes(file.type)
-  ) {
+  console.log('👢', acceptType, type, file.type);
+  if (!acceptType.map((item) => `${type}/${item}`).includes(file.type)) {
     message.error(
       `上传失败，格式错误，仅支持${acceptType.join('/')}格式${
-        type === 'image' ? '图片' : '视频'
+        type === 'image' ? '图片' : '素材'
       }`,
     );
     return false;
   } else if (file.size > maxSize * 1024 * 1024) {
     message.error(
-      `上传失败，单个${type === 'image' ? '图片' : '视频'}大小限制${
+      `上传失败，单个${type === 'image' ? '图片' : '素材'}大小限制${
         type === 'image' ? '5M' : '1G'
       }以内`,
     );
@@ -33,7 +40,7 @@ export const beforUpload = (file: RcFile, type: 'image' | 'video') => {
 };
 
 interface UploaderProps {
-  type?: 'image' | 'video';
+  type?: 'image' | 'video' | 'audio';
   number?: number;
   maxCount: number;
   disabled?: boolean;
@@ -45,6 +52,7 @@ interface UploaderProps {
 const AcceptType = {
   image: ImageAcceptType,
   video: VideoAcceptType,
+  audio: AudioAcceptType,
 };
 
 const Uploader = ({

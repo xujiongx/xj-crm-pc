@@ -49,7 +49,6 @@ export const formatActions = (data: {
       lock: item.lock,
     };
   });
-  console.log('👱rows', rows);
   return rows;
 };
 
