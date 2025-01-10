@@ -17,16 +17,18 @@ class AudioControl {
     src: string;
     startTime: number;
     time: number;
-    volume: number;
+    volume?: number;
   }) {
-    const { id, src, startTime, time, engine, volume } = data;
+    const { id, src, startTime, time, engine, volume = 1 } = data;
     let item: Howl;
     if (this.cacheMap[id]) {
       item = this.cacheMap[id];
       item.rate(engine.getPlayRate());
       item.seek((time - startTime) % item.duration());
-      item.play();
       item.volume(volume);
+      this.resetFadeFlags(id);
+      item.fade(volume, volume, 0);
+      item.play();
     } else {
       item = new Howl({ src, loop: false, autoplay: true, volume: volume });
       this.cacheMap[id] = item;
@@ -49,6 +51,56 @@ class AudioControl {
     engine.on('afterSetPlayRate', rateListener);
     this.listenerMap[id].time = timeListener;
     this.listenerMap[id].rate = rateListener;
+  }
+
+  fadeIn(data: {
+    id: string;
+    startTime: number;
+    time: number;
+    fadeDuration?: number;
+    volume?: number;
+  }) {
+    const { id, startTime, time, fadeDuration = 0, volume = 1 } = data;
+    if (!fadeDuration) return;
+    if (this.cacheMap[id]) {
+      const item = this.cacheMap[id];
+      if (time < startTime + fadeDuration && !item.fadeInExecuted) {
+        item.fade(
+          (time - startTime) / fadeDuration,
+          volume,
+          (startTime + fadeDuration - time) * 1000,
+        );
+        this.cacheMap[id].fadeInExecuted = true; // 标记 fadeIn 已执行
+      }
+    }
+  }
+  fadeOut(data: {
+    id: string;
+    endTime: number;
+    time: number;
+    fadeDuration?: number;
+    volume?: number;
+  }) {
+    const { id, endTime, time, fadeDuration = 0, volume = 1 } = data;
+    if (!fadeDuration) return;
+    if (this.cacheMap[id]) {
+      const item = this.cacheMap[id];
+      if (time > endTime - fadeDuration && !item.fadeOutExecuted) {
+        item.fade(
+          ((endTime - time) / fadeDuration) * volume,
+          0,
+          (endTime - time) * 1000,
+        );
+        this.cacheMap[id].fadeOutExecuted = true; // 标记 fadeOut 已执行
+      }
+    }
+  }
+
+  resetFadeFlags(id: string) {
+    if (this.cacheMap[id]) {
+      this.cacheMap[id].fadeInExecuted = false;
+      this.cacheMap[id].fadeOutExecuted = false;
+    }
   }
 
   stop(data: { id: string; engine: TimelineEngine }) {

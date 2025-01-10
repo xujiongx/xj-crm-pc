@@ -466,6 +466,8 @@ export interface PPTAudioElement extends PPTBaseElement {
   ext?: string;
   duration?: number;
   volume?: number;
+  fadeInDuration?: number;
+  fadeOutDuration?: number;
 }
 
 export type PPTElement =

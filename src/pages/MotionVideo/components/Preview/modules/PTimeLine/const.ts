@@ -5,7 +5,6 @@ import {
 import audioControl from '@/pages/MotionVideo/elements/Element/Audio/audioControl';
 import videoPlayerControl from '@/pages/MotionVideo/elements/Element/VideoElement/videoControl';
 import { runAnimation, setElementVisibility } from './utils';
-
 export const scaleWidth = 160;
 export const startLeft = 10;
 
@@ -21,6 +20,8 @@ export interface CustomTimelineAction extends TimelineAction {
     end: number;
     start: number;
     volume: number;
+    fadeInDuration?: number;
+    fadeOutDuration?: number;
   };
 }
 
@@ -140,7 +141,6 @@ export const mockEffect: Record<string, TimelineEffect> = {
       enter: ({ action, engine, isPlaying, time }) => {
         if (isPlaying) {
           const { id, src, volume } = (action as CustomTimelineAction).data;
-          console.log('👿', action, src);
           audioControl.start({
             id,
             src,
@@ -150,6 +150,27 @@ export const mockEffect: Record<string, TimelineEffect> = {
             volume,
           });
         }
+      },
+      update: ({ action, time }) => {
+        const { id, volume, fadeInDuration, fadeOutDuration } = (
+          action as CustomTimelineAction
+        ).data;
+        audioControl.fadeIn({
+          // 淡入
+          id,
+          startTime: action.start,
+          time,
+          volume,
+          fadeDuration: fadeInDuration,
+        });
+        audioControl.fadeOut({
+          // 淡出
+          id,
+          endTime: action.end,
+          time,
+          volume,
+          fadeDuration: fadeOutDuration,
+        });
       },
       leave: ({ action, engine }) => {
         const { id } = (action as CustomTimelineAction).data;

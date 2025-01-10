@@ -29,6 +29,8 @@ export const formatActions = (data: {
         if (animate.type === 'audio') {
           result.effectId = 'audio';
           result.data.volume = item.volume;
+          result.data.fadeInDuration = item.fadeInDuration;
+          result.data.fadeOutDuration = item.fadeOutDuration;
         }
         if (
           animate.type === 'in' ||
