@@ -92,23 +92,19 @@ const useCreateElement = () => {
     const content = data?.content || '';
     const vertical = data?.vertical || false;
 
-    const id = uid();
-    createElement(
-      {
-        type: 'text',
-        id,
-        left: left || (VIEWPORT_SIZE - width) / 2,
-        top: top || (VIEWPORT_SIZE * viewportRatio - height) / 2,
-        width,
-        height,
-        content,
-        rotate: 0,
-        defaultFontName: theme.fontName,
-        defaultColor: theme.fontColor,
-        vertical,
-      },
-      () => {},
-    );
+    createElement({
+      type: 'text',
+      id: uid(),
+      left: left || (VIEWPORT_SIZE - width) / 2,
+      top: top || (VIEWPORT_SIZE * viewportRatio - height) / 2,
+      width,
+      height,
+      content,
+      rotate: 0,
+      defaultFontName: theme.fontName,
+      defaultColor: theme.fontColor,
+      vertical,
+    });
   };
 
   /**
@@ -131,21 +127,24 @@ const useCreateElement = () => {
         });
       });
     };
-    // await getDurationByUrl(element.src);
 
     getDurationByUrl(src).then((video: any) => {
-      createElement({
-        type: 'video',
-        id: nanoid(10),
-        width: video.videoWidth,
-        height: video.videoHeight,
-        rotate: 0,
-        left: (VIEWPORT_SIZE - video.videoWidth) / 2,
-        top: (VIEWPORT_SIZE * viewportRatio - video.videoHeight) / 2,
-        src,
-        autoplay: false,
-        duration: video.duration,
-      });
+      if (!isNaN(video.duration) && video.duration !== Infinity) {
+        createElement({
+          type: 'video',
+          id: nanoid(10),
+          width: video.videoWidth,
+          height: video.videoHeight,
+          rotate: 0,
+          left: (VIEWPORT_SIZE - video.videoWidth) / 2,
+          top: (VIEWPORT_SIZE * viewportRatio - video.videoHeight) / 2,
+          src,
+          autoplay: false,
+          duration: video.duration,
+        });
+      } else {
+        message.error('素材加载失败，请检查素材是否可用');
+      }
     });
   };
 
@@ -190,9 +189,6 @@ const useCreateElement = () => {
         newElement.keypoints = pathFormula.defaultValue;
       } else newElement.path = pathFormula.formula(width, height);
     }
-
-    console.log('👕', newElement);
-
     createElement(newElement);
   };
 

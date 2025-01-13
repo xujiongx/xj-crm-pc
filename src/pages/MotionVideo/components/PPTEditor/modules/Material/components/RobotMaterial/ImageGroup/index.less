@@ -1,0 +1,141 @@
+@import '~@/themes/index.less';
+
+.listWrapper {
+  .list {
+    // display: flex;
+    // flex-wrap: wrap;
+    // overflow: auto;
+    // align-items: center;
+    // justify-content: center;
+    .flex-grid-layout();
+
+    padding: 8px;
+    margin-bottom: 4px;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgb(239, 239, 239);
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #bfbfbf;
+      border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #777;
+    }
+  }
+}
+
+.item {
+  position: relative;
+  overflow: hidden;
+  background-color: #f7f9fc;
+  border-radius: 10px;
+  cursor: pointer;
+
+  .flex-grid-layout-children(2, 48%);
+
+  border: 1px solid transparent;
+}
+
+.paramsWraper {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: flex;
+
+  img {
+    position: relative;
+    z-index: 2;
+    width: 20px;
+    height: 20px;
+  }
+
+  .labelBg {
+    position: relative;
+    z-index: 1;
+    margin-top: -1px;
+    height: 20px;
+    line-height: 20px;
+    background: linear-gradient(101.46deg, #fbf3eb 0.65%, #ffd2aa 58.43%);
+    border-radius: 4px;
+    font-size: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 4px;
+    color: rgba(199, 107, 57, 100%);
+  }
+}
+
+// .active {
+//   border-color: var(--ant-color-primary);
+
+//   .activeIcon {
+//     color: var(--ant-color-primary);
+//     position: absolute;
+//     font-size: 18px;
+//     top: 8px;
+//     right: 8px;
+//   }
+// }
+
+.cover {
+  display: flex;
+
+  img {
+    // width: 130px;
+    height: 130px;
+    // object-fit: contain;
+    // object-position: center top;
+    margin: 0 auto;
+  }
+
+  &:hover {
+    .resolutionWrapper {
+      display: flex;
+    }
+  }
+
+  .resolutionWrapper {
+    position: absolute;
+    bottom: 28px;
+    left: 12px;
+    // width: 80px;
+    height: 16px;
+    background: @primary-color;
+    border-radius: 2px;
+    opacity: 0.46;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    display: none;
+  }
+}
+
+.name {
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    font-size: @font-size-sm;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 4px;
+  }
+}

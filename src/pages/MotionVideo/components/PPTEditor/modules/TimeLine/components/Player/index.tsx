@@ -8,6 +8,7 @@ import { Slider } from 'antd';
 import { useEffect, useState } from 'react';
 import ActionIcon from '../../../Canvas/components/ActionIcon';
 import { scaleWidth, startLeft } from '../../const';
+// import { useCaption } from './index.hooks';
 import styles from './index.less';
 
 export const Rates = [0.2, 0.5, 1.0, 1.5, 2.0];
@@ -101,11 +102,11 @@ const TimelinePlayer = (props) => {
     }
   };
 
-  // 设置播放速率
-  const handleRateChange = (rate: number) => {
-    if (!timelineState.current) return;
-    timelineState.current.setPlayRate(rate);
-  };
+  // // 设置播放速率
+  // const handleRateChange = (rate: number) => {
+  //   if (!timelineState.current) return;
+  //   timelineState.current.setPlayRate(rate);
+  // };
 
   // 时间展示
   const timeRender = (time: number) => {
@@ -115,17 +116,30 @@ const TimelinePlayer = (props) => {
     return <>{`${min}:${second}.${float.replace('0.', '')}`}</>;
   };
 
+  // 字幕相关，需要等产品需求描述之后再开发
+  // const { isOpenCaption, handleSwitchCaption } = useCaption();
+
   return (
     <div className={styles['timeline-player']}>
       <div className={styles['timeline-rate']}>
-        <span>时间轴比例：</span>
-        <Slider
-          defaultValue={1}
-          min={1}
-          max={5}
-          style={{ width: '100px' }}
-          onChange={(v) => handleScaleChange(v)}
-        />
+        {/* <div className={styles['timeline-operate']}>
+          <span>字幕：</span>
+          <Switch
+            value={isOpenCaption}
+            size="small"
+            onChange={(v) => handleSwitchCaption(v)}
+          />
+        </div> */}
+        <div className={styles['timeline-operate']}>
+          <span>时间轴比例：</span>
+          <Slider
+            defaultValue={1}
+            min={1}
+            max={5}
+            style={{ width: '100px' }}
+            onChange={(v) => handleScaleChange(v)}
+          />
+        </div>
       </div>
       <div className={styles['play-control']} onClick={handlePlayOrPause}>
         <ActionIcon

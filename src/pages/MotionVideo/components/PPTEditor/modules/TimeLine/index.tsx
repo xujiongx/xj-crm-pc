@@ -16,7 +16,7 @@ import { mockEffect, scaleWidth, startLeft } from './const';
 import { useElement, useTimeLine } from './hooks';
 import './index.less';
 import styles from './index.less';
-import { formatActions, handleResetElement } from './utils';
+import { formatActions, handleSetElementVisibility } from './utils';
 
 const height = 250;
 
@@ -107,11 +107,12 @@ const TimelineEditor = forwardRef((props, ref) => {
           autoScroll={true}
           gridSnap={true}
           dragLine={true}
-          onClickTimeArea={() => {
+          onClickTimeArea={(time) => {
             // 还原状态
-            handleResetElement(
+            handleSetElementVisibility(
               currentSlide.elements,
               currentSlide.animations || [],
+              time,
             );
             return true;
           }}
@@ -121,8 +122,20 @@ const TimelineEditor = forwardRef((props, ref) => {
           onChange={() => {
             return false;
           }}
-          onClickAction={(e, { action }) => {
+          onClickAction={(e, { action, time }) => {
             if (action.lock) return;
+
+            const curTime = timelineState.current?.getTime() || 0;
+            if (curTime <= action.start || curTime >= action.end) {
+              timelineState.current?.setTime(action.start);
+            }
+            // 还原状态
+            handleSetElementVisibility(
+              currentSlide.elements,
+              currentSlide.animations || [],
+              time,
+            );
+
             setActiveActionId(action.id);
             setTimeout(() => {
               setActiveConfigTab(ToolbarStates.EL_ANIMATION);

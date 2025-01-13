@@ -1,5 +1,5 @@
-import useMainStore from '@/pages/MotionVideo/components/PPTEditor/store/main';
 import useSlideTheme from '@/pages/MotionVideo/components/PPTEditor/hooks/slideTheme';
+import useMainStore from '@/pages/MotionVideo/components/PPTEditor/store/main';
 import useSlidesStore from '@/pages/MotionVideo/components/PPTEditor/store/slides';
 import useHistorySnapshot from '@/pages/MotionVideo/components/PPTEditor/store/snapshot';
 import { getImageDataURL } from '@/pages/MotionVideo/utils/image';
@@ -123,7 +123,7 @@ const SlideDesignPanel: React.FC = () => {
             }
           >
             <div
-              className="colorPick-btn"
+              className="color-pick-btn"
               style={{ backgroundColor: background?.color || '#fff' }}
             >
               <FormatPainterFilled className="colorPick-btn-icon" />

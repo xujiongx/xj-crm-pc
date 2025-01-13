@@ -219,17 +219,20 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
       if (animations) {
         addAnimations = animations;
       } else {
-        const elAnimations = elements.map((el) => {
-          return {
-            id: nanoid(10),
-            elId: el.id,
-            effect: 'show',
-            start: 0,
-            end: 1,
-            name: '一直展示',
-            type: 'in' as const,
-          };
-        });
+        const canShowElementMap = ['text', 'image', 'shape', 'line', 'video'];
+        const elAnimations = elements
+          .filter((el) => canShowElementMap.includes(el.type))
+          .map((el) => {
+            return {
+              id: nanoid(10),
+              elId: el.id,
+              effect: 'show',
+              start: 0,
+              end: 1,
+              name: '一直展示',
+              type: 'in' as const,
+            };
+          });
 
         const videoAnimations = elements
           .filter((el) => el.type === 'video')
@@ -252,8 +255,8 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
               id: nanoid(10),
               elId: el.id,
               effect: 'show',
-              start: 1,
-              end: element.duration + 1,
+              start: 0,
+              end: element.duration,
               name: '音频',
               type: 'audio' as const,
               src: el.src,

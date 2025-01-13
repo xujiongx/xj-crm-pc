@@ -3,6 +3,7 @@
 .slide-design-panel {
   user-select: none;
 }
+
 .row {
   width: 100%;
   display: flex;
@@ -10,6 +11,7 @@
   margin-bottom: 10px;
   justify-content: space-between;
 }
+
 .title {
   display: flex;
   justify-content: space-between;
@@ -24,9 +26,11 @@
     }
   }
 }
+
 .background-image-wrapper {
   margin-bottom: 10px;
 }
+
 .background-image {
   height: 148px;
   border: 1px dashed #eee;
@@ -36,11 +40,11 @@
 
   &:hover {
     border-color: #eee;
-    color:var(--ant-color-primary, #145eff);
+    color: var(--ant-color-primary, #145eff);
   }
 
   .content {
-    @include absolute-0();
+    .absolute-0();
 
     display: flex;
     justify-content: center;
@@ -54,10 +58,11 @@
 }
 
 .theme-list {
-  @include flex-grid-layout();
+  .flex-grid-layout();
 }
+
 .theme-item {
-  @include flex-grid-layout-children(2, 48%);
+  .flex-grid-layout-children(2, 48%);
 
   padding-bottom: 30%;
   border-radius: 2px;
@@ -65,7 +70,7 @@
   cursor: pointer;
 
   .theme-item-content {
-    @include absolute-0();
+    .absolute-0();
 
     display: flex;
     flex-direction: column;
@@ -78,9 +83,11 @@
   .text {
     font-size: 16px;
   }
+
   .colors {
     display: flex;
   }
+
   .color-block {
     margin-top: 8px;
     width: 12px;
@@ -93,7 +100,7 @@
   }
 
   .btns {
-    @include absolute-0();
+    .absolute-0();
 
     flex-direction: column;
     justify-content: center;
@@ -105,7 +112,7 @@
   }
 }
 
-.colorPick-btn {
+.color-pick-btn {
   width: 70px;
   display: flex;
   align-items: center;
@@ -118,6 +125,7 @@
   cursor: pointer;
   border: 1px solid #d9d9d9;
   position: relative;
+
   &-icon {
     position: absolute;
     top: 8px;

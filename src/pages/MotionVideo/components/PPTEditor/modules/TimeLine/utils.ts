@@ -105,17 +105,33 @@ export const runAnimation = (
   }
 };
 
-export const handleResetElement = (
+export const handleSetElementVisibility = (
   elements: PPTElement[],
   animations: PPTAnimation[],
+  time: number,
 ) => {
-  elements.forEach((element) => {
+  const resetElement = (element) => {
     const curElementAnimations = animations.filter(
       (item) => item.elId === element.id,
     );
-    const show =
-      curElementAnimations[0].type === 'in' &&
-      curElementAnimations[0].effect === 'show';
-    setElementVisibility(element.id, show);
+
+    const enterAction = curElementAnimations.find(
+      (item) => item.type === 'in' && item.effect !== 'show',
+    );
+
+    const outAction = curElementAnimations.find((item) => item.type === 'out');
+
+    setElementVisibility(element.id, true);
+
+    if (enterAction && time <= enterAction.start) {
+      setElementVisibility(element.id, false);
+    }
+    if (outAction && time >= outAction.end) {
+      setElementVisibility(element.id, false);
+    }
+  };
+
+  elements.forEach((element) => {
+    resetElement(element);
   });
 };

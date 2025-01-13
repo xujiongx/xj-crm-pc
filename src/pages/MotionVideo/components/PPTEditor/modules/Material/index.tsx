@@ -3,11 +3,12 @@ import {
   FontSizeOutlined,
   FundProjectionScreenOutlined,
 } from '@ant-design/icons';
-import { Connection, GraphicDesign } from '@icon-park/react';
+import { Connection, GraphicDesign, User } from '@icon-park/react';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import LineMaterial from './components/LineMaterial';
 import Resources from './components/ResourcesMaterial';
+import RobotListMaterial from './components/RobotMaterial';
 import SceneMaterial from './components/SceneMaterial/index';
 import ShapeMaterial from './components/ShapeMaterial';
 import TextMaterial from './components/TextMaterial';
@@ -28,12 +29,12 @@ const Material = ({ className }: { className: string }) => {
       icon: <FundProjectionScreenOutlined />,
       component: <SceneMaterial />,
     },
-    // {
-    //   key: 'role',
-    //   label: '角色',
-    //   icon: 'user',
-    //   component: null,
-    // },
+    {
+      key: 'role',
+      label: '角色',
+      icon: <User />,
+      component: <RobotListMaterial />,
+    },
     {
       key: 'text',
       label: '文字',
