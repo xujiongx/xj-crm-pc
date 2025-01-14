@@ -114,13 +114,13 @@ const ElementShadow = () => {
                 }
               >
                 <div
-                  className="colorPick-btn"
+                  className="color-pick-btn"
                   style={{
                     backgroundColor: shadow?.color,
                     width: '100%',
                   }}
                 >
-                  <BgColorsOutlined className="colorPick-btn-icon" />
+                  <BgColorsOutlined className="color-pick-btn-icon" />
                 </div>
               </ColorPicker>
             </div>

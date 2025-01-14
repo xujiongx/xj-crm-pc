@@ -271,6 +271,24 @@ const useCreateElement = () => {
     });
   };
 
+  const createDigitalRobotElement = (
+    position: CommonElementPosition,
+    data: any,
+  ) => {
+    const { left, top, width, height } = position;
+    createElement({
+      type: 'digitalRobot',
+      id: nanoid(10),
+      digitalRobotId: data.digitalRobotId,
+      src: data.src,
+      left,
+      top,
+      width,
+      height,
+      rotate: 0,
+    });
+  };
+
   return {
     createTextElement,
     createImageElement,
@@ -278,6 +296,7 @@ const useCreateElement = () => {
     createShapeElement,
     createLineElement,
     createAudioElement,
+    createDigitalRobotElement,
   };
 };
 

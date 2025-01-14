@@ -3,6 +3,7 @@ import {
   useSlidesStore,
 } from '@/pages/MotionVideo/components/PPTEditor/store';
 import AudioStylePanel from './AudioStylePanel';
+import DigitalRobotStylePanel from './DigitalRobotStylePanel';
 import ImageStylePanel from './ImageStylePanel';
 import LineStylePanel from './LineStylePanel';
 import ShapeStylePanel from './ShapeStylePanel';
@@ -23,6 +24,7 @@ const ElementStylePanel = () => {
     shape: <ShapeStylePanel />,
     line: <LineStylePanel />,
     audio: <AudioStylePanel />,
+    digitalRobot: <DigitalRobotStylePanel />,
   };
 
   if (!handleElement) return null;

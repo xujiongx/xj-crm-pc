@@ -62,11 +62,16 @@ const EditableElement = ({
     }
   }, [show]);
 
+  if (!Component) {
+    return null;
+  }
+
   return (
     <div
       className={styles.element}
       id={`element-${element.id}`}
       style={{
+        position: 'relative',
         zIndex,
         opacity: isHidden ? '0' : '1',
         pointerEvents: isHidden ? 'none' : 'auto',

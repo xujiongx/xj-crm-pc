@@ -6,6 +6,7 @@ import {
 import { uid } from '@aicc/shared/es';
 import useTimelineStore from '../../store';
 import audioControl from './audioControl';
+import gaspController from './gaspControl';
 import lottieControl from './lottieControl';
 
 export const scaleWidth = 160;
@@ -14,7 +15,7 @@ export const startLeft = 20;
 
 export interface CustomTimelineAction extends TimelineAction {
   data: {
-    id?: string;
+    id: string;
     src: string;
     name: string;
     text?: string;
@@ -176,37 +177,53 @@ export const mockEffect: Record<string, TimelineEffect> = {
           visible: true,
           status: 'enter',
         });
+        // gaspController.start({
+        //   id,
+        //   duration: action.end - action.start,
+        //   progress: (time - action.start) / (action.end - action.start),
+        // });
       },
       start: ({ action, time }) => {
         const { id, type, name, src } = (action as CustomTimelineAction).data;
-        useTimelineStore.getState().updateElement({
+        // useTimelineStore.getState().updateElement({
+        //   id,
+        //   status: 'start',
+        // });
+        gaspController.start({
           id,
-          status: 'start',
+          duration: action.end - action.start,
+          progress: (time - action.start) / (action.end - action.start),
         });
       },
       leave: ({ action, time }) => {
         const { id, type, name, src } = (action as CustomTimelineAction).data;
-        useTimelineStore.getState().updateElement({
+        // useTimelineStore.getState().updateElement({
+        //   id,
+        //   status: 'leave',
+        //   visible: false,
+        // });
+        gaspController.stop({
           id,
-          status: 'leave',
-          visible: false,
         });
       },
-      update: ({ action, time }) => {
-        const { id, type, name, src } = (action as CustomTimelineAction).data;
-        useTimelineStore.getState().updateElement({
-          id,
-          time,
-          duration: action.end - action.start,
-          progress: (time - action.start) / (action.end - action.start),
-          status: 'update',
-        });
-      },
+      // update: ({ action, time }) => {
+      //   const { id, type, name, src } = (action as CustomTimelineAction).data;
+      //   useTimelineStore.getState().updateElement({
+      //     id,
+      //     time,
+      //     duration: action.end - action.start,
+      //     progress: (time - action.start) / (action.end - action.start),
+      //     status: 'update',
+      //   });
+      // },
       stop: ({ action, time }) => {
         const { id, type, name, src } = (action as CustomTimelineAction).data;
-        useTimelineStore.getState().updateElement({
+        // // useTimelineStore.getState().updateElement({
+        // //   id,
+        // //   status: 'stop',
+        // // });
+        gaspController.stop({
           id,
-          status: 'stop',
         });
       },
     },

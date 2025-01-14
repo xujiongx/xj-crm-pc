@@ -40,6 +40,7 @@ export const enum ElementTypes {
   SHAPE = 'shape',
   LINE = 'line',
   AUDIO = 'audio',
+  DIGITAL_ROBOT = 'digitalRobot',
 }
 
 export const enum OperateBorderLines {
@@ -145,6 +146,13 @@ export interface PPTTextElement extends PPTBaseElement {
   paragraphSpace?: number;
   /** 竖向文本 */
   vertical?: boolean;
+}
+/** 文本元素 */
+export interface PPTDigitalRobotElement extends PPTBaseElement {
+  type: 'digitalRobot';
+  digitalRobotId: string;
+  src: string;
+
 }
 
 /** 图片元素 */
@@ -478,7 +486,8 @@ export type PPTElement =
   | PPTTableElement
   | PPTLatexElement
   | PPTVideoElement
-  | PPTAudioElement;
+  | PPTAudioElement
+  | PPTDigitalRobotElement;
 
 /** 幻灯片页面 */
 export interface SlideItem {

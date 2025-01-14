@@ -11,5 +11,6 @@ export const ElementOperateTypeMap: Record<string, any> = {
   [ElementTypes.VIDEO]: CommonElementOperate,
   [ElementTypes.SHAPE]: ShapeElementOperate,
   [ElementTypes.LINE]: LineElementOperate,
+  [ElementTypes.DIGITAL_ROBOT]: CommonElementOperate,
   [ElementTypes.AUDIO]: null,
 };

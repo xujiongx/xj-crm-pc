@@ -110,7 +110,7 @@ export const handleSetElementVisibility = (
   animations: PPTAnimation[],
   time: number,
 ) => {
-  const resetElement = (element) => {
+  const resetElement = (element: PPTElement) => {
     const curElementAnimations = animations.filter(
       (item) => item.elId === element.id,
     );

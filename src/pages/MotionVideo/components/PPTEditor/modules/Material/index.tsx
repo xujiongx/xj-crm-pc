@@ -31,7 +31,7 @@ const Material = ({ className }: { className: string }) => {
     },
     {
       key: 'role',
-      label: '角色',
+      label: '数字人',
       icon: <User />,
       component: <RobotListMaterial />,
     },

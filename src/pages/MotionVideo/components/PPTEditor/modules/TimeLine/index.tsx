@@ -135,7 +135,6 @@ const TimelineEditor = forwardRef((props, ref) => {
               currentSlide.animations || [],
               time,
             );
-
             setActiveActionId(action.id);
             setTimeout(() => {
               setActiveConfigTab(ToolbarStates.EL_ANIMATION);

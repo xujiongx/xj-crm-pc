@@ -214,12 +214,18 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
   addElement(element: PPTElement | PPTElement[], animations?: PPTAnimation[]) {
     set((state) => {
       const elements = Array.isArray(element) ? element : [element];
-
       let addAnimations: PPTAnimation[] = [];
       if (animations) {
         addAnimations = animations;
       } else {
-        const canShowElementMap = ['text', 'image', 'shape', 'line', 'video'];
+        const canShowElementMap = [
+          'text',
+          'image',
+          'shape',
+          'line',
+          'video',
+          'digitalRobot',
+        ];
         const elAnimations = elements
           .filter((el) => canShowElementMap.includes(el.type))
           .map((el) => {

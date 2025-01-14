@@ -126,7 +126,7 @@ const SlideDesignPanel: React.FC = () => {
               className="color-pick-btn"
               style={{ backgroundColor: background?.color || '#fff' }}
             >
-              <FormatPainterFilled className="colorPick-btn-icon" />
+              <FormatPainterFilled className="color-pick-btn-icon" />
             </div>
           </ColorPicker>
         )}
@@ -194,7 +194,7 @@ const SlideDesignPanel: React.FC = () => {
               }
             >
               <div
-                className="colorPick-btn"
+                className="color-pick-btn"
                 style={{
                   backgroundColor: background.gradientColor
                     ? background.gradientColor[0]
@@ -202,7 +202,7 @@ const SlideDesignPanel: React.FC = () => {
                   width: '60%',
                 }}
               >
-                <FormatPainterFilled className="colorPick-btn-icon" />
+                <FormatPainterFilled className="color-pick-btn-icon" />
               </div>
             </ColorPicker>
           </div>
@@ -224,7 +224,7 @@ const SlideDesignPanel: React.FC = () => {
               }
             >
               <div
-                className="colorPick-btn"
+                className="color-pick-btn"
                 style={{
                   backgroundColor: background.gradientColor
                     ? background.gradientColor[1]
@@ -232,7 +232,7 @@ const SlideDesignPanel: React.FC = () => {
                   width: '60%',
                 }}
               >
-                <FormatPainterFilled className="colorPick-btn-icon" />
+                <FormatPainterFilled className="color-pick-btn-icon" />
               </div>
             </ColorPicker>
           </div>
@@ -282,10 +282,10 @@ const SlideDesignPanel: React.FC = () => {
           }
         >
           <div
-            className="colorPick-btn"
+            className="color-pick-btn"
             style={{ backgroundColor: theme.fontColor, width: '60%' }}
           >
-            <FontSizeOutlined className="colorPick-btn-icon" />
+            <FontSizeOutlined className="color-pick-btn-icon" />
           </div>
         </ColorPicker>
       </div>
@@ -298,10 +298,10 @@ const SlideDesignPanel: React.FC = () => {
           }
         >
           <div
-            className="colorPick-btn"
+            className="color-pick-btn"
             style={{ backgroundColor: theme.backgroundColor, width: '60%' }}
           >
-            <FormatPainterFilled className="colorPick-btn-icon" />
+            <FormatPainterFilled className="color-pick-btn-icon" />
           </div>
         </ColorPicker>
       </div>
@@ -314,10 +314,10 @@ const SlideDesignPanel: React.FC = () => {
           }
         >
           <div
-            className="colorPick-btn"
+            className="color-pick-btn"
             style={{ backgroundColor: theme.themeColor, width: '60%' }}
           >
-            <FunnelPlotOutlined className="colorPick-btn-icon" />
+            <FunnelPlotOutlined className="color-pick-btn-icon" />
           </div>
         </ColorPicker>
       </div>

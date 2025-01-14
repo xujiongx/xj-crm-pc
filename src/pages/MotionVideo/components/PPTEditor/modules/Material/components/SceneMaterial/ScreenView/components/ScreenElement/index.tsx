@@ -21,6 +21,8 @@ const ScreenElement = (props: ViewElement) => {
 
   const show = animations[0]?.type === 'in' && animations[0]?.effect === 'show';
 
+  if (!Component) return null;
+
   return (
     <div
       className={styles.element}

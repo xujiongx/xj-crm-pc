@@ -1,4 +1,5 @@
 import { ElementTypes } from '../../interface';
+import DigitalRobotView from './DigitalRobot/view'
 import ImageView from './Image/view';
 import LineElement from './Line/view';
 import ShapeView from './Shape/view';
@@ -14,5 +15,6 @@ export const ElementViewTypeMap: Record<
   [ElementTypes.VIDEO]: VideoView,
   [ElementTypes.SHAPE]: ShapeView,
   [ElementTypes.LINE]: LineElement,
+  [ElementTypes.DIGITAL_ROBOT]: DigitalRobotView,
   [ElementTypes.AUDIO]: () => null,
 };

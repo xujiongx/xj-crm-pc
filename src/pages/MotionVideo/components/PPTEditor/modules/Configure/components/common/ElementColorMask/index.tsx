@@ -62,13 +62,13 @@ const ElementColorMask = () => {
               onChange={(color) => updateColorMask(color.toRgbString())}
             >
               <div
-                className="colorPick-btn"
+                className="color-pick-btn"
                 style={{
                   backgroundColor: handleElement.colorMask,
                   width: '100%',
                 }}
               >
-                <BgColorsOutlined className="colorPick-btn-icon" />
+                <BgColorsOutlined className="color-pick-btn-icon" />
               </div>
             </ColorPicker>
           </div>

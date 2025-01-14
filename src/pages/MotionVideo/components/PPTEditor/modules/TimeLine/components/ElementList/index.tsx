@@ -15,6 +15,7 @@ import {
   Lock,
   Pic,
   Unlock,
+  User,
   VideoTwo,
 } from '@icon-park/react';
 import { Flex, Popconfirm } from 'antd';
@@ -54,6 +55,10 @@ const NAME_MAP: Record<
   audio: {
     icon: <AudioFile />,
     name: '音频',
+  },
+  digitalRobot: {
+    icon: <User />,
+    name: '数字人',
   },
 };
 
@@ -150,8 +155,8 @@ const ElementList = (props: any) => {
               onClick={(e) => handleSelectElement(e, item)}
             >
               <div className={styles['content']}>
-                <div className={styles['icon']}>{NAME_MAP[item.name].icon}</div>
-                <div className={styles['text']}>{NAME_MAP[item.name].name}</div>
+                <div className={styles['icon']}>{NAME_MAP[item.name]?.icon}</div>
+                <div className={styles['text']}>{NAME_MAP[item.name]?.name}</div>
               </div>
 
               <Flex gap={6} className={styles['item-operate']}>
