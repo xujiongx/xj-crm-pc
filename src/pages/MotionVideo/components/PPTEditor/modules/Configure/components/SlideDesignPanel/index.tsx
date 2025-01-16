@@ -268,9 +268,10 @@ const SlideDesignPanel: React.FC = () => {
           onChange={(value: string) => updateThemeProps({ fontName: value })}
           value={theme.fontName}
           style={{ width: '60%' }}
-          options={availableFonts
-            .concat(WEB_FONTS)
-            .map((font) => ({ value: font.value, label: font.label }))}
+          options={availableFonts.concat(WEB_FONTS).map((font) => ({
+            value: font.value,
+            label: <span style={{ fontFamily: font.value }}>{font.label}</span>,
+          }))}
         />
       </div>
       <div className="row">

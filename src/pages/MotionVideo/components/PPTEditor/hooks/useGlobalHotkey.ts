@@ -124,7 +124,6 @@ const HotkeyHandler = () => {
     if (!editorAreaFocus) return;
     uncombineElements();
   };
-
   const remove = () => {
     if (activeElementList.length) {
       deleteElement();
@@ -273,7 +272,6 @@ const HotkeyHandler = () => {
     }
     if (key === KEYS.DELETE || key === KEYS.BACKSPACE) {
       if (disableHotkeys) return;
-
       e.preventDefault();
       remove();
     }
@@ -345,7 +343,7 @@ const HotkeyHandler = () => {
             width: 120,
             height: 0,
           },
-          { content: 'ext' },
+          { content: '默认文本' },
         );
       } else if (key === KEYS.R) {
         createShapeElement(

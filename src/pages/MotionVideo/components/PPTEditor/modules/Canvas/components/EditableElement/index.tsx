@@ -36,9 +36,10 @@ const EditableElement = ({
   );
 
   // 入场动画为一直显示，默认渲染就为true
-  const show =
+  const show = !(
     curElementAnimations[0]?.type === 'in' &&
-    curElementAnimations[0]?.effect === 'show';
+    curElementAnimations[0]?.effect !== 'show'
+  );
 
   const hiddenElementIdList = useMainStore(
     (store) => store.hiddenElementIdList,

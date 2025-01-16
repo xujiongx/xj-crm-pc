@@ -8,12 +8,18 @@ import {
   useState,
 } from 'react';
 import { useMainStore, useSlidesStore } from '../../store';
+import ContextMenu from '../Canvas/components/ContextMenu';
 import { ToolbarStates } from '../Configure/enum';
 import ActionRender from './components/ActionRender';
 import ElementList from './components/ElementList';
 import TimelinePlayer from './components/Player';
 import { mockEffect, scaleWidth, startLeft } from './const';
-import { useElement, useTimeLine } from './hooks';
+import {
+  useElement,
+  useMenu,
+  useTimeLine,
+  useTimeLineHandleClick,
+} from './hooks';
 import './index.less';
 import styles from './index.less';
 import { formatActions, handleSetElementVisibility } from './utils';
@@ -23,6 +29,7 @@ const height = 250;
 const TimelineEditor = forwardRef((props, ref) => {
   const domRef = useRef<HTMLDivElement>();
   const timelineState = useRef<TimelineState>(null);
+  const viewportwrapperRef = useRef<HTMLDivElement>(null);
 
   const currentSlide = useSlidesStore(
     (state) => state.slides[state.slideIndex],
@@ -38,6 +45,8 @@ const TimelineEditor = forwardRef((props, ref) => {
   const [scale, setScale] = useState(1);
 
   const [scrollTop, setScrollTop] = useState(0);
+
+  const { menuItems, contextMenuClickFn } = useMenu();
 
   useEffect(() => {
     if (!currentSlide?.elements.length) {
@@ -74,6 +83,8 @@ const TimelineEditor = forwardRef((props, ref) => {
     };
   }, []);
 
+  const { handleClickBlankArea } = useTimeLineHandleClick();
+
   return (
     <div className={styles['timeline-wrapper']}>
       <TimelinePlayer
@@ -85,7 +96,11 @@ const TimelineEditor = forwardRef((props, ref) => {
           timelineState.current?.setScrollLeft(0);
         }}
       />
-      <div className={styles['timeline-editor-container']}>
+      <div
+        className={styles['timeline-editor-container']}
+        ref={viewportwrapperRef}
+        onMouseDown={(e) => handleClickBlankArea(e)}
+      >
         <ElementList
           listStyle={{
             height: `${height}px`,
@@ -116,6 +131,23 @@ const TimelineEditor = forwardRef((props, ref) => {
             );
             return true;
           }}
+          onContextMenuAction={(e, { action, time }) => {
+            if (action.lock) return;
+            const curTime = timelineState.current?.getTime() || 0;
+            if (curTime <= action.start || curTime >= action.end) {
+              timelineState.current?.setTime(action.start);
+            }
+            // 还原状态
+            handleSetElementVisibility(
+              currentSlide.elements,
+              currentSlide.animations || [],
+              time,
+            );
+            setActiveActionId(action.id);
+            setTimeout(() => {
+              setActiveConfigTab(ToolbarStates.EL_ANIMATION);
+            }, 10);
+          }}
           onClickRow={(e, { row }) => {
             handleSelectElement(e, row);
           }}
@@ -124,7 +156,6 @@ const TimelineEditor = forwardRef((props, ref) => {
           }}
           onClickAction={(e, { action, time }) => {
             if (action.lock) return;
-
             const curTime = timelineState.current?.getTime() || 0;
             if (curTime <= action.start || curTime >= action.end) {
               timelineState.current?.setTime(action.start);
@@ -169,6 +200,11 @@ const TimelineEditor = forwardRef((props, ref) => {
             />
           )}
         />
+        <ContextMenu
+          menuItems={menuItems}
+          targetEl={viewportwrapperRef.current as HTMLDivElement}
+          contextMenuClickFn={contextMenuClickFn}
+        ></ContextMenu>
       </div>
     </div>
   );

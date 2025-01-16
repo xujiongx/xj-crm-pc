@@ -15,9 +15,6 @@ const useSlideHandler = () => {
   const setActiveElementIdList = useMainStore(
     (store) => store.setActiveElementIds,
   );
-  const selectedSlidesIndex = useMainStore(
-    (store) => store.selectedSlidesIndex,
-  );
 
   const updateSlideIndex = useSlidesStore((store) => store.updateSlideIndex);
   const setSlides = useSlidesStore((store) => store.setSlides);
@@ -29,9 +26,7 @@ const useSlideHandler = () => {
   const setThumbnailsFocus = useMainStore((store) => store.setThumbnailsFocus);
 
   const activeElementIdList = useMainStore((store) => store.activeElementIds);
-  const updateSelectedSlidesIndex = useMainStore(
-    (store) => store.updateSelectedSlidesIndex,
-  );
+
   const addSlide = useSlidesStore((state) => state.addSlide);
   const currentSlide = useSlidesStore(
     (state) => state.slides[state.slideIndex],
@@ -39,14 +34,7 @@ const useSlideHandler = () => {
 
   const { addHistorySnapshot } = useHistorySnapshot();
 
-  const selectedSlides = useMemo(
-    () => slides.filter((item, index) => selectedSlidesIndex.includes(index)),
-    [slides, selectedSlidesIndex],
-  );
-  const selectedSlidesId = useMemo(
-    () => selectedSlides.map((item) => item.id),
-    [selectedSlides],
-  );
+  const selectedSlideId = currentSlide?.id;
 
   const theme = useSlidesStore((store) => store.theme);
 
@@ -64,7 +52,6 @@ const useSlideHandler = () => {
       },
     };
     updateSlideIndex(0);
-    updateSelectedSlidesIndex([]);
     setSlides([emptySlide]);
   };
 
@@ -144,29 +131,20 @@ const useSlideHandler = () => {
   };
 
   // 删除当前页，若将删除全部页面，则执行重置幻灯片操作
-  const handleDeleteSlide = (targetSlidesId = selectedSlidesId) => {
-    if (slides.length === targetSlidesId.length) resetSlides();
-    else deleteSlide(targetSlidesId);
-
-    updateSelectedSlidesIndex([]);
+  const handleDeleteSlide = (targetSlideId = selectedSlideId) => {
+    if (slides.length === 1) {
+      resetSlides();
+    } else {
+      deleteSlide(targetSlideId);
+    }
+    updateSlideIndex(0);
   };
 
   // 将当前页复制后删除（剪切）
   // 由于复制操作会导致多选状态消失，所以需要提前将需要删除的页面ID进行缓存
   const cutSlide = () => {
-    const targetSlidesId = [...selectedSlidesId];
     copySlide();
-    handleDeleteSlide(targetSlidesId);
-  };
-
-  // 选中全部幻灯片
-  const selectAllSlide = () => {
-    const newSelectedSlidesIndex = Array.from(
-      Array(slides.length),
-      (_, index) => index,
-    );
-    setActiveElementIdList([]);
-    updateSelectedSlidesIndex(newSelectedSlidesIndex);
+    handleDeleteSlide(selectedSlideId);
   };
 
   // 拖拽调整幻灯片顺序同步数据
@@ -216,7 +194,6 @@ const useSlideHandler = () => {
     copyAndPasteSlide,
     deleteSlide: handleDeleteSlide,
     cutSlide,
-    selectAllSlide,
     sortSlides,
     isEmptySlide,
   };

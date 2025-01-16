@@ -15,19 +15,22 @@ import { useMainStore, useSlidesStore, useSnapshotStore } from './store';
 
 const MotionVideoEditor = (props) => {
   const { PPTEditorData, dimensionRatio, videoData } = props;
-  const {
-    slides,
-    setSlides,
-    clean: slideClean,
-    updateSlideIndex,
-    setTheme,
-  } = useSlidesStore((state) => state);
-  const {
-    hiddenElementIdList,
-    setHiddenElementIdList,
-    setViewportRatio,
-    clean,
-  } = useMainStore((state) => state);
+
+  const slides = useSlidesStore((state) => state.slides);
+  const setSlides = useSlidesStore((state) => state.setSlides);
+  const slideClean = useSlidesStore((state) => state.clean);
+  const updateSlideIndex = useSlidesStore((state) => state.updateSlideIndex);
+  const setTheme = useSlidesStore((state) => state.setTheme);
+  const theme = useSlidesStore((state) => state.theme);
+
+  const hiddenElementIdList = useMainStore(
+    (state) => state.hiddenElementIdList,
+  );
+  const setHiddenElementIdList = useMainStore(
+    (state) => state.setHiddenElementIdList,
+  );
+  const setViewportRatio = useMainStore((state) => state.setViewportRatio);
+  const clean = useMainStore((state) => state.clean);
 
   const setShowTimeline = useMainStore((store) => store.setShowTimeline);
   const showTimeline = useMainStore((store) => store.showTimeline);
@@ -79,6 +82,7 @@ const MotionVideoEditor = (props) => {
   const PPTData = {
     slides,
     hiddenElementIdList,
+    theme,
   };
 
   const setIsEditorHsaChange = useMainStore(

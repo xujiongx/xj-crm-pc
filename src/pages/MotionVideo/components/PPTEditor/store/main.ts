@@ -48,7 +48,6 @@ type State = {
   showTimeline: boolean; // 显示标尺
   gridLineSize: number;
   thumbnailsFocus: boolean;
-  selectedSlidesIndex: number[];
   isOpenCaption: boolean;
 };
 
@@ -84,7 +83,6 @@ type Actions = {
   setShowTimeline: (showTimeline: boolean) => void;
   setGridLineSize: (gridLineSize: number) => void;
   setThumbnailsFocus: (thumbnailsFocus: boolean) => void;
-  updateSelectedSlidesIndex: (selectedSlidesIndex: number[]) => void;
   setIsOpenCaption: (isOpenCaption: boolean) => void;
 };
 
@@ -116,7 +114,6 @@ const defaultMainData = {
   showTimeline: true,
   gridLineSize: 0, // 网格线尺寸（0表示不显示网格线）
   thumbnailsFocus: false, // 左侧导航缩略图区域聚焦
-  selectedSlidesIndex: [], // 当前被选中的页面索引集合
   isOpenCaption: false, // 是否打开字幕
 };
 
@@ -235,9 +232,7 @@ const useMainStore = create<State & Actions>((set, get) => ({
   setThumbnailsFocus: (thumbnailsFocus: boolean) => {
     set(() => ({ thumbnailsFocus }));
   },
-  updateSelectedSlidesIndex(selectedSlidesIndex: number[]) {
-    set(() => ({ selectedSlidesIndex }));
-  },
+
   setIsOpenCaption: (isOpenCaption: boolean) => {
     set(() => ({ isOpenCaption }));
   },

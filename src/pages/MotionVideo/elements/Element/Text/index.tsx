@@ -6,9 +6,9 @@ import { useLatest } from 'ahooks';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 import ElementOutline from '../../common/Element/ElementOutline';
+import ProsemirrorEditor from '../../common/Element/ProsemirrorEditor';
 import { computeShadowStyle } from '../../utils';
 import styles from './index.less';
-import ProsemirrorEditor from '../../common/Element/ProsemirrorEditor';
 
 interface TextElementProps {
   element: PPTTextElement;
@@ -38,7 +38,7 @@ const TextElement = ({ element, onSelect, store }: TextElementProps) => {
   const updateElement = useSlidesStore((store) => store.updateElement);
   const isScalingRef = useLatest(isScaling);
 
-  const {  addHistorySnapshot } = useHistorySnapshot();
+  const { addHistorySnapshot } = useHistorySnapshot();
 
   const updateContent = (content: string) => {
     updateElement({
@@ -155,7 +155,7 @@ const TextElement = ({ element, onSelect, store }: TextElementProps) => {
             defaultFontName={element.defaultFontName as string}
             editable={!element.lock}
             value={element.content}
-            autoFocus={true}
+            // autoFocus={true}
             style={{
               '--paragraphSpace': `${
                 element.paragraphSpace === undefined

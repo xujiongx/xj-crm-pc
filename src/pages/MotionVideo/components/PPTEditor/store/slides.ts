@@ -277,8 +277,8 @@ const useSlidesStore = create<State & Actions>((set, get) => ({
 
       const slides = state.slides;
       const slideIndex = state.slideIndex;
-      const currentElements = slides[slideIndex].elements;
-      const currentAnimations = slides[slideIndex].animations || [];
+      const currentElements = slides[slideIndex]?.elements || [];
+      const currentAnimations = slides[slideIndex]?.animations || [];
       slides[slideIndex] = {
         ...slides[slideIndex],
         elements: [...currentElements, ...elements],

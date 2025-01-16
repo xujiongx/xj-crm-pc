@@ -11,7 +11,7 @@ import { Button } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
 import { arrayMoveImmutable } from 'array-move';
 import clsx from 'clsx';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import {
   SortableContainer,
   SortableElement,
@@ -43,11 +43,11 @@ interface SlideListProps extends SlideInfo {
 }
 
 const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
-  let { slide, width, viewportRatio, slideIndex, index, updateSlideIndex } =
-    slideInfo;
+  const { slide, width, viewportRatio, slideIndex, index } = slideInfo;
   const hiddenElementIdList = useMainStore(
     (store) => store.hiddenElementIdList,
   );
+
   return (
     <div
       style={{
@@ -57,9 +57,6 @@ const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
       className={clsx(styles.slide, {
         [styles['slide-active']]: slideIndex === index,
       })}
-      onClick={() => {
-        updateSlideIndex(index!);
-      }}
     >
       <ScreenView
         scale={width / VIEWPORT_SIZE}
@@ -67,18 +64,6 @@ const SingleSlide = ({ slideInfo }: { slideInfo: SlideInfo }) => {
         slide={slide}
         hiddenElementIdList={hiddenElementIdList}
       />
-      {/* <ContextMenu
-        MenuItem={CONTEXTMENU_Ele}
-        targetEl={
-          slidesWrapper.current?.childNodes?.[1].childNodes[
-            index
-          ] as HTMLDivElement
-        }
-        contextMenuClickFn={contextMenuClickFn}
-        defaultAction={() => {
-          hanldefocusFn(index);
-        }}
-      ></ContextMenu> */}
     </div>
   );
 };
@@ -100,6 +85,15 @@ const SortableSingleSlide = SortableElement(
     const setActiveConfigTab = useMainStore(
       (state) => state.setActiveConfigTab,
     );
+
+    const handleTransferClick = useCallback(() => {
+      updateSlideIndex(index);
+      useMainStore.getState().setActiveElementIds([]);
+      setTimeout(() => {
+        setActiveConfigTab(ToolbarStates.SLIDE_ANIMATION);
+      }, 10);
+    }, [index, setActiveConfigTab, updateSlideIndex]);
+
     return (
       <div className={styles['sort-item']}>
         <DragHandle {...props} />
@@ -114,19 +108,9 @@ const SortableSingleSlide = SortableElement(
           defaultAction={() => {
             hanldefocusFn(index);
           }}
-        ></ContextMenu>
+        />
         {index !== slides.length - 1 && (
-          <div
-            className={styles['transfer']}
-            onClick={() => {
-              updateSlideIndex(index!);
-              // 如果选中元素则取消选中
-              useMainStore.getState().setActiveElementIds([]);
-              setTimeout(() => {
-                setActiveConfigTab(ToolbarStates.SLIDE_ANIMATION);
-              }, 10);
-            }}
-          >
+          <div className={styles['transfer']} onClick={handleTransferClick}>
             <Transform />
             <span className={styles['text']}>
               {slide.turningMode && slide.turningMode !== 'no'
@@ -148,20 +132,19 @@ const SceneMaterial = () => {
   const sizeRef = useRef<HTMLDivElement>(null);
   const slidesWrapper = useRef<HTMLDivElement>(null);
   const { width = 0 } = useSize(sizeRef) || {};
-  const {
-    slides,
-    slideIndex,
-    addSlide,
-    updateSlideIndex,
-    currentSlide,
-    deleteSlide,
-    setSlides,
-  } = useSlidesStore((state) => state);
+  const slides = useSlidesStore((state) => state.slides);
+  const addSlide = useSlidesStore((state) => state.addSlide);
+  const updateSlideIndex = useSlidesStore((state) => state.updateSlideIndex);
+  const slideIndex = useSlidesStore((state) => state.slideIndex);
+  const currentSlide = useSlidesStore((state) => state.currentSlide);
+  const deleteSlide = useSlidesStore((state) => state.deleteSlide);
+  const setSlides = useSlidesStore((state) => state.setSlides);
   const viewportRatio = useMainStore((store) => store.viewportRatio);
   const setThumbnailsFocus = useMainStore((store) => store.setThumbnailsFocus);
   const { addSlidesFromData } = useAddSlidesOrElements();
   const { addHistorySnapshot } = useHistorySnapshot();
-  const createNew = () => {
+
+  const createNew = useCallback(() => {
     addSlide({
       id: uid(),
       elements: [],
@@ -171,7 +154,7 @@ const SceneMaterial = () => {
       },
     });
     addHistorySnapshot();
-  };
+  }, [addSlide, addHistorySnapshot]);
 
   const CONTEXTMENU_Ele = [
     {
@@ -184,42 +167,52 @@ const SceneMaterial = () => {
     },
   ];
 
-  const hanldefocusFn = function (index: number) {
-    updateSlideIndex(index);
-    useMainStore.getState().setActiveElementIds([]);
-    setThumbnailsFocus(true);
-  };
+  const hanldefocusFn = useCallback(
+    (index: number) => {
+      updateSlideIndex(index);
+      useMainStore.getState().setActiveElementIds([]);
+      setThumbnailsFocus(true);
+    },
+    [setThumbnailsFocus, updateSlideIndex],
+  );
 
   const contextMenuClickFn = {
-    // 将当前页复制一份到下一页
-    copy: function () {
+    copy: useCallback(() => {
       const slide = JSON.parse(JSON.stringify(currentSlide()));
       addSlidesFromData([slide]);
-    },
-    delete: function () {
+    }, [addSlidesFromData, currentSlide]),
+    delete: useCallback(() => {
       deleteSlide(currentSlide().id);
-      updateSlideIndex(-1);
       addHistorySnapshot();
+    }, [addHistorySnapshot, currentSlide, deleteSlide, updateSlideIndex]),
+  };
+
+  const slideDragEnd = useCallback(
+    ({ oldIndex, newIndex }: SortEnd) => {
+      if (
+        oldIndex === newIndex ||
+        !Number.isInteger(oldIndex) ||
+        !Number.isInteger(newIndex)
+      )
+        return;
+
+      const _slides = JSON.parse(JSON.stringify(slides));
+      const newData: any = arrayMoveImmutable(_slides, oldIndex, newIndex);
+
+      setSlides(newData);
+      updateSlideIndex(newIndex);
+      useMainStore.getState().setActiveElementIds([]);
+      addHistorySnapshot();
+      setThumbnailsFocus(true);
     },
-  };
-
-  const slideDragEnd = function ({ oldIndex, newIndex }: SortEnd) {
-    if (
-      oldIndex === newIndex ||
-      !Number.isInteger(oldIndex) ||
-      !Number.isInteger(newIndex)
-    )
-      return;
-
-    const _slides = JSON.parse(JSON.stringify(slides));
-    const newData: any = arrayMoveImmutable(_slides, oldIndex, newIndex);
-
-    setSlides(newData);
-    updateSlideIndex(newIndex);
-    useMainStore.getState().setActiveElementIds([]);
-    addHistorySnapshot();
-    setThumbnailsFocus(true);
-  };
+    [
+      addHistorySnapshot,
+      setSlides,
+      setThumbnailsFocus,
+      slides,
+      updateSlideIndex,
+    ],
+  );
 
   return (
     <div className={styles['slide-wrapper']}>
@@ -234,9 +227,7 @@ const SceneMaterial = () => {
         <SortableBody
           onSortEnd={slideDragEnd}
           onSortStart={(indexObj: any) => {
-            updateSlideIndex(indexObj.index!);
-            useMainStore.getState().setActiveElementIds([]);
-            setThumbnailsFocus(true);
+            hanldefocusFn(indexObj.index);
           }}
           useDragHandle
           helperClass="row-dragging"

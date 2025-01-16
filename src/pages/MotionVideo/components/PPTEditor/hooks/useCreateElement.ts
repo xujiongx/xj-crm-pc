@@ -289,6 +289,22 @@ const useCreateElement = () => {
     });
   };
 
+  const createCaptionElement = () => {
+    createElement({
+      type: 'text',
+      id: nanoid(10),
+      left: 125,
+      top: 620,
+      width: 1000,
+      height: 50,
+      content: '<p style="text-align: center;">字幕</p>',
+      rotate: 0,
+      defaultFontName: theme.fontName,
+      defaultColor: theme.fontColor,
+      vertical: false,
+    });
+  };
+
   return {
     createTextElement,
     createImageElement,
@@ -297,6 +313,7 @@ const useCreateElement = () => {
     createLineElement,
     createAudioElement,
     createDigitalRobotElement,
+    createCaptionElement,
   };
 };
 

@@ -11,7 +11,7 @@ const PPTSelect = (props) => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const accept = 'pptx';
-  const excelMaxSize = 100;
+  const excelMaxSize = 200;
 
   const uploadProps: DraggerProps = {
     name: 'file',
@@ -19,7 +19,7 @@ const PPTSelect = (props) => {
     beforeUpload: (file: UploadFile) => {
       if (!validFileFormat(file.name, accept.split(','))) {
         message.error('请上传pptx格式的文件');
-      } else if (file && file?.size!! > excelMaxSize * 1024 * 1024) {
+      } else if (file && file.size && file.size > excelMaxSize * 1024 * 1024) {
         message.error(`文件不能大于${excelMaxSize}M`);
       } else {
         setFileList([file]);
@@ -48,8 +48,7 @@ const PPTSelect = (props) => {
             style={{
               backgroundImage: `url('${PPT_URL}')`,
             }}
-          >
-          </div>
+          ></div>
           <div className={styles['ant-upload-text']}>
             点击或将文件拖拽至此处上传
           </div>

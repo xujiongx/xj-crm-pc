@@ -32,7 +32,6 @@ const ContextMenu = ({
   }, containerRef);
 
   useEventListener('contextmenu', (e) => {
-    console.log('🤑contextmenu', e);
     e.preventDefault();
     // 不在目标范围的 context ，直接 return
     if (!targetEl?.contains(e.target as Node)) {

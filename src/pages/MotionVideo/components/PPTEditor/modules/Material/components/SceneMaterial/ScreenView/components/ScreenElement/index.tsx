@@ -19,7 +19,9 @@ const ScreenElement = (props: ViewElement) => {
 
   const Component = ElementViewTypeMap[element.type];
 
-  const show = animations[0]?.type === 'in' && animations[0]?.effect === 'show';
+  const show = !(
+    animations[0]?.type === 'in' && animations[0]?.effect !== 'show'
+  );
 
   if (!Component) return null;
 
